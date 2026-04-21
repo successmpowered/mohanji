@@ -48,47 +48,44 @@
   .nav__cta{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;padding:12px 24px;background:var(--gold);color:var(--white);border:1px solid var(--gold);transition:all 0.35s;font-weight:500}
   .nav__cta:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
 
-  /* HERO */
+  /* HERO — cinematic full-width */
   .a-hero{
     position:relative;
-    padding:120px 48px 110px;
+    min-height:92vh;
+    padding:140px 48px 120px;
     overflow:hidden;
-    background:linear-gradient(180deg, var(--white) 0%, var(--white-soft) 100%);
+    background:var(--ink);
+    display:flex;align-items:center;justify-content:center;text-align:center;
   }
-  .a-hero::before{
-    content:"";position:absolute;top:-200px;right:-240px;width:820px;height:820px;
-    background:radial-gradient(circle, var(--gold-whisper) 0%, transparent 65%);
-    pointer-events:none;opacity:0.7;
+  .a-hero__bg{
+    position:absolute;inset:0;z-index:0;
+    background-image:url("assets/images/mohanji-candid-2.jpg");
+    background-size:cover;background-position:center 25%;
+    animation:hero-breathe 24s ease-in-out infinite alternate;
   }
-  .a-hero__inner{
-    position:relative;z-index:2;
-    max-width:1280px;margin:0 auto;
-    display:grid;grid-template-columns:0.95fr 1fr;gap:80px;align-items:center;
-  }
-  .a-hero__portrait{
-    position:relative;aspect-ratio:4/5;
-    border:1px solid var(--line-gold);
-    background:var(--white-warm);overflow:hidden;
-  }
-  .a-hero__portrait img{width:100%;height:100%;object-fit:cover}
-  .a-hero__portrait::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,transparent 60%,rgba(42,36,27,0.15) 100%);
-    pointer-events:none;
+  @keyframes hero-breathe{0%{transform:scale(1)}100%{transform:scale(1.04)}}
+  .a-hero__scrim{
+    position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(180deg, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.3) 40%, rgba(20,16,10,0.75) 100%),
+      radial-gradient(ellipse at center, transparent 30%, rgba(20,16,10,0.35) 100%);
   }
   .a-hero__mandala{
-    position:absolute;top:-40px;left:-40px;width:180px;height:180px;opacity:0.5;
-    animation:rotate 240s linear infinite;pointer-events:none;
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:640px;height:640px;opacity:0.14;z-index:1;pointer-events:none;
+    animation:rotate 240s linear infinite;
   }
-  @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  .a-hero__kicker{font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:28px;display:flex;align-items:center;gap:14px}
-  .a-hero__kicker::before{content:"";width:36px;height:1px;background:var(--gold)}
-  .a-hero__title{font-family:var(--serif);font-size:clamp(54px,6vw,92px);font-weight:300;line-height:0.98;letter-spacing:-0.02em;color:var(--ink);margin-bottom:36px}
-  .a-hero__title em{font-style:italic;color:var(--gold);font-weight:300}
-  .a-hero__lede{font-family:var(--serif);font-size:23px;font-style:italic;color:var(--ink-soft);line-height:1.5;max-width:540px;margin-bottom:44px}
-  .a-hero__meta{display:flex;gap:60px;padding-top:32px;border-top:1px solid var(--line-gold)}
-  .a-hero__meta-item{font-size:13px;color:var(--ink-soft)}
-  .a-hero__meta-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:6px}
+  @keyframes rotate{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .a-hero__inner{position:relative;z-index:2;max-width:1040px;color:var(--white)}
+  .a-hero__kicker{font-size:12px;letter-spacing:0.42em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:44px;display:inline-flex;align-items:center;gap:16px;justify-content:center}
+  .a-hero__kicker::before,.a-hero__kicker::after{content:"";width:48px;height:1px;background:var(--gold-light)}
+  .a-hero__title{font-family:var(--serif);font-size:clamp(64px,8vw,128px);font-weight:300;line-height:0.96;letter-spacing:-0.024em;color:var(--white);margin-bottom:36px;text-shadow:0 4px 40px rgba(0,0,0,0.5)}
+  .a-hero__title em{font-style:italic;color:var(--gold-light);font-weight:300}
+  .a-hero__lede{font-family:var(--serif);font-size:clamp(19px,1.6vw,24px);font-style:italic;color:rgba(253,252,249,0.88);line-height:1.55;max-width:680px;margin:0 auto 52px;text-shadow:0 2px 20px rgba(0,0,0,0.4)}
+  .a-hero__lede em{color:var(--gold-light);font-style:italic}
+  .a-hero__meta{display:flex;gap:60px;padding-top:36px;border-top:1px solid rgba(240,230,206,0.25);justify-content:center;flex-wrap:wrap}
+  .a-hero__meta-item{font-size:14px;color:rgba(253,252,249,0.85)}
+  .a-hero__meta-label{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:8px}
 
   /* SECTION BASE */
   .section{padding:120px 48px;position:relative}
@@ -313,9 +310,9 @@
   /* RESPONSIVE */
   @media (max-width:900px){
     .nav__menu{display:none}
-    .a-hero{padding:72px 24px 80px}
-    .a-hero__inner{grid-template-columns:1fr;gap:50px}
-    .a-hero__meta{gap:36px;flex-wrap:wrap}
+    .a-hero{padding:110px 24px 110px;min-height:88vh}
+    .a-hero__meta{gap:28px;flex-wrap:wrap;justify-content:center}
+    .a-hero__mandala{width:380px;height:380px;opacity:0.1}
     .section{padding:80px 24px}
     .teachings__grid{grid-template-columns:1fr;gap:20px}
     .journey__list::before{left:6px}
@@ -345,7 +342,7 @@
     <div class="nav__menu">
       <div class="nav__item active"><a href="about.html">About</a></div>
       <div class="nav__item"><a href="index.html#path">Path</a></div>
-      <div class="nav__item"><a href="index.html#weekly">Events</a></div>
+      <div class="nav__item"><a href="events.html">Events</a></div>
       <div class="nav__item"><a href="spaces.html">Spaces</a></div>
       <div class="nav__item"><a href="index.html#community">Family</a></div>
     </div>
@@ -355,38 +352,44 @@
 
 <!-- HERO -->
 <section class="a-hero">
+  <div class="a-hero__bg"></div>
+  <div class="a-hero__scrim"></div>
+  <svg class="a-hero__mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#f0e6ce" stroke-width="0.5">
+      <circle cx="200" cy="200" r="198"/>
+      <circle cx="200" cy="200" r="170"/>
+      <circle cx="200" cy="200" r="140"/>
+      <circle cx="200" cy="200" r="110"/>
+      <circle cx="200" cy="200" r="80"/>
+      <circle cx="200" cy="200" r="50"/>
+      <g transform="translate(200,200)">
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(45)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(90)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(135)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(180)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(225)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(270)"/>
+        <path d="M0,-170 Q20,-130 0,-80 Q-20,-130 0,-170" transform="rotate(315)"/>
+      </g>
+    </g>
+  </svg>
   <div class="a-hero__inner">
-    <div class="a-hero__portrait">
-      <svg class="a-hero__mandala" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="90" stroke="#b8924a" stroke-width="0.6" stroke-dasharray="2 4"/>
-        <circle cx="100" cy="100" r="70" stroke="#b8924a" stroke-width="0.4"/>
-        <circle cx="100" cy="100" r="50" stroke="#b8924a" stroke-width="0.4" stroke-dasharray="1 3"/>
-        <g stroke="#b8924a" stroke-width="0.4">
-          <line x1="100" y1="10" x2="100" y2="190"/>
-          <line x1="10" y1="100" x2="190" y2="100"/>
-          <line x1="36" y1="36" x2="164" y2="164"/>
-          <line x1="164" y1="36" x2="36" y2="164"/>
-        </g>
-      </svg>
-      <img src="assets/images/mohanji-hero.jpg" alt="Brahmarishi Mohanji" />
-    </div>
-    <div class="a-hero__copy">
-      <div class="a-hero__kicker">About Mohanji</div>
-      <h1 class="a-hero__title">A life poured<br/>into <em>service.</em></h1>
-      <p class="a-hero__lede">Brahmarishi Mohanji is a teacher, humanitarian and the quiet centre of a global family walking the path of <em>Be You.</em> For more than a decade he has offered — freely and continuously — a way of living grounded in kindness, selfless service, and the recognition of divinity in every being.</p>
-      <div class="a-hero__meta">
-        <div class="a-hero__meta-item">
-          <div class="a-hero__meta-label">Teaching since</div>
-          2012
-        </div>
-        <div class="a-hero__meta-item">
-          <div class="a-hero__meta-label">Family across</div>
-          90+ countries
-        </div>
-        <div class="a-hero__meta-item">
-          <div class="a-hero__meta-label">Foundation</div>
-          Mohanji Foundation · Switzerland
-        </div>
+    <div class="a-hero__kicker">About Mohanji</div>
+    <h1 class="a-hero__title">A life poured<br/>into <em>service.</em></h1>
+    <p class="a-hero__lede">Brahmarishi Mohanji is a teacher, humanitarian and the quiet centre of a global family walking the path of <em>Be You.</em> For more than a decade he has offered — freely and continuously — a way of living grounded in kindness, selfless service, and the recognition of divinity in every being.</p>
+    <div class="a-hero__meta">
+      <div class="a-hero__meta-item">
+        <div class="a-hero__meta-label">Teaching since</div>
+        2012
+      </div>
+      <div class="a-hero__meta-item">
+        <div class="a-hero__meta-label">Family across</div>
+        90+ countries
+      </div>
+      <div class="a-hero__meta-item">
+        <div class="a-hero__meta-label">Foundation</div>
+        Mohanji Foundation · Switzerland
       </div>
     </div>
   </div>

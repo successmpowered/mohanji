@@ -202,84 +202,147 @@
   }
   .nav__cta:hover { background: var(--gold-deep); border-color: var(--gold-deep); }
 
-  /* ================= HERO — split layout ================= */
+  /* ================= HERO — full-width cinematic ================= */
   .hero {
     position: relative;
-    min-height: 94vh;
-    background: var(--white);
-    display: grid;
-    grid-template-columns: 0.85fr 1.3fr;
+    min-height: 100vh;
+    background: var(--ink);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 48px 120px;
+  }
+  .hero__bg {
+    position: absolute; inset: 0;
+    background-image: url("assets/images/mohanji-hero.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    animation: hero-breathe 24s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  .hero__scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.25) 40%, rgba(20,16,10,0.75) 100%),
+      radial-gradient(ellipse at center, transparent 30%, rgba(20,16,10,0.35) 100%);
   }
   .hero__left {
     position: relative;
-    padding: 80px 64px 80px 72px;
+    z-index: 2;
+    max-width: 1100px;
+    color: var(--white);
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    background: var(--white);
-    z-index: 2;
   }
   /* rotating mandala watermark behind the text */
   .hero__mandala {
     position: absolute;
-    top: 50%; left: 20%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 620px; height: 620px;
-    opacity: 0.045;
+    width: 680px; height: 680px;
+    opacity: 0.14;
     pointer-events: none;
     animation: slow-rotate-hero 240s linear infinite;
-    z-index: 0;
+    z-index: 1;
   }
+  .hero__mandala g { stroke: #f0e6ce !important; }
   @keyframes slow-rotate-hero { to { transform: translate(-50%,-50%) rotate(360deg); } }
 
   .hero__kicker {
     position: relative; z-index: 1;
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.42em;
     text-transform: uppercase;
-    color: var(--gold-deep);
+    color: var(--gold-light);
     font-weight: 500;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
     opacity: 0;
     animation: rise 1.4s 0.3s cubic-bezier(.2,.7,.2,1) forwards;
     display: inline-flex; align-items: center; gap: 16px;
   }
-  .hero__kicker::before {
+  .hero__kicker::before, .hero__kicker::after {
     content: ""; display: block;
-    width: 36px; height: 1px; background: var(--gold);
+    width: 48px; height: 1px; background: var(--gold-light);
   }
   .hero__title {
     position: relative; z-index: 1;
     font-family: var(--serif);
-    font-size: clamp(88px, 11vw, 180px);
+    font-size: clamp(96px, 13vw, 220px);
     font-weight: 300;
-    line-height: 0.9;
+    line-height: 0.92;
     letter-spacing: -0.028em;
-    color: var(--ink);
+    color: var(--white);
     margin-bottom: 0.15em;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.5);
     opacity: 0;
     animation: rise 1.8s 0.5s cubic-bezier(.2,.7,.2,1) forwards;
   }
-  .hero__title em { font-style: italic; font-weight: 300; color: var(--gold); }
+  .hero__title em { font-style: italic; font-weight: 300; color: var(--gold-light); }
   .hero__sub {
     position: relative; z-index: 1;
     font-family: var(--serif);
-    font-size: clamp(20px, 1.8vw, 25px);
+    font-size: clamp(20px, 1.8vw, 26px);
     font-weight: 300;
     font-style: italic;
-    color: var(--ink-soft);
-    max-width: 500px;
-    margin: 32px 0 48px;
-    line-height: 1.5;
+    color: rgba(253,252,249,0.85);
+    max-width: 640px;
+    margin: 36px auto 52px;
+    line-height: 1.55;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     opacity: 0;
     animation: rise 1.8s 0.9s cubic-bezier(.2,.7,.2,1) forwards;
   }
   .hero__ctas {
     position: relative; z-index: 1;
     display: flex; gap: 16px; flex-wrap: wrap;
+    justify-content: center;
     opacity: 0;
     animation: rise 1.6s 1.3s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero__bottom {
+    position: absolute;
+    bottom: 44px; left: 48px; right: 48px;
+    z-index: 2;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    color: rgba(253,252,249,0.85);
+    pointer-events: none;
+    opacity: 0;
+    animation: rise 2s 1.6s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero__caption-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--white);
+    max-width: 400px;
+    line-height: 1.4;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .hero__caption-name {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+  .hero__scroll {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(253,252,249,0.6);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding-bottom: 8px;
   }
   @keyframes rise {
     from { opacity: 0; transform: translateY(28px); }
@@ -400,6 +463,8 @@
     color: var(--ink);
   }
   .btn--ghost:hover { background: var(--ink); color: var(--white); }
+  .btn--ghost-light { border-color: rgba(253,252,249,0.6); color: var(--white); background: transparent; }
+  .btn--ghost-light:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
   .btn__arrow { transition: transform 0.3s; }
   .btn:hover .btn__arrow { transform: translateX(4px); }
 
@@ -1299,17 +1364,10 @@
   @media (max-width: 1000px) {
     .nav { padding: 16px 24px; }
     .nav__menu { display: none; }
-    .hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-    .hero__left { padding: 72px 24px 60px; text-align: center; align-items: center; }
-    .hero__kicker, .hero__ctas { justify-content: center; }
-    .hero__sub { margin-left: auto; margin-right: auto; }
-    .hero__right { height: 80vh; min-height: 500px; }
-    .hero__right::before, .hero__right::after { display: none; }
-    .hero__caption { left: 24px; right: 24px; bottom: 32px; }
-    .hero__mandala { display: none; }
+    .hero { padding: 110px 24px 140px; min-height: 90vh; }
+    .hero__bottom { left: 24px; right: 24px; bottom: 24px; flex-direction: column; align-items: flex-start; gap: 18px; }
+    .hero__scroll { display: none; }
+    .hero__mandala { width: 420px; height: 420px; opacity: 0.1; }
 
     section, .about-mohanji, .path, .community, .events, .welcome, .purpose, .join { padding: 100px 24px; }
     .about-mohanji__grid, .community__grid { grid-template-columns: 1fr; gap: 56px; }
@@ -1386,18 +1444,18 @@
         </div>
       </div>
       <div class="nav__item">
-        <a>Events <span class="nav__caret"></span></a>
+        <a href="events.html">Events <span class="nav__caret"></span></a>
         <div class="mega">
           <div class="mega__group-title">Gatherings</div>
-          <a href="#">All events</a>
-          <a href="#">Weekly Talk with Mohanji</a>
-          <a href="#">Silence with Mohanji</a>
-          <a href="#">Kailash 2026</a>
+          <a href="events.html">All events</a>
+          <a href="events.html#satsang">Weekly Satsang</a>
+          <a href="events.html">Silence with Mohanji</a>
+          <a href="events.html">Kailash Pilgrimage</a>
           <div class="mega__group-title">Calendar</div>
-          <a href="#">Upcoming events</a>
-          <a href="#">Where is Mohanji</a>
-          <a href="#">Local events</a>
-          <a href="#">Pilgrimages</a>
+          <a href="events.html">Calendar view</a>
+          <a href="events.html">Where is Mohanji</a>
+          <a href="events.html">Retreats</a>
+          <a href="events.html">Pilgrimages</a>
         </div>
       </div>
       <div class="nav__item">
@@ -1437,6 +1495,8 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__scrim"></div>
   <div class="hero__left">
     <svg class="hero__mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="#b8924a" stroke-width="0.5">
@@ -1470,18 +1530,18 @@
       <a href="#join" class="btn btn--gold">
         Enter the family <span class="btn__arrow">→</span>
       </a>
-      <a href="#path" class="btn btn--ghost">
+      <a href="#path" class="btn btn--ghost btn--ghost-light">
         Explore the path
       </a>
     </div>
   </div>
 
-  <div class="hero__right">
-    <div class="hero__image"></div>
-    <div class="hero__caption">
+  <div class="hero__bottom">
+    <div>
       <p class="hero__caption-quote">"Understand, accept and express your uniqueness in the world."</p>
       <span class="hero__caption-name">Brahmarishi Mohanji</span>
     </div>
+    <div class="hero__scroll">Scroll to begin</div>
   </div>
 </section>
 
