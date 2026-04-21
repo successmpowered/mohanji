@@ -129,6 +129,7 @@
   .chip:hover{background:var(--gold-trace);border-color:var(--gold);color:var(--ink)}
   .chip.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
   .chip.active .chip__dot{background:var(--gold-light)}
+  .chip--external .chip__dot{background:transparent;border:1.5px dashed var(--ink-soft)}
 
   /* CALENDAR */
   .calendar-section{padding:72px 48px 80px;background:var(--white)}
@@ -178,18 +179,94 @@
   .cal-cell__num{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:2px;align-self:flex-end;padding-right:4px}
   .cal-cell.dim .cal-cell__num{color:var(--ink-mute)}
   .cal-event{
-    font-size:10px;padding:3px 7px;border-radius:3px;
+    font-size:10px;padding:4px 8px;border-radius:3px;
     color:var(--white);font-weight:500;letter-spacing:0.04em;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    cursor:pointer;transition:transform 0.2s;
-    border-left:3px solid rgba(255,255,255,0.3);
+    cursor:pointer;transition:filter 0.2s;
+    min-height:18px;line-height:1.1;
+    box-shadow:inset 3px 0 0 rgba(255,255,255,0.3);
   }
-  .cal-event:hover{transform:translateX(2px)}
+  .cal-event:hover{filter:brightness(1.15)}
+  /* multi-day continuation */
+  .cal-event.mid,.cal-event.end{
+    margin-left:-11px;border-top-left-radius:0;border-bottom-left-radius:0;
+    box-shadow:none;
+  }
+  .cal-event.start,.cal-event.mid{
+    margin-right:-11px;border-top-right-radius:0;border-bottom-right-radius:0;
+  }
+  .cal-event.mid{color:transparent;padding-left:0;padding-right:0}
   .cal-event[data-type="satsang"]{background:var(--satsang)}
   .cal-event[data-type="retreat"]{background:var(--retreat)}
   .cal-event[data-type="pilgrimage"]{background:var(--pilgrimage)}
   .cal-event[data-type="immersion"]{background:var(--immersion)}
   .cal-event[data-type="festival"]{background:var(--festival)}
+  /* external / invited */
+  .cal-event.external{
+    background:var(--white-soft)!important;
+    border:1px dashed;
+    box-shadow:none;padding:3px 7px;
+  }
+  .cal-event.external[data-type="satsang"]{color:var(--satsang);border-color:var(--satsang)}
+  .cal-event.external[data-type="retreat"]{color:var(--retreat);border-color:var(--retreat)}
+  .cal-event.external[data-type="pilgrimage"]{color:var(--pilgrimage);border-color:var(--pilgrimage)}
+  .cal-event.external[data-type="immersion"]{color:var(--immersion);border-color:var(--immersion)}
+  .cal-event.external[data-type="festival"]{color:var(--festival);border-color:var(--festival)}
+
+  /* TYPE MOCKUPS */
+  .types{background:var(--white);padding:100px 48px 20px}
+  .types__head{text-align:center;max-width:820px;margin:0 auto 64px}
+  .types__head h2{font-family:var(--serif);font-size:clamp(40px,4.4vw,60px);font-weight:300;line-height:1.04;letter-spacing:-0.015em;color:var(--ink);margin-bottom:22px}
+  .types__head h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .types__head p{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink-soft);line-height:1.55}
+  .types__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .type-mock{
+    background:var(--white);
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;overflow:hidden;
+    transition:all 0.4s;position:relative;
+  }
+  .type-mock:hover{transform:translateY(-6px);border-color:var(--line-gold-strong);box-shadow:0 30px 70px -40px rgba(42,36,27,0.25)}
+  .type-mock__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--white-warm)}
+  .type-mock__media img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s}
+  .type-mock:hover .type-mock__media img{transform:scale(1.05)}
+  .type-mock__bar{position:absolute;top:0;left:0;width:100%;height:6px;z-index:2}
+  .type-mock[data-type="satsang"] .type-mock__bar{background:var(--satsang)}
+  .type-mock[data-type="retreat"] .type-mock__bar{background:var(--retreat)}
+  .type-mock[data-type="pilgrimage"] .type-mock__bar{background:var(--pilgrimage)}
+  .type-mock[data-type="immersion"] .type-mock__bar{background:var(--immersion)}
+  .type-mock[data-type="festival"] .type-mock__bar{background:var(--festival)}
+  .type-mock--external .type-mock__bar{background:repeating-linear-gradient(90deg,var(--ink-soft) 0 6px,transparent 6px 12px)}
+  .type-mock__badge{
+    position:absolute;bottom:14px;left:14px;z-index:2;
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500;
+    padding:6px 12px;color:var(--ink);background:rgba(253,252,249,0.94);
+    backdrop-filter:blur(8px);
+  }
+  .type-mock__body{padding:28px 30px 32px;flex:1;display:flex;flex-direction:column}
+  .type-mock__tag{
+    font-size:10px;letter-spacing:0.24em;text-transform:uppercase;font-weight:500;
+    color:var(--gold-deep);margin-bottom:14px;display:inline-flex;align-items:center;gap:8px;
+  }
+  .type-mock__tag::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold)}
+  .type-mock[data-type="satsang"] .type-mock__tag::before{background:var(--satsang)}
+  .type-mock[data-type="retreat"] .type-mock__tag::before{background:var(--retreat)}
+  .type-mock[data-type="pilgrimage"] .type-mock__tag::before{background:var(--pilgrimage)}
+  .type-mock[data-type="immersion"] .type-mock__tag::before{background:var(--immersion)}
+  .type-mock[data-type="festival"] .type-mock__tag::before{background:var(--festival)}
+  .type-mock--external .type-mock__tag::before{background:transparent;border:1.5px dashed var(--ink-soft)}
+  .type-mock h3{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px}
+  .type-mock h3 em{font-style:italic;color:var(--gold)}
+  .type-mock__lede{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:22px;flex:1}
+  .type-mock__list{list-style:none;border-top:1px solid var(--line);padding:0;margin:0}
+  .type-mock__list li{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:12px 0;border-bottom:1px solid var(--line);
+    font-size:13px;
+  }
+  .type-mock__list li:last-child{border-bottom:none}
+  .type-mock__list span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
+  .type-mock__list strong{font-family:var(--serif);font-size:16px;font-weight:400;color:var(--ink);text-align:right}
 
   /* MAJOR EVENTS — card rail */
   .major{background:var(--white-soft);padding:120px 48px;border-top:1px solid var(--line-gold)}
@@ -254,44 +331,48 @@
   .journey-map__head p{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink-soft);line-height:1.55}
 
   .movement-list{
-    max-width:920px;margin:0 auto;
+    max-width:1040px;margin:0 auto;
     position:relative;z-index:2;
   }
   .movement-list::before{
     content:"";position:absolute;left:140px;top:20px;bottom:20px;
-    width:1px;background:linear-gradient(180deg,transparent,var(--gold) 10%,var(--gold) 90%,transparent);
+    width:1px;background:linear-gradient(180deg,transparent,var(--gold) 6%,var(--gold) 94%,transparent);
   }
-  .movement{
+  .mmonth{
     display:grid;grid-template-columns:140px 1fr;gap:56px;
-    padding:22px 0;position:relative;align-items:center;
+    padding:22px 0;position:relative;align-items:flex-start;
   }
-  .movement::before{
-    content:"";position:absolute;left:135px;top:50%;transform:translateY(-50%);
+  .mmonth::before{
+    content:"";position:absolute;left:135px;top:34px;
     width:11px;height:11px;border-radius:50%;
     background:var(--white);border:2px solid var(--gold);
     transition:all 0.3s;
   }
-  .movement:hover::before{background:var(--gold);box-shadow:0 0 0 6px rgba(184,146,74,0.15)}
-  .movement__month{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--gold-deep);font-weight:400;text-align:right;padding-right:20px}
-  .movement__body{
-    background:var(--white);padding:22px 28px;
-    border:1px solid var(--line);
-    transition:all 0.3s;cursor:pointer;
+  .mmonth:hover::before{background:var(--gold);box-shadow:0 0 0 6px rgba(184,146,74,0.15)}
+  .mmonth__label{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--gold-deep);font-weight:400;text-align:right;padding-right:20px;padding-top:18px}
+  .mmonth__events{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .mev{
+    background:var(--white);padding:18px 24px;
+    border:1px solid var(--line);border-left:3px solid var(--gold);
     display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+    transition:all 0.3s;cursor:pointer;
   }
-  .movement:hover .movement__body{border-color:var(--line-gold-strong);box-shadow:0 16px 40px -30px rgba(42,36,27,0.2)}
-  .movement__title{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;line-height:1.2;margin-bottom:6px}
-  .movement__title em{font-style:italic;color:var(--gold)}
-  .movement__location{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
-  .movement__type{
-    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
-    padding:6px 12px;color:var(--white);white-space:nowrap;
+  .mev:hover{border-color:var(--line-gold-strong);transform:translateX(4px);box-shadow:0 12px 32px -24px rgba(42,36,27,0.25)}
+  .mev[data-type="satsang"]{border-left-color:var(--satsang)}
+  .mev[data-type="retreat"]{border-left-color:var(--retreat)}
+  .mev[data-type="pilgrimage"]{border-left-color:var(--pilgrimage)}
+  .mev[data-type="immersion"]{border-left-color:var(--immersion)}
+  .mev[data-type="festival"]{border-left-color:var(--festival)}
+  .mev.external{border-left-style:dashed;background:var(--white-soft)}
+  .mev__title{font-family:var(--serif);font-size:19px;color:var(--ink);font-weight:400;line-height:1.2;margin-bottom:4px}
+  .mev__title em{font-style:italic;color:var(--gold)}
+  .mev__loc{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
+  .mev__tag{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;
+    color:var(--ink-soft);white-space:nowrap;padding:5px 10px;
+    background:var(--white-warm);border-radius:2px;
   }
-  .movement__type[data-type="satsang"]{background:var(--satsang)}
-  .movement__type[data-type="retreat"]{background:var(--retreat)}
-  .movement__type[data-type="pilgrimage"]{background:var(--pilgrimage)}
-  .movement__type[data-type="immersion"]{background:var(--immersion)}
-  .movement__type[data-type="festival"]{background:var(--festival)}
+  .mev.external .mev__tag{background:transparent;border:1px dashed var(--ink-mute);color:var(--ink-soft)}
 
   /* WAYS — how to attend */
   .ways{background:var(--white-warm);padding:120px 48px;border-top:1px solid var(--line-gold);border-bottom:1px solid var(--line-gold)}
@@ -376,15 +457,17 @@
     .cal-cell__num{font-size:14px}
     .cal-event{font-size:8px;padding:2px 4px}
     .cal-dow{padding:10px 4px;font-size:9px;letter-spacing:0.14em}
+    .types{padding:70px 24px 0}
+    .types__grid{grid-template-columns:1fr;gap:18px}
     .major{padding:80px 24px}
     .major__grid{grid-template-columns:1fr;gap:20px}
     .journey-map{padding:80px 20px}
     .movement-list::before{left:8px}
-    .movement{grid-template-columns:1fr;gap:10px;padding-left:32px}
-    .movement::before{left:2px;top:26px;transform:none}
-    .movement__month{text-align:left;padding-right:0}
-    .movement__body{grid-template-columns:1fr;gap:12px}
-    .movement__type{justify-self:start}
+    .mmonth{grid-template-columns:1fr;gap:10px;padding-left:32px}
+    .mmonth::before{left:2px;top:28px;transform:none}
+    .mmonth__label{text-align:left;padding-right:0;padding-top:0}
+    .mev{grid-template-columns:1fr;gap:10px;padding:14px 18px}
+    .mev__tag{justify-self:start}
     .ways{padding:80px 24px}
     .ways__grid{grid-template-columns:1fr 1fr;gap:14px}
     .way{padding:30px 22px}
@@ -413,7 +496,7 @@
       <div class="nav__item"><a href="index.html#path">Path</a></div>
       <div class="nav__item active"><a href="events.html">Events</a></div>
       <div class="nav__item"><a href="spaces.html">Spaces</a></div>
-      <div class="nav__item"><a href="index.html#community">Family</a></div>
+      <div class="nav__item"><a href="awards.html">Awards</a></div>
     </div>
     <a href="index.html#join" class="nav__cta">Join the Family</a>
   </nav>
@@ -516,6 +599,7 @@
       <button class="chip" data-filter="pilgrimage" data-type="pilgrimage"><span class="chip__dot"></span>Pilgrimage</button>
       <button class="chip" data-filter="immersion" data-type="immersion"><span class="chip__dot"></span>Immersion</button>
       <button class="chip" data-filter="festival" data-type="festival"><span class="chip__dot"></span>Festival</button>
+      <button class="chip chip--external" data-filter="external"><span class="chip__dot"></span>Invited appearance</button>
     </div>
   </div>
 </div>
@@ -532,6 +616,126 @@
       </div>
     </div>
     <div class="calendar" id="calendar"></div>
+  </div>
+</section>
+
+<!-- EVENT TYPE MOCKUPS -->
+<section class="types">
+  <div class="types__head">
+    <div class="section__kicker">Five kinds of gathering</div>
+    <h2>Choose the <em>texture</em> of your experience.</h2>
+    <p>Each event type has its own rhythm and purpose. Here is what each one looks and feels like — so you can choose the door that fits.</p>
+  </div>
+  <div class="types__grid">
+
+    <div class="type-mock" data-type="satsang">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/weekly-talk.jpg" alt="Sunday Satsang" />
+        <div class="type-mock__badge">Live · Every Sunday</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">Satsang</div>
+        <h3>The weekly <em>return.</em></h3>
+        <p class="type-mock__lede">An hour of live teaching, meditation, and questions. Free, online, open to everyone — the simplest way to walk with the family.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>~90 minutes</strong></li>
+          <li><span>Where</span><strong>Online · free</strong></li>
+          <li><span>Best for</span><strong>First-timers and weekly practice</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="type-mock" data-type="retreat">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/spaces/vrindavan.jpg" alt="Retreat" />
+        <div class="type-mock__badge">3–5 days · In-person</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">Retreat</div>
+        <h3>A long <em>breath</em> away.</h3>
+        <p class="type-mock__lede">Three to five days at a Mohanji Space — guided teaching, meditation sessions, community meals, and time in silence and service.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>3–5 days</strong></li>
+          <li><span>Where</span><strong>Mohanji Spaces worldwide</strong></li>
+          <li><span>Best for</span><strong>Deepening practice in community</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="type-mock" data-type="pilgrimage">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/kailash-2026.jpg" alt="Pilgrimage" />
+        <div class="type-mock__badge">Once a year · Sacred</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">Pilgrimage</div>
+        <h3>Old roads, <em>walked slowly.</em></h3>
+        <p class="type-mock__lede">Ten to fifteen days on the ancient pilgrimage routes — Kailash, Muktinath, Kedarnath. Small groups, full logistics, Mohanji in your company.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>10–15 days</strong></li>
+          <li><span>Where</span><strong>Tibet · Nepal · India</strong></li>
+          <li><span>Best for</span><strong>A year's practice in two weeks</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="type-mock" data-type="immersion">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/spaces/serbia.jpg" alt="Silent Immersion" />
+        <div class="type-mock__badge">5–7 days · Silence</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">Immersion</div>
+        <h3>A week of <em>silence.</em></h3>
+        <p class="type-mock__lede">No phones, no speaking, no schedule. Only practice, presence, and the quiet work of meeting yourself — guided, supported, held.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>5–7 days</strong></li>
+          <li><span>Where</span><strong>Peace Centres · Serbia · India</strong></li>
+          <li><span>Best for</span><strong>Experienced practitioners</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="type-mock" data-type="festival">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/spaces/shirdi.jpg" alt="Festival" />
+        <div class="type-mock__badge">Sacred days · Global</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">Festival</div>
+        <h3>A single <em>global night.</em></h3>
+        <p class="type-mock__lede">Shivaratri, Guru Purnima, Navaratri — celebrated simultaneously across every Mohanji Space, live-streamed worldwide through the night.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>One day or overnight</strong></li>
+          <li><span>Where</span><strong>Every Mohanji Space · Online</strong></li>
+          <li><span>Best for</span><strong>Celebrating with the family</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="type-mock type-mock--external" data-type="external">
+      <div class="type-mock__media">
+        <div class="type-mock__bar"></div>
+        <img src="assets/images/mohanji-portrait.webp" alt="Invited Appearance" />
+        <div class="type-mock__badge">Invited appearance</div>
+      </div>
+      <div class="type-mock__body">
+        <div class="type-mock__tag">External</div>
+        <h3>Where the world <em>calls him.</em></h3>
+        <p class="type-mock__lede">Talks, panels and keynotes at conferences, parliaments and summits — not Mohanji's own programmes, but gatherings where he has been invited to share.</p>
+        <ul class="type-mock__list">
+          <li><span>Duration</span><strong>Single session, usually</strong></li>
+          <li><span>Where</span><strong>Global events · hybrid</strong></li>
+          <li><span>Best for</span><strong>Public, wider audiences</strong></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -676,136 +880,112 @@
   </div>
   <div class="movement-list">
 
-    <div class="movement">
-      <div class="movement__month">January</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">New Year <em>Blessings</em> · Bhopal</div>
-          <div class="movement__location">Harda Ashram · India</div>
-        </div>
-        <div class="movement__type" data-type="festival">Festival</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">January</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="festival"><div><div class="mev__title">New Year <em>Blessings</em></div><div class="mev__loc">Harda Ashram · India</div></div><span class="mev__tag">Festival · 2 days</span></li>
+        <li class="mev" data-type="satsang"><div><div class="mev__title">Pongal <em>Satsang</em></div><div class="mev__loc">Chennai · India</div></div><span class="mev__tag">Satsang · 1 day</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Vedic Leadership <em>Summit</em></div><div class="mev__loc">Mumbai · India</div></div><span class="mev__tag">Invited · 1 day</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">February</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">European Family <em>Gathering</em></div>
-          <div class="movement__location">Slovenia · Croatia · Serbia</div>
-        </div>
-        <div class="movement__type" data-type="retreat">Retreat</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">February</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="retreat"><div><div class="mev__title">European Family <em>Gathering</em></div><div class="mev__loc">Slovenia · Croatia · Serbia</div></div><span class="mev__tag">Retreat · 7 days</span></li>
+        <li class="mev external" data-type="festival"><div><div class="mev__title">Sivananda World <em>Conference</em></div><div class="mev__loc">Kerala · India</div></div><span class="mev__tag">Invited · 2 days</span></li>
+        <li class="mev" data-type="satsang"><div><div class="mev__title">London <em>Satsang</em></div><div class="mev__loc">Mohanji Foundation UK</div></div><span class="mev__tag">Satsang · 1 evening</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">March</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Mahashivaratri <em>Global</em></div>
-          <div class="movement__location">All Mohanji Spaces · Online</div>
-        </div>
-        <div class="movement__type" data-type="festival">Festival</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">March</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="festival"><div><div class="mev__title">Mahashivaratri <em>Global</em></div><div class="mev__loc">All Mohanji Spaces · Online</div></div><span class="mev__tag">Festival · overnight</span></li>
+        <li class="mev external" data-type="festival"><div><div class="mev__title">World Consciousness <em>Summit</em></div><div class="mev__loc">Delhi · India</div></div><span class="mev__tag">Invited · 3 days</span></li>
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Holi <em>Weekend</em></div><div class="mev__loc">Vrindavan · India</div></div><span class="mev__tag">Retreat · 3 days</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">April</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Teaching Tour · <em>Americas</em></div>
-          <div class="movement__location">USA · Canada</div>
-        </div>
-        <div class="movement__type" data-type="satsang">Satsang</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">April</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="satsang"><div><div class="mev__title">Americas Teaching <em>Tour</em></div><div class="mev__loc">NYC · LA · Toronto</div></div><span class="mev__tag">Satsang · 12 days</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Parliament of <em>Religions</em></div><div class="mev__loc">Chicago · USA</div></div><span class="mev__tag">Invited · 1 day</span></li>
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Ganeshpuri <em>Weekend</em></div><div class="mev__loc">Ganeshpuri · India</div></div><span class="mev__tag">Retreat · 4 days</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">May</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Silence with <em>Mohanji</em></div>
-          <div class="movement__location">Peace Centre · Serbia</div>
-        </div>
-        <div class="movement__type" data-type="immersion">Immersion</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">May</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="immersion"><div><div class="mev__title">Silence with <em>Mohanji</em></div><div class="mev__loc">Peace Centre · Serbia</div></div><span class="mev__tag">Immersion · 7 days</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">UN Day of <em>Vesak</em></div><div class="mev__loc">Geneva · Switzerland</div></div><span class="mev__tag">Invited · 1 day</span></li>
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Slovenia Family <em>Weekend</em></div><div class="mev__loc">Bled · Slovenia</div></div><span class="mev__tag">Retreat · 3 days</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Yoga <em>Expo</em></div><div class="mev__loc">London · UK</div></div><span class="mev__tag">Invited · 1 day</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">June</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Kailash <em>Pilgrimage</em></div>
-          <div class="movement__location">Mount Kailash · Tibet</div>
-        </div>
-        <div class="movement__type" data-type="pilgrimage">Pilgrimage</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">June</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="pilgrimage"><div><div class="mev__title">Kailash <em>Pilgrimage</em></div><div class="mev__loc">Mount Kailash · Tibet</div></div><span class="mev__tag">Pilgrimage · 15 days</span></li>
+        <li class="mev" data-type="festival"><div><div class="mev__title">International Yoga <em>Day</em></div><div class="mev__loc">Global · Online</div></div><span class="mev__tag">Festival · 1 day</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">July</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Guru Purnima <em>Worldwide</em></div>
-          <div class="movement__location">Ganeshpuri · India · Online</div>
-        </div>
-        <div class="movement__type" data-type="festival">Festival</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">July</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="festival"><div><div class="mev__title">Guru Purnima <em>Worldwide</em></div><div class="mev__loc">Ganeshpuri · India · Online</div></div><span class="mev__tag">Festival · 1 day</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Spiritual Leaders <em>Forum</em></div><div class="mev__loc">Rishikesh · India</div></div><span class="mev__tag">Invited · 2 days</span></li>
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Monsoon <em>Retreat</em></div><div class="mev__loc">Harda · India</div></div><span class="mev__tag">Retreat · 5 days</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">August</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Bhakti <em>Immersion</em></div>
-          <div class="movement__location">Vrindavan · India</div>
-        </div>
-        <div class="movement__type" data-type="retreat">Retreat</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">August</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Bhakti <em>Immersion</em></div><div class="mev__loc">Vrindavan · India</div></div><span class="mev__tag">Retreat · 5 days</span></li>
+        <li class="mev external" data-type="festival"><div><div class="mev__title">Janmashtami · Iskcon <em>Mumbai</em></div><div class="mev__loc">Mumbai · India</div></div><span class="mev__tag">Invited · 1 day</span></li>
+        <li class="mev" data-type="satsang"><div><div class="mev__title">Independence Day <em>Blessing</em></div><div class="mev__loc">Online · Global</div></div><span class="mev__tag">Satsang · 1 day</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">September</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">African Family <em>Gathering</em></div>
-          <div class="movement__location">Nonoti · South Africa</div>
-        </div>
-        <div class="movement__type" data-type="retreat">Retreat</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">September</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="retreat"><div><div class="mev__title">African Family <em>Gathering</em></div><div class="mev__loc">Nonoti · South Africa</div></div><span class="mev__tag">Retreat · 5 days</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Global Peace <em>Summit</em></div><div class="mev__loc">Cape Town · South Africa</div></div><span class="mev__tag">Invited · 2 days</span></li>
+        <li class="mev" data-type="festival"><div><div class="mev__title">Ganesh <em>Chaturthi</em></div><div class="mev__loc">Ganeshpuri · India</div></div><span class="mev__tag">Festival · 1 day</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">October</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Muktinath <em>Yatra</em></div>
-          <div class="movement__location">Muktinath · Nepal</div>
-        </div>
-        <div class="movement__type" data-type="pilgrimage">Pilgrimage</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">October</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="pilgrimage"><div><div class="mev__title">Muktinath <em>Yatra</em></div><div class="mev__loc">Muktinath · Nepal</div></div><span class="mev__tag">Pilgrimage · 10 days</span></li>
+        <li class="mev" data-type="festival"><div><div class="mev__title">Navaratri <em>Global</em></div><div class="mev__loc">All Mohanji Spaces</div></div><span class="mev__tag">Festival · 9 nights</span></li>
+        <li class="mev external" data-type="festival"><div><div class="mev__title">Parliament of World <em>Religions</em></div><div class="mev__loc">Melbourne · Australia</div></div><span class="mev__tag">Invited · 3 days</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">November</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Southern Hemisphere <em>Retreat</em></div>
-          <div class="movement__location">Gold Coast · Australia</div>
-        </div>
-        <div class="movement__type" data-type="retreat">Retreat</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">November</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="retreat"><div><div class="mev__title">Southern Hemisphere <em>Retreat</em></div><div class="mev__loc">Gold Coast · Australia</div></div><span class="mev__tag">Retreat · 4 days</span></li>
+        <li class="mev" data-type="festival"><div><div class="mev__title">Diwali <em>Lights</em></div><div class="mev__loc">Harda Ashram · India</div></div><span class="mev__tag">Festival · 5 days</span></li>
+        <li class="mev external" data-type="satsang"><div><div class="mev__title">Sydney Wellness <em>Festival</em></div><div class="mev__loc">Sydney · Australia</div></div><span class="mev__tag">Invited · 2 days</span></li>
+      </ul>
     </div>
 
-    <div class="movement">
-      <div class="movement__month">December</div>
-      <div class="movement__body">
-        <div>
-          <div class="movement__title">Year-End <em>Silence</em></div>
-          <div class="movement__location">Harda Ashram · India</div>
-        </div>
-        <div class="movement__type" data-type="immersion">Immersion</div>
-      </div>
+    <div class="mmonth">
+      <div class="mmonth__label">December</div>
+      <ul class="mmonth__events">
+        <li class="mev" data-type="immersion"><div><div class="mev__title">Year-End <em>Silence</em></div><div class="mev__loc">Harda Ashram · India</div></div><span class="mev__tag">Immersion · 10 days</span></li>
+        <li class="mev" data-type="satsang"><div><div class="mev__title">Christmas <em>Satsang</em></div><div class="mev__loc">Online · Global</div></div><span class="mev__tag">Satsang · 1 day</span></li>
+        <li class="mev" data-type="festival"><div><div class="mev__title">New Year's Eve <em>Meditation</em></div><div class="mev__loc">All Mohanji Spaces · Online</div></div><span class="mev__tag">Festival · overnight</span></li>
+      </ul>
     </div>
 
   </div>
@@ -927,35 +1107,41 @@
 </footer>
 
 <script>
-  // Event data for calendar
+  // Event data — { start, end?, name, type, external? }
   const EVENTS = [
-    // April 2026
-    { date: '2026-04-05', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-04-12', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-04-15', name: 'Americas Tour · NYC',   type: 'satsang' },
-    { date: '2026-04-18', name: 'Americas Tour · LA',    type: 'satsang' },
-    { date: '2026-04-19', name: 'Sunday Satsang · LA',   type: 'satsang' },
-    { date: '2026-04-22', name: 'Americas Tour · Toronto', type: 'satsang' },
-    { date: '2026-04-26', name: 'Sunday Satsang',        type: 'satsang' },
-    // May 2026
-    { date: '2026-05-03', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-05-10', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-05-12', name: 'Silence · Serbia',      type: 'immersion', span: 7 },
-    { date: '2026-05-17', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-05-24', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-05-31', name: 'Sunday Satsang',        type: 'satsang' },
-    // June 2026
-    { date: '2026-06-07', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-06-14', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-06-18', name: 'Kailash Pilgrimage',    type: 'pilgrimage' },
-    { date: '2026-06-21', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-06-28', name: 'Sunday Satsang',        type: 'satsang' },
     // March 2026
-    { date: '2026-03-01', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-03-08', name: 'Mahashivaratri Global', type: 'festival' },
-    { date: '2026-03-15', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-03-22', name: 'Sunday Satsang',        type: 'satsang' },
-    { date: '2026-03-29', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-03-01', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-03-08', name: 'Mahashivaratri Global', type: 'festival' },
+    { start: '2026-03-15', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-03-18', end: '2026-03-20', name: 'World Consciousness Summit', type: 'festival', external: true },
+    { start: '2026-03-22', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-03-29', name: 'Sunday Satsang',        type: 'satsang' },
+    // April 2026
+    { start: '2026-04-05', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-04-10', end: '2026-04-12', name: 'Americas Teaching Tour · NYC', type: 'satsang' },
+    { start: '2026-04-12', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-04-14', name: 'Parliament of Religions · Chicago', type: 'satsang', external: true },
+    { start: '2026-04-17', end: '2026-04-19', name: 'Americas Teaching Tour · LA', type: 'satsang' },
+    { start: '2026-04-19', name: 'Sunday Satsang · LA',   type: 'satsang' },
+    { start: '2026-04-22', name: 'Toronto Dharma Talk',   type: 'satsang' },
+    { start: '2026-04-26', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-04-29', end: '2026-05-02', name: 'Ganeshpuri Weekend', type: 'retreat' },
+    // May 2026
+    { start: '2026-05-03', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-05-06', name: 'UN Day of Vesak · Geneva', type: 'satsang', external: true },
+    { start: '2026-05-10', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-05-12', end: '2026-05-18', name: 'Silence with Mohanji · Serbia', type: 'immersion' },
+    { start: '2026-05-17', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-05-22', end: '2026-05-24', name: 'Slovenia Family Weekend', type: 'retreat' },
+    { start: '2026-05-24', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-05-28', name: 'Yoga Expo · London',    type: 'satsang', external: true },
+    { start: '2026-05-31', name: 'Sunday Satsang',        type: 'satsang' },
+    // June 2026
+    { start: '2026-06-07', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-06-14', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-06-18', end: '2026-07-02', name: 'Kailash Pilgrimage', type: 'pilgrimage' },
+    { start: '2026-06-21', name: 'Sunday Satsang',        type: 'satsang' },
+    { start: '2026-06-28', name: 'Sunday Satsang',        type: 'satsang' },
   ];
 
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -964,9 +1150,37 @@
   let currentYear = 2026, currentMonth = 3; // April
   let activeFilter = 'all';
 
-  function eventsOn(y, m, d) {
-    const iso = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    return EVENTS.filter(e => e.date === iso && (activeFilter === 'all' || e.type === activeFilter));
+  function isoOf(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+  function parseIso(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
+
+  function matchesFilter(ev){
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'external') return ev.external === true;
+    return ev.type === activeFilter;
+  }
+
+  function eventSegmentsForDate(y, m, d) {
+    // returns array of {ev, role} where role ∈ 'single'|'start'|'mid'|'end'
+    const cell = new Date(y, m, d);
+    const cellDow = cell.getDay(); // 0 = Sun
+    const out = [];
+    EVENTS.filter(matchesFilter).forEach(ev => {
+      const start = parseIso(ev.start);
+      const end = ev.end ? parseIso(ev.end) : start;
+      if (cell < start || cell > end) return;
+      const sameDay = start.getTime() === end.getTime();
+      const isStart = cell.getTime() === start.getTime();
+      const isEnd = cell.getTime() === end.getTime();
+      const isWeekStart = cellDow === 0; // new visual row → treat as start
+      let role;
+      if (sameDay) role = 'single';
+      else if (isStart) role = 'start';
+      else if (isEnd) role = isWeekStart ? 'end' : 'end';
+      else if (isWeekStart) role = 'start-wrap';
+      else role = 'mid';
+      out.push({ ev, role });
+    });
+    return out;
   }
 
   function renderCalendar() {
@@ -990,9 +1204,8 @@
     const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
 
     const today = new Date();
-    const todayIso = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    const todayIso = isoOf(today.getFullYear(), today.getMonth(), today.getDate());
 
-    // Previous month dim days
     for (let i = startDow - 1; i >= 0; i--) {
       const d = prevMonthDays - i;
       const cell = document.createElement('div');
@@ -1001,24 +1214,25 @@
       cal.appendChild(cell);
     }
 
-    // This month
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement('div');
-      const iso = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const iso = isoOf(currentYear, currentMonth, d);
       cell.className = 'cal-cell' + (iso === todayIso ? ' today' : '');
       cell.innerHTML = `<div class="cal-cell__num">${d}</div>`;
-      eventsOn(currentYear, currentMonth, d).forEach(ev => {
+      eventSegmentsForDate(currentYear, currentMonth, d).forEach(({ev, role}) => {
         const pill = document.createElement('div');
-        pill.className = 'cal-event';
+        let roleClass = role;
+        if (role === 'start-wrap') roleClass = 'start wrap';
+        pill.className = 'cal-event ' + roleClass + (ev.external ? ' external' : '');
         pill.setAttribute('data-type', ev.type);
-        pill.textContent = ev.name;
-        pill.title = ev.name;
+        const showLabel = (role === 'single' || role === 'start' || role === 'start-wrap');
+        pill.textContent = showLabel ? ev.name : '\u00A0';
+        pill.title = ev.name + (ev.external ? ' (invited appearance)' : '');
         cell.appendChild(pill);
       });
       cal.appendChild(cell);
     }
 
-    // Next month fill
     const total = startDow + daysInMonth;
     const fill = (7 - (total % 7)) % 7;
     for (let i = 1; i <= fill; i++) {
