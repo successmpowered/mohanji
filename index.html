@@ -210,9 +210,9 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 140px 48px 120px;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 140px 88px 120px;
   }
   .hero__bg {
     position: absolute; inset: 0;
@@ -231,20 +231,20 @@
   .hero__left {
     position: relative;
     z-index: 2;
-    max-width: 1100px;
+    max-width: 560px;
     color: var(--white);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
   }
   /* rotating mandala watermark behind the text */
   .hero__mandala {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%; left: 18%;
     transform: translate(-50%, -50%);
-    width: 680px; height: 680px;
-    opacity: 0.14;
+    width: 620px; height: 620px;
+    opacity: 0.12;
     pointer-events: none;
     animation: slow-rotate-hero 240s linear infinite;
     z-index: 1;
@@ -264,7 +264,7 @@
     animation: rise 1.4s 0.3s cubic-bezier(.2,.7,.2,1) forwards;
     display: inline-flex; align-items: center; gap: 16px;
   }
-  .hero__kicker::before, .hero__kicker::after {
+  .hero__kicker::before {
     content: ""; display: block;
     width: 48px; height: 1px; background: var(--gold-light);
   }
@@ -289,8 +289,8 @@
     font-weight: 300;
     font-style: italic;
     color: rgba(253,252,249,0.85);
-    max-width: 640px;
-    margin: 36px auto 52px;
+    max-width: 520px;
+    margin: 36px 0 52px;
     line-height: 1.55;
     text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     opacity: 0;
@@ -299,27 +299,34 @@
   .hero__ctas {
     position: relative; z-index: 1;
     display: flex; gap: 16px; flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     opacity: 0;
     animation: rise 1.6s 1.3s cubic-bezier(.2,.7,.2,1) forwards;
   }
   .hero__bottom {
     position: absolute;
-    bottom: 44px; left: 48px; right: 48px;
+    top: 50%; right: 88px;
+    transform: translateY(-50%);
     z-index: 2;
-    display: flex; justify-content: space-between; align-items: flex-end;
-    color: rgba(253,252,249,0.85);
+    width: 320px;
+    display: flex; flex-direction: column; align-items: flex-end;
+    text-align: right;
+    color: rgba(253,252,249,0.88);
     pointer-events: none;
     opacity: 0;
     animation: rise 2s 1.6s cubic-bezier(.2,.7,.2,1) forwards;
   }
+  .hero__bottom::before {
+    content: ""; display: block;
+    width: 48px; height: 1px; background: var(--gold-light);
+    margin-bottom: 22px;
+  }
   .hero__caption-quote {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 300;
     color: var(--white);
-    max-width: 400px;
     line-height: 1.4;
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
@@ -334,16 +341,7 @@
     color: var(--gold-light);
     font-weight: 500;
   }
-  .hero__scroll {
-    font-family: var(--sans);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(253,252,249,0.6);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    padding-bottom: 8px;
-  }
+  .hero__scroll { display: none; }
   @keyframes rise {
     from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -1364,10 +1362,15 @@
   @media (max-width: 1000px) {
     .nav { padding: 16px 24px; }
     .nav__menu { display: none; }
-    .hero { padding: 110px 24px 140px; min-height: 90vh; }
-    .hero__bottom { left: 24px; right: 24px; bottom: 24px; flex-direction: column; align-items: flex-start; gap: 18px; }
-    .hero__scroll { display: none; }
-    .hero__mandala { width: 420px; height: 420px; opacity: 0.1; }
+    .hero { padding: 110px 24px 200px; min-height: 90vh; text-align: left; }
+    .hero__left { max-width: 100%; }
+    .hero__bottom {
+      position: absolute; top: auto; bottom: 28px; right: 24px; left: 24px;
+      transform: none; width: auto; align-items: flex-start; text-align: left;
+    }
+    .hero__bottom::before { margin-bottom: 14px; }
+    .hero__caption-quote { font-size: 17px; }
+    .hero__mandala { width: 420px; height: 420px; opacity: 0.1; left: 30%; }
 
     section, .about-mohanji, .path, .community, .events, .welcome, .purpose, .join { padding: 100px 24px; }
     .about-mohanji__grid, .community__grid { grid-template-columns: 1fr; gap: 56px; }
