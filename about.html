@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Mohanji — A life in service</title>
+<meta name="description" content="Brahmarishi Mohanji — teacher, humanitarian, and founder of a global family of consciousness. Humanity is the best religion. Kindness is the highest practice." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #fdfcf9; --white-pure: #ffffff; --white-soft: #faf7f0; --white-warm: #f5efe2;
+    --ink: #2a241b; --ink-soft: #5a5347; --ink-mute: #8a8278;
+    --gold: #b8924a; --gold-light: #d4ae6b; --gold-deep: #8a6a2f;
+    --gold-whisper: #f0e6ce; --gold-trace: #faf4e6;
+    --line: rgba(42,36,27,0.08);
+    --line-mid: rgba(42,36,27,0.16);
+    --line-gold: rgba(184,146,74,0.3);
+    --line-gold-strong: rgba(184,146,74,0.55);
+    --serif: 'Cormorant Garamond','Times New Roman',serif;
+    --sans:  'Manrope',-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:0.025;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+  /* ANNOUNCE */
+  .announce{background:var(--white-warm);color:var(--ink);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:400;text-align:center;padding:10px 20px;position:relative;z-index:110;border-bottom:1px solid var(--line-gold)}
+  .announce a{color:var(--gold-deep);margin-left:10px;font-weight:500;border-bottom:1px solid transparent;transition:border-color 0.3s}
+  .announce a:hover{border-color:var(--gold)}
+  .announce__dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin-right:10px;animation:pulse 2s ease-in-out infinite;vertical-align:middle}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:0.5}}
+
+  /* NAV */
+  .nav-wrap{position:sticky;top:0;z-index:50;background:rgba(253,252,249,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .nav{max-width:1400px;margin:0 auto;padding:20px 48px;display:flex;align-items:center;justify-content:space-between}
+  .nav__logo{font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:0.05em;color:var(--ink)}
+  .nav__logo em{font-style:italic;color:var(--gold);font-weight:400}
+  .nav__menu{display:flex;gap:38px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500}
+  .nav__item{position:relative;padding:10px 0}
+  .nav__item > a{color:var(--ink);transition:color 0.3s;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .nav__item:hover > a{color:var(--gold-deep)}
+  .nav__item.active > a{color:var(--gold-deep)}
+  .nav__cta{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;padding:12px 24px;background:var(--gold);color:var(--white);border:1px solid var(--gold);transition:all 0.35s;font-weight:500}
+  .nav__cta:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+
+  /* HERO */
+  .a-hero{
+    position:relative;
+    padding:120px 48px 110px;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--white) 0%, var(--white-soft) 100%);
+  }
+  .a-hero::before{
+    content:"";position:absolute;top:-200px;right:-240px;width:820px;height:820px;
+    background:radial-gradient(circle, var(--gold-whisper) 0%, transparent 65%);
+    pointer-events:none;opacity:0.7;
+  }
+  .a-hero__inner{
+    position:relative;z-index:2;
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:0.95fr 1fr;gap:80px;align-items:center;
+  }
+  .a-hero__portrait{
+    position:relative;aspect-ratio:4/5;
+    border:1px solid var(--line-gold);
+    background:var(--white-warm);overflow:hidden;
+  }
+  .a-hero__portrait img{width:100%;height:100%;object-fit:cover}
+  .a-hero__portrait::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(42,36,27,0.15) 100%);
+    pointer-events:none;
+  }
+  .a-hero__mandala{
+    position:absolute;top:-40px;left:-40px;width:180px;height:180px;opacity:0.5;
+    animation:rotate 240s linear infinite;pointer-events:none;
+  }
+  @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .a-hero__kicker{font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+  .a-hero__kicker::before{content:"";width:36px;height:1px;background:var(--gold)}
+  .a-hero__title{font-family:var(--serif);font-size:clamp(54px,6vw,92px);font-weight:300;line-height:0.98;letter-spacing:-0.02em;color:var(--ink);margin-bottom:36px}
+  .a-hero__title em{font-style:italic;color:var(--gold);font-weight:300}
+  .a-hero__lede{font-family:var(--serif);font-size:23px;font-style:italic;color:var(--ink-soft);line-height:1.5;max-width:540px;margin-bottom:44px}
+  .a-hero__meta{display:flex;gap:60px;padding-top:32px;border-top:1px solid var(--line-gold)}
+  .a-hero__meta-item{font-size:13px;color:var(--ink-soft)}
+  .a-hero__meta-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:6px}
+
+  /* SECTION BASE */
+  .section{padding:120px 48px;position:relative}
+  .section__kicker{font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:22px;display:flex;align-items:center;gap:12px;justify-content:center}
+  .section__kicker::before,.section__kicker::after{content:"";width:28px;height:1px;background:var(--gold-light)}
+  .section__head{text-align:center;max-width:780px;margin:0 auto 80px}
+  .section__head h2{font-family:var(--serif);font-size:clamp(40px,4.4vw,64px);font-weight:300;line-height:1.05;letter-spacing:-0.015em;color:var(--ink);margin-bottom:22px}
+  .section__head h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .section__head p{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink-soft);line-height:1.55}
+
+  /* LIFE STORY */
+  .life{background:var(--white)}
+  .life__body{
+    max-width:760px;margin:0 auto;
+    font-size:18px;line-height:1.85;color:var(--ink-soft);font-weight:300;
+  }
+  .life__body p{margin-bottom:26px}
+  .life__body p:first-of-type::first-letter{
+    font-family:var(--serif);font-size:76px;line-height:0.85;
+    float:left;padding:8px 14px 0 0;color:var(--gold);font-weight:400;font-style:italic;
+  }
+  .life__body em{font-style:italic;color:var(--ink);font-family:var(--serif);font-size:20px}
+
+  /* PULL QUOTE */
+  .pullquote{
+    background:var(--white-warm);
+    padding:110px 48px;text-align:center;
+    position:relative;overflow:hidden;
+    border-top:1px solid var(--line-gold);border-bottom:1px solid var(--line-gold);
+  }
+  .pullquote::before{
+    content:"";position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:900px;height:900px;
+    background:radial-gradient(circle, var(--gold-trace) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  .pullquote__inner{position:relative;z-index:2;max-width:860px;margin:0 auto}
+  .pullquote__mark{
+    font-family:var(--serif);font-size:120px;line-height:0.3;color:var(--gold);
+    font-style:italic;display:block;margin-bottom:20px;opacity:0.6;
+  }
+  .pullquote blockquote{
+    font-family:var(--serif);font-size:clamp(32px,3.2vw,44px);
+    font-weight:300;font-style:italic;line-height:1.25;color:var(--ink);
+    margin-bottom:30px;
+  }
+  .pullquote cite{
+    font-style:normal;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:500;
+  }
+
+  /* TEACHINGS */
+  .teachings{background:var(--white-soft)}
+  .teachings__grid{
+    max-width:1200px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+  }
+  .teaching-card{
+    background:var(--white);padding:48px 38px;
+    border:1px solid var(--line);
+    position:relative;transition:all 0.4s;
+  }
+  .teaching-card::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-deep));
+    transform:scaleX(0);transform-origin:left;transition:transform 0.5s;
+  }
+  .teaching-card:hover{border-color:var(--line-gold-strong);transform:translateY(-4px);box-shadow:0 24px 60px -30px rgba(42,36,27,0.2)}
+  .teaching-card:hover::before{transform:scaleX(1)}
+  .teaching-card__num{
+    font-family:var(--serif);font-size:46px;font-style:italic;
+    color:var(--gold);font-weight:300;line-height:1;margin-bottom:20px;
+  }
+  .teaching-card__title{
+    font-family:var(--serif);font-size:28px;font-weight:400;
+    color:var(--ink);margin-bottom:16px;letter-spacing:-0.01em;
+  }
+  .teaching-card__title em{font-style:italic;color:var(--gold)}
+  .teaching-card__text{font-size:15px;color:var(--ink-soft);line-height:1.75}
+
+  /* JOURNEY / TIMELINE */
+  .journey{background:var(--white);border-top:1px solid var(--line-gold)}
+  .journey__list{
+    max-width:880px;margin:0 auto;
+    position:relative;
+  }
+  .journey__list::before{
+    content:"";position:absolute;left:110px;top:12px;bottom:12px;
+    width:1px;background:linear-gradient(180deg,transparent,var(--gold) 15%,var(--gold) 85%,transparent);
+  }
+  .journey__item{
+    display:grid;grid-template-columns:110px 1fr;gap:60px;
+    padding:28px 0;position:relative;
+  }
+  .journey__item::before{
+    content:"";position:absolute;left:105px;top:36px;
+    width:11px;height:11px;border-radius:50%;
+    background:var(--white);border:2px solid var(--gold);
+  }
+  .journey__year{
+    font-family:var(--serif);font-size:28px;font-style:italic;
+    color:var(--gold-deep);font-weight:400;line-height:1.2;
+  }
+  .journey__body h3{
+    font-family:var(--serif);font-size:24px;font-weight:400;
+    color:var(--ink);margin-bottom:10px;letter-spacing:-0.01em;
+  }
+  .journey__body p{font-size:15px;color:var(--ink-soft);line-height:1.7}
+
+  /* SPLIT IMAGE + TEXT */
+  .split{
+    background:var(--white-warm);
+    padding:120px 48px;
+    border-top:1px solid var(--line-gold);border-bottom:1px solid var(--line-gold);
+  }
+  .split__inner{
+    max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 0.95fr;gap:80px;align-items:center;
+  }
+  .split__image{
+    aspect-ratio:3/4;overflow:hidden;
+    border:1px solid var(--line-gold);
+    background:var(--white);position:relative;
+  }
+  .split__image img{width:100%;height:100%;object-fit:cover}
+  .split__body h2{
+    font-family:var(--serif);font-size:clamp(36px,3.8vw,54px);
+    font-weight:300;line-height:1.08;letter-spacing:-0.015em;
+    color:var(--ink);margin-bottom:28px;
+  }
+  .split__body h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .split__body p{font-size:17px;color:var(--ink-soft);line-height:1.8;margin-bottom:20px}
+  .split__body p em{font-style:italic;color:var(--ink);font-family:var(--serif);font-size:19px}
+
+  /* ORGANISATIONS */
+  .orgs{background:var(--white)}
+  .orgs__grid{
+    max-width:1200px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+  }
+  .org-card{
+    background:var(--white-soft);padding:42px 40px;
+    border:1px solid var(--line);
+    display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start;
+    transition:all 0.4s;
+  }
+  .org-card:hover{border-color:var(--line-gold-strong);background:var(--gold-trace)}
+  .org-card__mark{
+    width:56px;height:56px;border-radius:50%;
+    border:1px solid var(--line-gold-strong);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-style:italic;font-size:24px;color:var(--gold-deep);
+    background:var(--white);
+  }
+  .org-card__name{
+    font-family:var(--serif);font-size:24px;font-weight:400;
+    color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;
+  }
+  .org-card__name em{font-style:italic;color:var(--gold)}
+  .org-card__role{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:12px}
+  .org-card__desc{font-size:14px;color:var(--ink-soft);line-height:1.7}
+
+  /* VOICES / QUOTE WALL */
+  .voices{background:var(--white-soft);border-top:1px solid var(--line-gold)}
+  .voices__grid{
+    max-width:1200px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
+  }
+  .voice{
+    background:var(--white);padding:44px 40px;
+    border:1px solid var(--line);position:relative;
+  }
+  .voice__quote{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--ink);line-height:1.45;margin-bottom:20px;font-weight:300}
+  .voice__source{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
+  .voice::before{
+    content:"";position:absolute;top:0;left:40px;width:40px;height:2px;background:var(--gold);
+  }
+
+  /* CTA */
+  .about-cta{
+    padding:140px 48px;
+    background:var(--white-warm);
+    text-align:center;
+    position:relative;overflow:hidden;
+    border-top:1px solid var(--line-gold);
+  }
+  .about-cta::before{
+    content:"";position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:900px;height:900px;
+    background:radial-gradient(circle, var(--gold-trace) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  .about-cta__inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
+  .about-cta h2{font-family:var(--serif);font-size:clamp(44px,5vw,72px);font-weight:300;line-height:1;letter-spacing:-0.015em;color:var(--ink);margin-bottom:28px}
+  .about-cta h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .about-cta__sub{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--ink-soft);max-width:560px;margin:0 auto 40px}
+  .btn{
+    font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;
+    padding:16px 30px;display:inline-flex;align-items:center;gap:10px;
+    transition:all 0.35s;cursor:pointer;border:1px solid transparent;margin:0 6px;
+  }
+  .btn--ink{background:var(--ink);color:var(--white);border-color:var(--ink)}
+  .btn--ink:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .btn--ghost{background:transparent;color:var(--ink);border-color:var(--gold)}
+  .btn--ghost:hover{background:var(--gold-trace)}
+
+  /* FOOTER */
+  footer{background:var(--white-warm);border-top:1px solid var(--line-gold);padding:80px 48px 40px;color:var(--ink)}
+  .footer__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:48px;padding-bottom:48px;border-bottom:1px solid var(--line-gold)}
+  .footer__brand{font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:0.04em;margin-bottom:16px}
+  .footer__brand em{font-style:italic;color:var(--gold)}
+  .footer__tag{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--ink-soft);line-height:1.5;max-width:320px}
+  .footer__col-title{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:20px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:10px}
+  .footer__col a{font-size:14px;color:var(--ink-soft);transition:color 0.3s}
+  .footer__col a:hover{color:var(--gold-deep)}
+  .footer__bottom{max-width:1280px;margin:0 auto;padding-top:28px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-mute);letter-spacing:0.06em}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .nav__menu{display:none}
+    .a-hero{padding:72px 24px 80px}
+    .a-hero__inner{grid-template-columns:1fr;gap:50px}
+    .a-hero__meta{gap:36px;flex-wrap:wrap}
+    .section{padding:80px 24px}
+    .teachings__grid{grid-template-columns:1fr;gap:20px}
+    .journey__list::before{left:6px}
+    .journey__item{grid-template-columns:1fr;gap:6px;padding-left:34px}
+    .journey__item::before{left:0;top:34px}
+    .split{padding:80px 24px}
+    .split__inner{grid-template-columns:1fr;gap:40px}
+    .orgs__grid{grid-template-columns:1fr}
+    .voices__grid{grid-template-columns:1fr}
+    .about-cta{padding:90px 24px}
+    .footer__grid{grid-template-columns:1fr 1fr;gap:32px}
+    .footer__bottom{flex-direction:column;gap:14px;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <span class="announce__dot"></span>
+  Live this Sunday · Weekly Talk with Mohanji
+  <a href="index.html#weekly">Reserve your seat →</a>
+</div>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">Mohanji<em>.</em></a>
+    <div class="nav__menu">
+      <div class="nav__item active"><a href="about.html">About</a></div>
+      <div class="nav__item"><a href="index.html#path">Path</a></div>
+      <div class="nav__item"><a href="index.html#weekly">Events</a></div>
+      <div class="nav__item"><a href="spaces.html">Spaces</a></div>
+      <div class="nav__item"><a href="index.html#community">Family</a></div>
+    </div>
+    <a href="index.html#join" class="nav__cta">Join the Family</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="a-hero">
+  <div class="a-hero__inner">
+    <div class="a-hero__portrait">
+      <svg class="a-hero__mandala" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="90" stroke="#b8924a" stroke-width="0.6" stroke-dasharray="2 4"/>
+        <circle cx="100" cy="100" r="70" stroke="#b8924a" stroke-width="0.4"/>
+        <circle cx="100" cy="100" r="50" stroke="#b8924a" stroke-width="0.4" stroke-dasharray="1 3"/>
+        <g stroke="#b8924a" stroke-width="0.4">
+          <line x1="100" y1="10" x2="100" y2="190"/>
+          <line x1="10" y1="100" x2="190" y2="100"/>
+          <line x1="36" y1="36" x2="164" y2="164"/>
+          <line x1="164" y1="36" x2="36" y2="164"/>
+        </g>
+      </svg>
+      <img src="assets/images/mohanji-hero.jpg" alt="Brahmarishi Mohanji" />
+    </div>
+    <div class="a-hero__copy">
+      <div class="a-hero__kicker">About Mohanji</div>
+      <h1 class="a-hero__title">A life poured<br/>into <em>service.</em></h1>
+      <p class="a-hero__lede">Brahmarishi Mohanji is a teacher, humanitarian and the quiet centre of a global family walking the path of <em>Be You.</em> For more than a decade he has offered — freely and continuously — a way of living grounded in kindness, selfless service, and the recognition of divinity in every being.</p>
+      <div class="a-hero__meta">
+        <div class="a-hero__meta-item">
+          <div class="a-hero__meta-label">Teaching since</div>
+          2012
+        </div>
+        <div class="a-hero__meta-item">
+          <div class="a-hero__meta-label">Family across</div>
+          90+ countries
+        </div>
+        <div class="a-hero__meta-item">
+          <div class="a-hero__meta-label">Foundation</div>
+          Mohanji Foundation · Switzerland
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE STORY -->
+<section class="section life">
+  <div class="section__head">
+    <div class="section__kicker">The Journey</div>
+    <h2>From a quiet boy in Kerala<br/>to <em>a global presence.</em></h2>
+    <p>The outline of a life that has moved, almost without pause, from the inner landscape of silence to the outer work of serving humanity.</p>
+  </div>
+  <div class="life__body">
+    <p>Mohanji was born in a small village in Kerala, South India — a child known for his unusual stillness and for a natural affinity with the world around him. From an early age he was drawn inward, to the interior rooms where questions of purpose, being and suffering live. The outer life, though, unfolded in the ordinary way: school, university, a career in the shipping industry that would eventually carry him across oceans and into leadership roles in Dubai, Oman, Nigeria and beyond.</p>
+
+    <p>Through those years the inner pull never left him. He served quietly — helping where he could, giving without announcement — and walked alongside saints and masters of India's living traditions. <em>Loss, love, and a long apprenticeship to silence</em> shaped the teacher he would later become. When the call to teach publicly arrived, he did not rush to meet it. It arrived, in its own time, in 2007 — and by 2012 Mohanji had begun to speak openly to a growing circle of sincere seekers.</p>
+
+    <p>What he offered was not new. It was as old as the Himalayas: the recognition that we are consciousness, that ahimsa — non-violence — is the highest practice, and that the shortest path to the divine is to be, simply and unapologetically, <em>oneself.</em> Today that offering has grown into Mohanji Foundation, a network of humanitarian organisations, and a family of practitioners across more than ninety countries — held together not by hierarchy, but by a shared intention to be kind, to be useful, and to be free.</p>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="pullquote">
+  <div class="pullquote__inner">
+    <span class="pullquote__mark">"</span>
+    <blockquote>Humanity is the best religion.<br/>Kindness is the highest practice.</blockquote>
+    <cite>— Mohanji</cite>
+  </div>
+</section>
+
+<!-- TEACHINGS -->
+<section class="section teachings" id="teachings">
+  <div class="section__head">
+    <div class="section__kicker">The Teaching</div>
+    <h2>Three threads,<br/>one <em>simple life.</em></h2>
+    <p>Mohanji's teaching is not a doctrine. It is a set of doorways back to what you already are.</p>
+  </div>
+  <div class="teachings__grid">
+    <div class="teaching-card">
+      <div class="teaching-card__num">I.</div>
+      <h3 class="teaching-card__title">Be <em>You.</em></h3>
+      <p class="teaching-card__text">Do not imitate. Do not perform. The divine is not elsewhere — it is the unconditioned version of who you already are. The entire path is the steady uncovering of that self, and the gentle shedding of everything you are not.</p>
+    </div>
+    <div class="teaching-card">
+      <div class="teaching-card__num">II.</div>
+      <h3 class="teaching-card__title"><em>Ahimsa</em> in action.</h3>
+      <p class="teaching-card__text">Non-violence is not passivity. It is the active choice — in thought, word, food and work — to do no harm and, wherever possible, to bring relief. It begins on the plate and extends outward to every being we touch.</p>
+    </div>
+    <div class="teaching-card">
+      <div class="teaching-card__num">III.</div>
+      <h3 class="teaching-card__title">Service as <em>sadhana.</em></h3>
+      <p class="teaching-card__text">Selfless service is not charity done on the side — it is the practice itself. To serve without expectation dissolves the ego faster than any meditation seat, and turns ordinary life into a continuous offering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section class="section journey" id="journey">
+  <div class="section__head">
+    <div class="section__kicker">A Life in Motion</div>
+    <h2>Markers along <em>the way.</em></h2>
+  </div>
+  <div class="journey__list">
+    <div class="journey__item">
+      <div class="journey__year">Kerala</div>
+      <div class="journey__body">
+        <h3>Early years</h3>
+        <p>Born in a village in South India. A childhood marked by inwardness, long hours in nature, and a tenderness toward all living beings that his family noticed from the beginning.</p>
+      </div>
+    </div>
+    <div class="journey__item">
+      <div class="journey__year">2000s</div>
+      <div class="journey__body">
+        <h3>A working life, quietly spiritual</h3>
+        <p>Years of leadership in the international shipping industry — Dubai, the Middle East, Africa — while walking, in parallel, with saints and masters of India's living traditions. Service offered without name.</p>
+      </div>
+    </div>
+    <div class="journey__item">
+      <div class="journey__year">2007</div>
+      <div class="journey__body">
+        <h3>Ammucare begins</h3>
+        <p>Founded Ammucare Charitable Trust in memory of his daughter Ammu — an act of grief transmuted into ongoing service: food, medicine, education and disaster relief for those who have the least.</p>
+      </div>
+    </div>
+    <div class="journey__item">
+      <div class="journey__year">2012</div>
+      <div class="journey__body">
+        <h3>Teaching publicly</h3>
+        <p>Begins teaching openly. The first Mohanji Foundation circles form. A practice rooted in ahimsa, selfless service and the direct recognition of one's own nature begins to spread quietly across continents.</p>
+      </div>
+    </div>
+    <div class="journey__item">
+      <div class="journey__year">Today</div>
+      <div class="journey__body">
+        <h3>A global family</h3>
+        <p>Nineteen Mohanji Spaces across six continents. Family in more than ninety countries. Ongoing humanitarian work through Ammucare, ACT Foundation and allied initiatives — and a weekly talk, open to all, that has never stopped.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT: philosophy -->
+<section class="split">
+  <div class="split__inner">
+    <div class="split__image">
+      <img src="assets/images/mohanji-candid-2.jpg" alt="Mohanji in white robes" />
+    </div>
+    <div class="split__body">
+      <h2>Not a guru<br/>in the <em>old shape.</em></h2>
+      <p>Mohanji consistently declines the architecture of guru and disciple. He does not collect followers. He does not sell liberation. <em>"I am what you consider me to be,"</em> he has said — meaning the relationship is yours to define, and the work is yours to do.</p>
+      <p>What he offers instead is companionship on the path: a steady, patient presence pointing always back to your own centre. The Mohanji family is therefore horizontal rather than vertical — a fellowship of seekers supporting one another, with Mohanji as the quiet reference point rather than the destination.</p>
+      <p>This is, perhaps, the most contemporary thing about a very ancient teaching: it insists on your sovereignty. You are not asked to surrender your discrimination, only to use it well.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANISATIONS -->
+<section class="section orgs" id="orgs">
+  <div class="section__head">
+    <div class="section__kicker">The Work in the World</div>
+    <h2>Organisations of <em>benevolence.</em></h2>
+    <p>Over two decades a constellation of charities, schools and platforms has grown around Mohanji's work — each with its own focus, each offering its service freely.</p>
+  </div>
+  <div class="orgs__grid">
+    <div class="org-card">
+      <div class="org-card__mark">M</div>
+      <div>
+        <h3 class="org-card__name">Mohanji <em>Foundation</em></h3>
+        <div class="org-card__role">Headquarters · Switzerland</div>
+        <p class="org-card__desc">The central body coordinating teaching, retreats, publications and the worldwide network of Mohanji Spaces — present in more than fifteen registered countries.</p>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-card__mark">A</div>
+      <div>
+        <h3 class="org-card__name">Ammucare <em>Charitable Trust</em></h3>
+        <div class="org-card__role">Humanitarian · Founded 2007</div>
+        <p class="org-card__desc">Food, medicine, education, disaster relief. Ammucare carries Mohanji's principle that selfless service is not a wing of the practice — it is the practice.</p>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-card__mark">A</div>
+      <div>
+        <h3 class="org-card__name">ACT <em>Foundation</em></h3>
+        <div class="org-card__role">Awareness · Compassion · Transformation</div>
+        <p class="org-card__desc">A global humanitarian arm active across India, the Balkans, Africa and the Americas — mobilising volunteers in moments of crisis and in quiet, daily care.</p>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-card__mark">H</div>
+      <div>
+        <h3 class="org-card__name">Himalayan School of <em>Traditional Yoga</em></h3>
+        <div class="org-card__role">Lineage · Practice · Transmission</div>
+        <p class="org-card__desc">A school carrying Himalayan yogic traditions — asana, pranayama, meditation and the deeper internal practices — transmitted in their classical, unhurried form.</p>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-card__mark">W</div>
+      <div>
+        <h3 class="org-card__name">World <em>Consciousness Alliance</em></h3>
+        <div class="org-card__role">Gathering · Dialogue · Awareness</div>
+        <p class="org-card__desc">A platform bringing together teachers, healers and seekers from across traditions to serve the rise of collective consciousness beyond any single lineage.</p>
+      </div>
+    </div>
+    <div class="org-card">
+      <div class="org-card__mark">E</div>
+      <div>
+        <h3 class="org-card__name">Early Birds <em>Club</em></h3>
+        <div class="org-card__role">Daily practice · Worldwide</div>
+        <p class="org-card__desc">A simple, powerful daily practice shared across timezones — an early-morning container that millions of practitioners return to, one quiet sunrise at a time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES / QUOTE WALL -->
+<section class="section voices" id="voices">
+  <div class="section__head">
+    <div class="section__kicker">In His Own Words</div>
+    <h2>A teaching, in <em>fragments.</em></h2>
+  </div>
+  <div class="voices__grid">
+    <div class="voice">
+      <p class="voice__quote">True wealth comes from what we give to this earth, not from what we take.</p>
+      <div class="voice__source">— Mohanji</div>
+    </div>
+    <div class="voice">
+      <p class="voice__quote">True mastery is the mastery of one's own mind.</p>
+      <div class="voice__source">— Mohanji</div>
+    </div>
+    <div class="voice">
+      <p class="voice__quote">When we see God in every being, we can only have romance in our hearts.</p>
+      <div class="voice__source">— Mohanji</div>
+    </div>
+    <div class="voice">
+      <p class="voice__quote">I am what you consider me to be.</p>
+      <div class="voice__source">— Mohanji</div>
+    </div>
+    <div class="voice">
+      <p class="voice__quote">Thank you for letting me serve one more day in the world.</p>
+      <div class="voice__source">— Morning prayer · Mohanji</div>
+    </div>
+    <div class="voice">
+      <p class="voice__quote">You are not here to become something. You are here to uncover what you already are.</p>
+      <div class="voice__source">— Mohanji</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <div class="about-cta__inner">
+    <h2>Walk with <em>the family.</em></h2>
+    <p class="about-cta__sub">The teaching is not something to believe. It is something to live, in quiet steps, with others who have chosen the same direction. You are welcome, exactly as you are.</p>
+    <div>
+      <a href="index.html#weekly" class="btn btn--ink">Join Sunday's talk <span>→</span></a>
+      <a href="spaces.html" class="btn btn--ghost">Visit a Space</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__grid">
+    <div>
+      <div class="footer__brand">Mohanji<em>.</em></div>
+      <p class="footer__tag">A global family walking the timeless path of Be You.</p>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Explore</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Mohanji</a></li>
+        <li><a href="index.html#path">The Path</a></li>
+        <li><a href="spaces.html">Spaces</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">The Work</div>
+      <ul>
+        <li><a href="#">Mohanji Foundation</a></li>
+        <li><a href="#">Ammucare</a></li>
+        <li><a href="#">ACT Foundation</a></li>
+        <li><a href="#">Himalayan School</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Practice</div>
+      <ul>
+        <li><a href="index.html#weekly">Weekly Talk</a></li>
+        <li><a href="index.html#path">Meditations</a></li>
+        <li><a href="index.html#community">Community</a></li>
+        <li><a href="index.html#join">Newsletter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© Mohanji Foundation · All rights reserved.</span>
+    <span>Prototype · Built with presence</span>
+  </div>
+</footer>
+
+</body>
+</html>
