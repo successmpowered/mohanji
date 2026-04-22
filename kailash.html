@@ -10,291 +10,364 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --black:#000000;--ink-0:#0a0908;--ink-1:#14110c;--ink-2:#1f1a13;--ink-3:#2a241b;
-    --ink-soft:#6a6055;--ink-mute:#8a8278;
-    --white:#fdfcf9;--white-soft:#f5efe2;--white-ghost:rgba(253,252,249,0.85);
-    --gold:#c9a14e;--gold-light:#e0bf7a;--gold-deep:#8f6a2b;--gold-bright:#f2d48a;
+    /* Pilgrimage palette — snow, sky, Mansarovar, stone, saffron, gold */
+    --snow:#fbf7ed;           /* warm mountain ivory */
+    --snow-soft:#f5efe0;      /* aged paper */
+    --snow-warm:#efe6d0;      /* sandstone monastery wall */
+    --ice:#e4ecf1;            /* glacial ice */
+    --ice-deep:#c7d5de;       /* shadowed snow */
+    --sky:#7fa0b8;            /* Himalayan sky */
+    --sky-deep:#3d5a75;       /* high-altitude blue */
+    --mansarovar:#3a746b;     /* sacred lake emerald */
+    --mansarovar-deep:#20504a;
+    --stone:#8a8276;          /* Tibetan stone */
+    --stone-deep:#5a5347;
+    --ink:#1a1610;            /* yak-hair black */
+    --ink-deep:#0d0a06;
+    --gold:#c9a14e;
+    --gold-light:#e0bf7a;
+    --gold-deep:#8f6a2b;
+    --gold-bright:#f2d48a;
     --gold-whisper:#f0e6ce;
-    --saffron:#e8823c;--crimson:#a43a2a;--mansarovar:#3b6f6a;--sky-ice:#a9c3d4;
-    --line-gold:rgba(201,161,78,0.22);--line-gold-strong:rgba(201,161,78,0.5);
+    --saffron:#d9743a;        /* monk robe saffron */
+    --saffron-soft:#e8a570;
+    --crimson:#a43a2a;        /* prayer flag red */
+    --white:#ffffff;
+    --line-gold:rgba(201,161,78,0.28);
+    --line-gold-strong:rgba(201,161,78,0.55);
+    --line-stone:rgba(42,36,27,0.1);
     --serif:'Cormorant Garamond','Times New Roman',serif;
     --sans:'Manrope',-apple-system,system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--ink-0);color:var(--white);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--snow);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:0.04;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:0.03;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
 
-  /* announce + nav */
-  .announce{background:var(--black);color:var(--gold-whisper);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-align:center;padding:11px 20px;border-bottom:1px solid rgba(201,161,78,0.18);font-weight:400}
+  /* ========== PRAYER FLAG STRIP (announce) ========== */
+  .announce{background:var(--ink);color:var(--gold-whisper);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-align:center;padding:11px 20px;border-bottom:1px solid rgba(201,161,78,0.25);font-weight:400;position:relative;overflow:hidden}
+  .announce__flags{position:absolute;top:0;left:0;right:0;height:3px;display:flex}
+  .announce__flags span{flex:1}
+  .announce__flags span:nth-child(1){background:#3a6fb0}
+  .announce__flags span:nth-child(2){background:#f4f1e4}
+  .announce__flags span:nth-child(3){background:#c74a2e}
+  .announce__flags span:nth-child(4){background:#3a7a5a}
+  .announce__flags span:nth-child(5){background:#d9a93e}
   .announce a{color:var(--gold-light);margin-left:12px;font-weight:500}
   .announce__dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin-right:12px;animation:pulse 2s ease-in-out infinite;vertical-align:middle}
   @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:0.4}}
 
-  .nav-wrap{position:absolute;top:38px;left:0;right:0;z-index:50;pointer-events:none}
-  .nav{max-width:1400px;margin:0 auto;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;pointer-events:auto}
-  .nav__logo{font-family:var(--serif);font-size:30px;color:var(--white);letter-spacing:0.05em;text-shadow:0 2px 24px rgba(0,0,0,0.8)}
-  .nav__logo em{font-style:italic;color:var(--gold-light)}
-  .nav__menu{display:flex;gap:38px;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500}
-  .nav__item>a{color:rgba(253,252,249,0.82);transition:color 0.3s;text-shadow:0 2px 16px rgba(0,0,0,0.8)}
+  /* ========== NAV ========== */
+  .nav-wrap{position:absolute;top:42px;left:0;right:0;z-index:50;pointer-events:none}
+  .nav{max-width:1400px;margin:0 auto;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;pointer-events:auto}
+  .nav__logo{display:flex;align-items:center;gap:14px;color:var(--white)}
+  .nav__logo-mark{width:46px;height:46px;flex-shrink:0;filter:drop-shadow(0 2px 14px rgba(0,0,0,0.6))}
+  .nav__logo-word{font-family:var(--serif);font-size:30px;color:var(--white);letter-spacing:0.04em;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,0.75)}
+  .nav__logo-word em{font-style:italic;color:var(--gold-light)}
+  .nav__logo-tag{display:block;font-family:var(--sans);font-size:9px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-light);margin-top:4px;font-weight:500;opacity:0.85}
+  .nav__menu{display:flex;gap:36px;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500}
+  .nav__item>a{color:rgba(255,255,255,0.88);transition:color 0.3s;text-shadow:0 2px 16px rgba(0,0,0,0.8)}
   .nav__item:hover>a,.nav__item.active>a{color:var(--gold-light)}
-  .nav__cta{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;padding:13px 26px;background:var(--gold);color:var(--black);border:1px solid var(--gold);font-weight:600;transition:all 0.35s}
+  .nav__cta{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;padding:13px 26px;background:var(--gold);color:var(--ink);border:1px solid var(--gold);font-weight:600;transition:all 0.35s}
   .nav__cta:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
 
-  /* ============== HERO — photographic, cinematic ============== */
-  .k-hero{position:relative;height:100vh;min-height:820px;overflow:hidden;background:var(--black);color:var(--white)}
-  /* Ken-Burns photo layer (acts like a video — slow zoom + pan) */
+  /* ========== HERO — cinematic twilight Kailash ========== */
+  .k-hero{position:relative;height:100vh;min-height:820px;overflow:hidden;background:var(--ink-deep);color:var(--white)}
   .k-hero__media{position:absolute;inset:0;z-index:0;overflow:hidden}
-  .k-hero__photo{position:absolute;inset:-6%;background-image:url("assets/images/kailash-2026.jpg");background-size:cover;background-position:center 35%;animation:kenburns 28s ease-in-out infinite alternate;filter:saturate(0.85) contrast(1.08) brightness(0.88)}
-  @keyframes kenburns{
-    0%{transform:scale(1.02) translate(0,0)}
-    100%{transform:scale(1.12) translate(-1.5%,-2%)}
-  }
-  /* Film-grade scrims */
-  .k-hero__scrim-1{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 38%, rgba(0,0,0,0.25) 62%, rgba(0,0,0,0.92) 100%)}
-  .k-hero__scrim-2{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 100%)}
-  /* Gold halo behind the peak */
-  .k-hero__halo{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:min(900px,95vw);height:min(900px,95vw);z-index:3;pointer-events:none;background:radial-gradient(circle, rgba(240,198,110,0.22) 0%, rgba(201,161,78,0.08) 35%, transparent 62%);animation:halo 9s ease-in-out infinite alternate;mix-blend-mode:screen}
+  .k-hero__photo{position:absolute;inset:-6%;background-image:url("assets/images/kailash-2026.jpg");background-size:cover;background-position:center 35%;animation:kenburns 28s ease-in-out infinite alternate;filter:saturate(0.95) contrast(1.06) brightness(0.95)}
+  @keyframes kenburns{0%{transform:scale(1.02) translate(0,0)}100%{transform:scale(1.12) translate(-1.5%,-2%)}}
+  /* warm-cold gradient scrim — keeps photo visible, adds cinema */
+  .k-hero__scrim-1{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(20,26,40,0.55) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 58%, rgba(15,10,5,0.85) 100%)}
+  .k-hero__scrim-2{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 35%, rgba(15,10,5,0.4) 100%)}
+  /* warm gold glow behind peak */
+  .k-hero__halo{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:min(900px,95vw);height:min(900px,95vw);z-index:3;pointer-events:none;background:radial-gradient(circle, rgba(242,212,138,0.28) 0%, rgba(217,116,58,0.1) 32%, transparent 62%);animation:halo 9s ease-in-out infinite alternate;mix-blend-mode:screen}
   @keyframes halo{0%{opacity:0.55;transform:translate(-50%,-50%) scale(0.96)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
-  /* Faint mandala ring */
-  .k-hero__ring{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:min(620px,80vw);height:min(620px,80vw);z-index:3;pointer-events:none;opacity:0.15;animation:spin 300s linear infinite}
+  .k-hero__ring{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:min(620px,80vw);height:min(620px,80vw);z-index:3;pointer-events:none;opacity:0.18;animation:spin 300s linear infinite}
   @keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-  /* Letterbox bars */
-  .k-hero__bar{position:absolute;left:0;right:0;height:72px;z-index:4;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.85),transparent)}
-  .k-hero__bar--top{top:0}
-  .k-hero__bar--bot{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,0.95),transparent)}
-  /* Grain flicker overlay */
-  .k-hero__flicker{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at 20% 20%, rgba(255,230,180,0.05) 0%, transparent 40%);mix-blend-mode:screen;animation:flicker 7s ease-in-out infinite alternate}
+  .k-hero__bar{position:absolute;left:0;right:0;height:68px;z-index:4;pointer-events:none}
+  .k-hero__bar--top{top:0;background:linear-gradient(180deg,rgba(0,0,0,0.7),transparent)}
+  .k-hero__bar--bot{bottom:0;height:120px;background:linear-gradient(0deg,rgba(10,7,4,0.95),transparent)}
+  .k-hero__flicker{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at 20% 20%, rgba(255,220,160,0.06) 0%, transparent 40%);mix-blend-mode:screen;animation:flicker 7s ease-in-out infinite alternate}
   @keyframes flicker{0%{opacity:0.3}100%{opacity:0.9}}
 
-  .k-hero__inner{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:210px 48px 140px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:100vh;justify-content:center}
-  .k-hero__shloka{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:0.38em;color:var(--gold-light);margin-bottom:40px;text-transform:uppercase;font-weight:400}
+  .k-hero__inner{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:180px 48px 140px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:100vh;justify-content:center}
+  .k-hero__shloka{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:0.38em;color:var(--gold-light);margin-bottom:36px;text-transform:uppercase;font-weight:400}
   .k-hero__shloka::before,.k-hero__shloka::after{content:"";display:inline-block;width:42px;height:1px;background:var(--gold);margin:0 18px;vertical-align:middle}
   .k-hero__title{font-family:var(--serif);font-size:clamp(54px,8vw,132px);font-weight:300;line-height:0.92;letter-spacing:-0.025em;margin-bottom:24px;text-shadow:0 10px 80px rgba(0,0,0,0.7)}
   .k-hero__title em{font-style:italic;color:var(--gold-light);display:block;font-size:0.78em;margin-top:8px}
-  .k-hero__sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,1.6vw,24px);color:rgba(253,252,249,0.88);line-height:1.5;max-width:640px;margin:0 auto 20px;font-weight:300}
-  .k-hero__dateblock{display:inline-flex;align-items:center;gap:20px;padding:16px 30px;margin:40px auto 48px;border-top:1px solid rgba(201,161,78,0.35);border-bottom:1px solid rgba(201,161,78,0.35);font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
+  .k-hero__sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,1.6vw,24px);color:rgba(255,255,255,0.9);line-height:1.5;max-width:640px;margin:0 auto 20px;font-weight:300}
+  .k-hero__dateblock{display:inline-flex;align-items:center;gap:20px;padding:16px 30px;margin:36px auto 44px;border-top:1px solid rgba(201,161,78,0.4);border-bottom:1px solid rgba(201,161,78,0.4);font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
   .k-hero__dateblock strong{color:var(--white);font-weight:500}
-  .k-hero__ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+  .k-hero__ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
   .k-btn{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;padding:18px 36px;border:1px solid var(--gold);font-weight:600;transition:all 0.35s;cursor:pointer;display:inline-flex;align-items:center;gap:12px}
-  .k-btn--primary{background:var(--gold);color:var(--black);border-color:var(--gold)}
+  .k-btn--primary{background:var(--gold);color:var(--ink);border-color:var(--gold)}
   .k-btn--primary:hover{background:var(--gold-bright);border-color:var(--gold-bright);transform:translateY(-2px)}
-  .k-btn--ghost{background:rgba(0,0,0,0.3);color:var(--white);border-color:rgba(240,230,206,0.4);backdrop-filter:blur(6px)}
-  .k-btn--ghost:hover{background:rgba(201,161,78,0.15);border-color:var(--gold-light)}
+  .k-btn--ghost{background:rgba(0,0,0,0.3);color:var(--white);border-color:rgba(240,230,206,0.45);backdrop-filter:blur(6px)}
+  .k-btn--ghost:hover{background:rgba(201,161,78,0.18);border-color:var(--gold-light)}
+  /* light-page variants */
+  .k-btn--dark{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+  .k-btn--dark:hover{background:var(--gold-deep);border-color:var(--gold-deep);transform:translateY(-2px)}
 
-  /* COUNTDOWN */
-  .k-count{display:inline-flex;gap:16px;padding:22px 36px;background:rgba(0,0,0,0.5);backdrop-filter:blur(20px);border:1px solid rgba(201,161,78,0.25)}
+  .k-count{display:inline-flex;gap:16px;padding:20px 34px;background:rgba(0,0,0,0.45);backdrop-filter:blur(20px);border:1px solid rgba(201,161,78,0.3)}
   .k-count__item{text-align:center;min-width:62px}
-  .k-count__n{font-family:var(--serif);font-size:40px;color:var(--gold-light);line-height:1;font-weight:300;letter-spacing:-0.02em}
-  .k-count__l{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(253,252,249,0.65);margin-top:8px;font-weight:500}
-  .k-count__sep{color:rgba(201,161,78,0.35);font-size:26px;align-self:center}
+  .k-count__n{font-family:var(--serif);font-size:38px;color:var(--gold-light);line-height:1;font-weight:300;letter-spacing:-0.02em}
+  .k-count__l{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-top:8px;font-weight:500}
+  .k-count__sep{color:rgba(201,161,78,0.4);font-size:24px;align-self:center}
+  .k-hero__scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:11;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:500;writing-mode:vertical-lr;animation:scrollPulse 3s ease-in-out infinite}
+  @keyframes scrollPulse{0%,100%{opacity:0.4;transform:translate(-50%,0)}50%{opacity:0.95;transform:translate(-50%,10px)}}
 
-  /* Scroll hint */
-  .k-hero__scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:11;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(253,252,249,0.5);font-weight:500;writing-mode:vertical-lr;animation:scrollPulse 3s ease-in-out infinite}
-  @keyframes scrollPulse{0%,100%{opacity:0.4;transform:translate(-50%,0)}50%{opacity:0.9;transform:translate(-50%,10px)}}
-
-  /* ============== SECTION BASE ============== */
+  /* ========== SECTION BASE (light) ========== */
   section{padding:140px 48px;position:relative}
   .section__head{text-align:center;max-width:860px;margin:0 auto 90px}
-  .section__kicker{font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:28px;display:inline-flex;align-items:center;gap:14px}
+  .section__kicker{font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:26px;display:inline-flex;align-items:center;gap:14px}
   .section__kicker::before,.section__kicker::after{content:"";width:36px;height:1px;background:var(--gold)}
-  .section__head h2{font-family:var(--serif);font-size:clamp(42px,5vw,76px);font-weight:300;line-height:1.02;letter-spacing:-0.018em;color:var(--white);margin-bottom:26px}
-  .section__head h2 em{font-style:italic;color:var(--gold-light)}
-  .section__head p{font-family:var(--serif);font-size:21px;font-style:italic;color:rgba(253,252,249,0.72);line-height:1.55;max-width:720px;margin:0 auto;font-weight:300}
+  .section__head h2{font-family:var(--serif);font-size:clamp(42px,5vw,76px);font-weight:300;line-height:1.02;letter-spacing:-0.018em;color:var(--ink);margin-bottom:24px}
+  .section__head h2 em{font-style:italic;color:var(--gold-deep)}
+  .section__head p{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--stone-deep);line-height:1.55;max-width:720px;margin:0 auto;font-weight:300}
 
-  /* ============== OPENING — THE GRACE SECTION ============== */
-  .grace{background:var(--black);text-align:center;padding:160px 48px 140px}
-  .grace__om{font-family:var(--serif);font-size:72px;color:var(--gold-light);line-height:1;margin-bottom:40px;font-weight:300;letter-spacing:0.05em}
-  .grace h2{font-family:var(--serif);font-size:clamp(44px,5.4vw,84px);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:40px;max-width:920px;margin-left:auto;margin-right:auto}
-  .grace h2 em{font-style:italic;color:var(--gold-light);display:block;margin-top:8px}
-  .grace__line{width:1px;height:90px;background:linear-gradient(180deg,transparent,var(--gold),transparent);margin:50px auto}
-  .grace p{font-family:var(--serif);font-size:22px;font-style:italic;color:rgba(253,252,249,0.78);line-height:1.65;max-width:760px;margin:0 auto 24px}
-  .grace__attr{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);font-weight:500;font-style:normal;font-family:var(--sans);margin-top:36px}
+  /* ========== GRACE — opening invocation on snow ========== */
+  .grace{background:var(--snow);text-align:center;padding:160px 48px;position:relative;overflow:hidden}
+  .grace::before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(217,116,58,0.06) 0%,rgba(201,161,78,0.03) 40%,transparent 65%);pointer-events:none}
+  .grace__om{font-family:var(--serif);font-size:86px;color:var(--gold-deep);line-height:1;margin-bottom:36px;font-weight:300;letter-spacing:0.05em;position:relative}
+  .grace h2{font-family:var(--serif);font-size:clamp(44px,5.4vw,84px);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--ink);margin-bottom:40px;max-width:920px;margin-left:auto;margin-right:auto;position:relative}
+  .grace h2 em{font-style:italic;color:var(--gold-deep);display:block;margin-top:8px}
+  .grace__line{width:1px;height:90px;background:linear-gradient(180deg,transparent,var(--gold),transparent);margin:50px auto;position:relative}
+  .grace p{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--stone-deep);line-height:1.65;max-width:760px;margin:0 auto 24px;position:relative}
+  .grace__attr{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;font-style:normal;font-family:var(--sans);margin-top:36px;position:relative}
 
-  /* ============== SIGNIFICANCE — Kailash as Shiva Linga ============== */
-  .sig{background:linear-gradient(180deg,var(--black) 0%,var(--ink-1) 100%);overflow:hidden}
+  /* ========== SIGNIFICANCE — photo + copy, warm sandstone ========== */
+  .sig{background:linear-gradient(180deg,var(--snow) 0%,var(--snow-warm) 100%);overflow:hidden}
   .sig__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-  .sig__art{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line-gold)}
-  .sig__art img{width:100%;height:100%;object-fit:cover;filter:saturate(0.9) contrast(1.08)}
-  .sig__art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.6) 100%),radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%)}
+  .sig__art{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line-gold);box-shadow:0 30px 80px rgba(42,36,27,0.15)}
+  .sig__art img{width:100%;height:100%;object-fit:cover;filter:saturate(0.95) contrast(1.05)}
+  .sig__art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(15,10,5,0.75) 100%)}
   .sig__caption{position:absolute;bottom:28px;left:28px;right:28px;z-index:2;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold-light);line-height:1.4}
   .sig__caption::before{content:"";display:block;width:32px;height:1px;background:var(--gold);margin-bottom:14px}
+  .sig__body h2{font-family:var(--serif);font-size:clamp(40px,4.4vw,64px);font-weight:300;line-height:1.06;letter-spacing:-0.02em;color:var(--ink);margin-bottom:30px}
+  .sig__body h2 em{font-style:italic;color:var(--gold-deep)}
+  .sig__body p{font-size:16px;color:var(--stone-deep);line-height:1.9;margin-bottom:22px;max-width:540px}
+  .sig__body p strong{color:var(--gold-deep);font-weight:600}
+  .sig__facts{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-gold);border:1px solid var(--line-gold)}
+  .sig__fact{padding:26px 28px;background:var(--snow)}
+  .sig__fact-n{font-family:var(--serif);font-size:36px;color:var(--gold-deep);line-height:1;font-weight:300;margin-bottom:8px}
+  .sig__fact-l{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--stone);font-weight:600}
 
-  .sig__body h2{font-family:var(--serif);font-size:clamp(40px,4.4vw,64px);font-weight:300;line-height:1.06;letter-spacing:-0.02em;color:var(--white);margin-bottom:36px}
-  .sig__body h2 em{font-style:italic;color:var(--gold-light)}
-  .sig__body p{font-size:16px;color:rgba(253,252,249,0.78);line-height:1.85;margin-bottom:22px;max-width:540px}
-  .sig__body p strong{color:var(--gold-light);font-weight:500}
-  .sig__facts{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line-gold);border:1px solid var(--line-gold)}
-  .sig__fact{padding:26px 28px;background:var(--ink-1)}
-  .sig__fact-n{font-family:var(--serif);font-size:36px;color:var(--gold-light);line-height:1;font-weight:300;margin-bottom:8px}
-  .sig__fact-l{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(253,252,249,0.65);font-weight:500}
-
-  /* ============== DEV KUMBH ============== */
-  .kumbh{background:var(--ink-1);position:relative;overflow:hidden;text-align:center}
-  .kumbh::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1200px;height:1200px;border-radius:50%;background:radial-gradient(circle,rgba(201,161,78,0.08) 0%,transparent 55%);pointer-events:none}
+  /* ========== DEV KUMBH — deep ink block, single dramatic band ========== */
+  .kumbh{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-deep) 100%);color:var(--white);position:relative;overflow:hidden;text-align:center}
+  .kumbh::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1200px;height:1200px;border-radius:50%;background:radial-gradient(circle,rgba(217,116,58,0.12) 0%,rgba(201,161,78,0.06) 35%,transparent 60%);pointer-events:none}
   .kumbh__inner{position:relative;max-width:900px;margin:0 auto}
-  .kumbh__mark{width:72px;height:72px;margin:0 auto 36px}
+  .kumbh__mark{width:72px;height:72px;margin:0 auto 36px;color:var(--gold-light)}
   .kumbh__q{font-family:var(--serif);font-size:clamp(30px,3.2vw,44px);font-weight:300;font-style:italic;line-height:1.35;color:var(--white);margin-bottom:50px;letter-spacing:-0.005em}
   .kumbh__q em{color:var(--gold-light);font-style:italic}
-  .kumbh__body{font-size:17px;color:rgba(253,252,249,0.72);line-height:1.85;max-width:720px;margin:0 auto 20px}
-  .kumbh__seal{margin-top:56px;display:inline-flex;align-items:center;gap:16px;padding:14px 28px;border:1px solid var(--line-gold);font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
+  .kumbh__body{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.85;max-width:720px;margin:0 auto 20px}
+  .kumbh__seal{margin-top:56px;display:inline-flex;align-items:center;gap:16px;padding:14px 28px;border:1px solid var(--line-gold);font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);font-weight:600}
   .kumbh__seal span{color:var(--white)}
 
-  /* ============== PILLARS — Four Sacred Passages ============== */
-  .pillars{background:linear-gradient(180deg,var(--ink-1) 0%,var(--black) 100%)}
+  /* ========== PILLARS — on soft ivory, warm cards ========== */
+  .pillars{background:var(--snow-soft)}
   .pillars__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:1400px;margin:0 auto;background:var(--line-gold);border:1px solid var(--line-gold)}
-  .pillar{position:relative;padding:60px 36px 52px;background:var(--ink-1);transition:all 0.5s;overflow:hidden}
-  .pillar:hover{background:var(--ink-2)}
-  .pillar__roman{font-family:var(--serif);font-size:14px;letter-spacing:0.32em;color:var(--gold);margin-bottom:32px;font-weight:500}
-  .pillar__sanskrit{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-light);margin-bottom:12px;letter-spacing:0.04em}
-  .pillar h3{font-family:var(--serif);font-size:32px;font-weight:400;line-height:1.1;color:var(--white);margin-bottom:22px;letter-spacing:-0.01em}
-  .pillar h3 em{font-style:italic;color:var(--gold-light)}
-  .pillar p{font-size:14px;line-height:1.85;color:rgba(253,252,249,0.72);margin-bottom:22px}
-  .pillar__icon{width:44px;height:44px;margin-bottom:28px;color:var(--gold);opacity:0.85}
-  .pillar__meta{padding-top:20px;border-top:1px solid var(--line-gold);font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
+  .pillar{position:relative;padding:54px 32px 48px;background:var(--snow);transition:all 0.5s;overflow:hidden}
+  .pillar:hover{background:var(--white);transform:translateY(-2px)}
+  .pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-deep))}
+  .pillar:nth-child(2)::before{background:linear-gradient(90deg,var(--mansarovar),var(--mansarovar-deep))}
+  .pillar:nth-child(3)::before{background:linear-gradient(90deg,var(--saffron-soft),var(--saffron))}
+  .pillar:nth-child(4)::before{background:linear-gradient(90deg,var(--crimson),#7a2a1e)}
+  .pillar__roman{font-family:var(--serif);font-size:14px;letter-spacing:0.32em;color:var(--gold-deep);margin-bottom:28px;font-weight:600}
+  .pillar__icon{width:44px;height:44px;margin-bottom:26px;color:var(--gold-deep);opacity:0.9}
+  .pillar:nth-child(2) .pillar__icon{color:var(--mansarovar)}
+  .pillar:nth-child(3) .pillar__icon{color:var(--saffron)}
+  .pillar:nth-child(4) .pillar__icon{color:var(--crimson)}
+  .pillar__sanskrit{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-deep);margin-bottom:10px;letter-spacing:0.04em}
+  .pillar:nth-child(2) .pillar__sanskrit{color:var(--mansarovar)}
+  .pillar:nth-child(3) .pillar__sanskrit{color:var(--saffron)}
+  .pillar:nth-child(4) .pillar__sanskrit{color:var(--crimson)}
+  .pillar h3{font-family:var(--serif);font-size:30px;font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:20px;letter-spacing:-0.01em}
+  .pillar h3 em{font-style:italic;color:var(--gold-deep)}
+  .pillar:nth-child(2) h3 em{color:var(--mansarovar)}
+  .pillar:nth-child(3) h3 em{color:var(--saffron)}
+  .pillar:nth-child(4) h3 em{color:var(--crimson)}
+  .pillar p{font-size:14px;line-height:1.85;color:var(--stone-deep);margin-bottom:22px}
+  .pillar__meta{padding-top:18px;border-top:1px solid var(--line-stone);font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--stone);font-weight:600}
 
-  /* ============== MOHANJI WORDS ============== */
-  .words{background:var(--black);padding:160px 48px;position:relative;overflow:hidden}
-  .words::before{content:"";position:absolute;inset:0;background:url("assets/images/kailash-2026.jpg") center/cover no-repeat;opacity:0.12;filter:saturate(0) blur(2px);pointer-events:none}
+  /* ========== MOHANJI WORDS — sky-blue tinted block ========== */
+  .words{background:linear-gradient(180deg,var(--ice) 0%,var(--ice-deep) 100%);padding:160px 48px;position:relative;overflow:hidden}
+  .words::before{content:"";position:absolute;top:0;right:-10%;width:60%;height:100%;background:url("assets/images/kailash-2026.jpg") center/cover no-repeat;opacity:0.18;filter:saturate(0.6) blur(1px);pointer-events:none}
   .words__inner{position:relative;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center}
-  .words__portrait{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line-gold)}
-  .words__portrait img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85) contrast(1.05)}
-  .words__mark{font-family:var(--serif);font-size:140px;line-height:0.6;color:var(--gold);opacity:0.35;margin-bottom:16px;font-weight:300}
-  .words h2{font-family:var(--serif);font-size:clamp(14px,1.4vw,18px);font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);margin-bottom:28px}
-  .words blockquote{font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);font-weight:300;line-height:1.45;color:var(--white);font-style:italic;margin-bottom:40px;letter-spacing:-0.005em}
-  .words blockquote em{color:var(--gold-light);font-style:italic}
-  .words__by{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);font-weight:500}
-  .words__by::before{content:"";display:inline-block;width:30px;height:1px;background:var(--gold);vertical-align:middle;margin-right:16px}
+  .words__portrait{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line-gold);box-shadow:0 24px 60px rgba(42,50,60,0.25)}
+  .words__portrait img{width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.05)}
+  .words__mark{font-family:var(--serif);font-size:140px;line-height:0.55;color:var(--gold);opacity:0.45;margin-bottom:14px;font-weight:300}
+  .words h2{font-family:var(--serif);font-size:clamp(14px,1.4vw,18px);font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--sky-deep);margin-bottom:28px}
+  .words blockquote{font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);font-weight:300;line-height:1.45;color:var(--ink);font-style:italic;margin-bottom:40px;letter-spacing:-0.005em}
+  .words blockquote em{color:var(--gold-deep);font-style:italic}
+  .words__by{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--sky-deep);font-weight:600}
+  .words__by::before{content:"";display:inline-block;width:30px;height:1px;background:var(--sky-deep);vertical-align:middle;margin-right:16px}
 
-  /* ============== ITINERARY ============== */
-  .itin{background:var(--ink-1)}
+  /* ========== ITINERARY — paper timeline ========== */
+  .itin{background:var(--snow)}
   .itin__grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:130px 1fr;gap:0}
-  .itin__day{padding:32px 0;border-bottom:1px solid var(--line-gold)}
-  .itin__d-num{font-family:var(--serif);font-size:48px;color:var(--gold-light);line-height:1;font-weight:300}
-  .itin__d-num small{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;font-weight:500}
-  .itin__d-body{padding:32px 0 32px 46px;border-bottom:1px solid var(--line-gold);border-left:1px solid var(--line-gold);position:relative}
-  .itin__d-body::before{content:"";position:absolute;left:-5px;top:42px;width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 3px var(--ink-1)}
-  .itin__d-body.peak::before{background:var(--gold-bright);width:13px;height:13px;left:-7px;box-shadow:0 0 0 3px var(--ink-1),0 0 20px rgba(240,198,110,0.6)}
-  .itin__d-title{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--white);margin-bottom:10px;letter-spacing:-0.008em}
-  .itin__d-title em{font-style:italic;color:var(--gold-light)}
-  .itin__d-meta{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px}
+  .itin__day{padding:30px 0;border-bottom:1px solid var(--line-gold)}
+  .itin__d-num{font-family:var(--serif);font-size:48px;color:var(--gold-deep);line-height:1;font-weight:300}
+  .itin__d-num small{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;font-weight:600}
+  .itin__d-body{padding:30px 0 30px 46px;border-bottom:1px solid var(--line-gold);border-left:1px solid var(--line-gold);position:relative}
+  .itin__d-body::before{content:"";position:absolute;left:-5px;top:40px;width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 3px var(--snow)}
+  .itin__d-body.peak::before{background:var(--saffron);width:13px;height:13px;left:-7px;box-shadow:0 0 0 3px var(--snow),0 0 14px rgba(217,116,58,0.5)}
+  .itin__d-body.lake::before{background:var(--mansarovar)}
+  .itin__d-title{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:10px;letter-spacing:-0.008em}
+  .itin__d-title em{font-style:italic;color:var(--gold-deep)}
+  .itin__d-meta{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:14px}
   .itin__d-meta span{margin-right:22px}
   .itin__d-meta span::before{content:"";display:inline-block;width:4px;height:4px;background:var(--gold);border-radius:50%;margin-right:8px;vertical-align:middle}
-  .itin__d-desc{font-size:15px;color:rgba(253,252,249,0.72);line-height:1.8;max-width:640px}
-
-  .elev{max-width:1100px;margin:90px auto 0;padding:44px;background:var(--ink-2);border:1px solid var(--line-gold)}
+  .itin__d-desc{font-size:15px;color:var(--stone-deep);line-height:1.8;max-width:640px}
+  .elev{max-width:1100px;margin:90px auto 0;padding:44px;background:var(--white);border:1px solid var(--line-gold);box-shadow:0 20px 50px rgba(42,36,27,0.08)}
   .elev__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px}
-  .elev__title{font-family:var(--serif);font-size:24px;color:var(--white);font-weight:400}
-  .elev__title em{font-style:italic;color:var(--gold-light)}
-  .elev__legend{font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .elev__title{font-family:var(--serif);font-size:24px;color:var(--ink);font-weight:400}
+  .elev__title em{font-style:italic;color:var(--gold-deep)}
+  .elev__legend{font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
   .elev__svg{width:100%;height:auto}
 
-  /* ============== INCLUSIONS ============== */
-  .inc{background:var(--black)}
-  .inc__grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--line-gold);border:1px solid var(--line-gold)}
-  .inc__col{padding:56px 48px;background:var(--ink-1)}
-  .inc__col h3{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--white);margin-bottom:32px;letter-spacing:-0.01em;padding-bottom:24px;border-bottom:1px solid var(--line-gold)}
-  .inc__col h3 em{font-style:italic;color:var(--gold-light)}
+  /* ========== INCLUSIONS ========== */
+  .inc{background:var(--snow-warm)}
+  .inc__grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line-gold);border:1px solid var(--line-gold)}
+  .inc__col{padding:54px 46px;background:var(--snow)}
+  .inc__col--alt{background:var(--white)}
+  .inc__col h3{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--ink);margin-bottom:32px;letter-spacing:-0.01em;padding-bottom:24px;border-bottom:1px solid var(--line-gold)}
+  .inc__col h3 em{font-style:italic;color:var(--gold-deep)}
   .inc ul{list-style:none}
-  .inc li{padding:14px 0;padding-left:30px;position:relative;font-size:14px;color:rgba(253,252,249,0.72);line-height:1.6;border-bottom:1px dashed rgba(201,161,78,0.1)}
+  .inc li{padding:14px 0;padding-left:30px;position:relative;font-size:14px;color:var(--stone-deep);line-height:1.65;border-bottom:1px dashed rgba(42,36,27,0.08)}
   .inc li:last-child{border-bottom:none}
   .inc li::before{content:"";position:absolute;left:0;top:22px;width:18px;height:1px;background:var(--gold)}
-  .inc li strong{color:var(--white);font-weight:500}
+  .inc li strong{color:var(--ink);font-weight:600}
 
-  /* ============== TESTIMONIALS — Stories of Transformation ============== */
-  .testi{background:var(--ink-1);position:relative}
-  .testi__grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line-gold);border:1px solid var(--line-gold)}
-  .testi__card{padding:50px 40px;background:var(--ink-0);transition:all 0.4s;position:relative}
-  .testi__card:hover{background:var(--ink-1)}
-  .testi__mark{font-family:var(--serif);font-size:86px;line-height:0.55;color:var(--gold);opacity:0.35;margin-bottom:10px;font-weight:300}
-  .testi__quote{font-family:var(--serif);font-size:20px;font-style:italic;line-height:1.55;color:rgba(253,252,249,0.92);margin-bottom:36px;font-weight:300}
+  /* ========== TESTIMONIALS — stone-blue tinted ========== */
+  .testi{background:linear-gradient(180deg,var(--ink) 0%,#201b14 100%);color:var(--white);position:relative;overflow:hidden}
+  .testi::before{content:"";position:absolute;top:-30%;left:-10%;width:60%;height:140%;background:radial-gradient(ellipse, rgba(201,161,78,0.1) 0%, transparent 60%)}
+  .testi .section__head h2{color:var(--white)}
+  .testi .section__head h2 em{color:var(--gold-light)}
+  .testi .section__head p{color:rgba(255,255,255,0.75)}
+  .testi .section__kicker{color:var(--gold-light)}
+  .testi__grid{position:relative;max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line-gold);border:1px solid var(--line-gold)}
+  .testi__card{padding:50px 38px;background:rgba(0,0,0,0.3);backdrop-filter:blur(8px);transition:all 0.4s}
+  .testi__card:hover{background:rgba(0,0,0,0.45)}
+  .testi__mark{font-family:var(--serif);font-size:86px;line-height:0.55;color:var(--gold);opacity:0.4;margin-bottom:10px;font-weight:300}
+  .testi__quote{font-family:var(--serif);font-size:20px;font-style:italic;line-height:1.55;color:rgba(255,255,255,0.92);margin-bottom:36px;font-weight:300}
   .testi__by{display:flex;align-items:center;gap:14px;padding-top:26px;border-top:1px solid var(--line-gold)}
-  .testi__av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--ink-0);font-size:18px;font-weight:500}
+  .testi__av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--ink);font-size:18px;font-weight:500}
   .testi__name{font-size:14px;color:var(--white);font-weight:500;margin-bottom:3px}
-  .testi__loc{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
+  .testi__loc{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-light);font-weight:600}
 
-  /* ============== PRICING ============== */
-  .price{background:var(--black)}
+  /* ========== PRICING ========== */
+  .price{background:var(--snow)}
   .price__grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line-gold);border:1px solid var(--line-gold)}
-  .tier{background:var(--ink-1);padding:56px 42px;position:relative;transition:all 0.4s;display:flex;flex-direction:column}
-  .tier:hover{background:var(--ink-2)}
-  .tier--feature{background:linear-gradient(180deg,rgba(201,161,78,0.08) 0%,var(--ink-1) 40%);border-top:2px solid var(--gold)}
-  .tier--feature::before{content:"Most chosen";position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:6px 20px;background:var(--gold);color:var(--black);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:600}
-  .tier__name{font-family:var(--serif);font-size:32px;color:var(--white);margin-bottom:10px;font-weight:400;letter-spacing:-0.01em}
-  .tier__name em{font-style:italic;color:var(--gold-light)}
-  .tier__tag{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:30px}
-  .tier__price{font-family:var(--serif);font-size:60px;color:var(--white);line-height:1;font-weight:300;margin-bottom:8px;letter-spacing:-0.02em}
-  .tier__price small{font-size:16px;color:var(--ink-mute);margin-left:4px}
-  .tier__per{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid var(--line-gold)}
+  .tier{background:var(--white);padding:54px 40px;position:relative;transition:all 0.4s;display:flex;flex-direction:column}
+  .tier:hover{background:var(--snow-soft)}
+  .tier--feature{background:linear-gradient(180deg,rgba(201,161,78,0.1) 0%,var(--white) 35%);border-top:2px solid var(--gold)}
+  .tier--feature::before{content:"Most chosen";position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:6px 20px;background:var(--gold);color:var(--ink);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700}
+  .tier__name{font-family:var(--serif);font-size:32px;color:var(--ink);margin-bottom:10px;font-weight:400;letter-spacing:-0.01em}
+  .tier__name em{font-style:italic;color:var(--gold-deep)}
+  .tier__tag{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:30px}
+  .tier__price{font-family:var(--serif);font-size:60px;color:var(--ink);line-height:1;font-weight:300;margin-bottom:8px;letter-spacing:-0.02em}
+  .tier__price small{font-size:16px;color:var(--stone);margin-left:4px}
+  .tier__per{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--stone);margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--line-gold)}
   .tier ul{list-style:none;margin-bottom:36px;flex-grow:1}
-  .tier li{padding:11px 0 11px 26px;position:relative;font-size:14px;color:rgba(253,252,249,0.75);line-height:1.55}
+  .tier li{padding:11px 0 11px 26px;position:relative;font-size:14px;color:var(--stone-deep);line-height:1.55}
   .tier li::before{content:"◆";position:absolute;left:0;top:11px;color:var(--gold);font-size:9px}
-  .tier li strong{color:var(--gold-light);font-weight:500}
-  .tier__cta{display:block;text-align:center;padding:17px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold-light);font-weight:600;transition:all 0.3s}
-  .tier__cta:hover{background:var(--gold);color:var(--black)}
-  .tier--feature .tier__cta{background:var(--gold);color:var(--black)}
+  .tier li strong{color:var(--ink);font-weight:600}
+  .tier__cta{display:block;text-align:center;padding:17px;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold-deep);font-weight:700;transition:all 0.3s}
+  .tier__cta:hover{background:var(--gold);color:var(--ink)}
+  .tier--feature .tier__cta{background:var(--gold);color:var(--ink)}
   .tier--feature .tier__cta:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
 
-  /* ============== FAQ ============== */
-  .faq{background:var(--ink-1)}
+  /* ========== FAQ ========== */
+  .faq{background:var(--snow-warm)}
   .faq__list{max-width:900px;margin:0 auto}
   .faq__item{border-bottom:1px solid var(--line-gold);padding:30px 0}
-  .faq__q{font-family:var(--serif);font-size:22px;color:var(--white);font-weight:400;cursor:pointer;display:flex;justify-content:space-between;align-items:center;list-style:none;transition:color 0.3s}
-  .faq__q:hover{color:var(--gold-light)}
+  .faq__q{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;cursor:pointer;display:flex;justify-content:space-between;align-items:center;list-style:none;transition:color 0.3s}
+  .faq__q:hover{color:var(--gold-deep)}
   .faq__q::-webkit-details-marker{display:none}
-  .faq__q::after{content:"+";font-family:var(--serif);font-size:30px;color:var(--gold);transition:transform 0.3s;font-weight:300;margin-left:20px}
+  .faq__q::after{content:"+";font-family:var(--serif);font-size:30px;color:var(--gold-deep);transition:transform 0.3s;font-weight:300;margin-left:20px}
   details[open] .faq__q::after{transform:rotate(45deg)}
-  .faq__a{margin-top:18px;font-size:15px;color:rgba(253,252,249,0.72);line-height:1.8;max-width:760px}
+  .faq__a{margin-top:18px;font-size:15px;color:var(--stone-deep);line-height:1.8;max-width:760px}
 
-  /* ============== FINAL CTA ============== */
-  .final{padding:180px 48px 140px;background:var(--black);color:var(--white);text-align:center;position:relative;overflow:hidden}
-  .final::before{content:"";position:absolute;inset:0;background:url("assets/images/kailash-2026.jpg") center/cover no-repeat;opacity:0.28;filter:saturate(0.8) contrast(1.1);pointer-events:none}
-  .final::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.75) 50%,var(--black) 100%);pointer-events:none}
+  /* ========== FINAL CTA — photo + dawn gradient ========== */
+  .final{padding:180px 48px 140px;background:var(--ink-deep);color:var(--white);text-align:center;position:relative;overflow:hidden}
+  .final::before{content:"";position:absolute;inset:0;background:url("assets/images/kailash-2026.jpg") center/cover no-repeat;opacity:0.38;filter:saturate(0.85) contrast(1.1);pointer-events:none}
+  .final::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,5,0.5) 0%,rgba(15,10,5,0.7) 50%,var(--ink-deep) 100%);pointer-events:none}
   .final__inner{position:relative;z-index:2;max-width:820px;margin:0 auto}
-  .final__kicker{font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:32px}
+  .final__kicker{font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:32px}
   .final__kicker::before,.final__kicker::after{content:"";display:inline-block;width:32px;height:1px;background:var(--gold);vertical-align:middle;margin:0 16px}
   .final h2{font-family:var(--serif);font-size:clamp(52px,6.5vw,104px);font-weight:300;line-height:0.98;letter-spacing:-0.022em;margin-bottom:36px}
   .final h2 em{font-style:italic;color:var(--gold-light)}
-  .final p{font-family:var(--serif);font-size:22px;font-style:italic;line-height:1.55;color:rgba(253,252,249,0.82);margin-bottom:56px;max-width:620px;margin-left:auto;margin-right:auto}
+  .final p{font-family:var(--serif);font-size:22px;font-style:italic;line-height:1.55;color:rgba(255,255,255,0.85);margin-bottom:56px;max-width:620px;margin-left:auto;margin-right:auto}
   .final__ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
   .final__grace{margin-top:72px;padding-top:44px;border-top:1px solid var(--line-gold);font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold-light)}
   .final__grace strong{color:var(--white);font-style:normal;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;font-family:var(--sans);font-size:14px;display:block;margin-top:12px}
 
-  /* ============== FOOTER ============== */
-  footer{background:var(--black);color:rgba(253,252,249,0.55);padding:80px 48px 40px;font-size:13px;border-top:1px solid var(--line-gold)}
+  /* ========== FOOTER ========== */
+  footer{background:var(--ink-deep);color:rgba(255,255,255,0.6);padding:80px 48px 40px;font-size:13px}
   .foot{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:50px;border-bottom:1px solid var(--line-gold)}
-  .foot__brand{font-family:var(--serif);font-size:28px;color:var(--white);letter-spacing:0.05em;margin-bottom:16px}
-  .foot__brand em{font-style:italic;color:var(--gold-light)}
+  .foot__brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .foot__brand-word{font-family:var(--serif);font-size:28px;color:var(--white);letter-spacing:0.04em;line-height:1}
+  .foot__brand-word em{font-style:italic;color:var(--gold-light)}
   .foot p{line-height:1.7;max-width:320px}
-  .foot h5{font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:20px}
+  .foot h5{font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:20px}
   .foot ul{list-style:none}
   .foot li{padding:6px 0}
   .foot a{transition:color 0.3s}
   .foot a:hover{color:var(--gold-light)}
-  .foot__base{max-width:1400px;margin:0 auto;padding-top:30px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(253,252,249,0.35)}
+  .foot__base{max-width:1400px;margin:0 auto;padding-top:30px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
 
   @media (max-width:980px){
     .nav__menu{display:none}
+    .nav__logo-tag{display:none}
     .pillars__grid,.testi__grid,.price__grid{grid-template-columns:1fr}
     .inc__grid,.sig__grid,.words__inner{grid-template-columns:1fr;gap:40px}
     .itin__grid{grid-template-columns:92px 1fr}
     .foot{grid-template-columns:1fr;gap:40px}
-    section,.call,.pillars,.itin,.inc,.testi,.price,.faq,.final,.grace,.sig,.kumbh,.words{padding:90px 24px}
-    .nav{padding:16px 24px}
-    .k-hero__inner{padding:180px 24px 100px}
+    section,.pillars,.itin,.inc,.testi,.price,.faq,.final,.grace,.sig,.kumbh,.words{padding:90px 24px}
+    .nav{padding:14px 24px}
+    .k-hero__inner{padding:160px 24px 100px}
     .k-hero__shloka::before,.k-hero__shloka::after{width:24px;margin:0 10px}
   }
 </style>
 </head>
 <body>
 
-<div class="announce"><span class="announce__dot"></span>Kailash With Mohanji 2026 · Registration open · <a href="#register">Reserve your place →</a></div>
+<div class="announce">
+  <div class="announce__flags"><span></span><span></span><span></span><span></span><span></span></div>
+  <span class="announce__dot"></span>Kailash With Mohanji 2026 · Registration open · <a href="#register">Reserve your place →</a>
+</div>
 
 <div class="nav-wrap">
   <nav class="nav">
-    <a href="index.html" class="nav__logo">Mohanji<em>.</em></a>
+    <a href="index.html" class="nav__logo" aria-label="Mohanji — home">
+      <!-- Kailash mountain mark in gold -->
+      <svg class="nav__logo-mark" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f2d48a"/>
+            <stop offset="55%" stop-color="#c9a14e"/>
+            <stop offset="100%" stop-color="#8f6a2b"/>
+          </linearGradient>
+        </defs>
+        <!-- outer ring -->
+        <circle cx="28" cy="28" r="26" fill="none" stroke="url(#logoGold)" stroke-width="1.2"/>
+        <circle cx="28" cy="28" r="22" fill="none" stroke="url(#logoGold)" stroke-width="0.6" opacity="0.5"/>
+        <!-- mountain triangle -->
+        <polygon points="28,13 14,40 42,40" fill="url(#logoGold)" opacity="0.95"/>
+        <!-- snow ridge -->
+        <polyline points="28,13 24,22 27,26 22,34" fill="none" stroke="#fbf7ed" stroke-width="0.8" opacity="0.75"/>
+        <!-- base line -->
+        <line x1="10" y1="40" x2="46" y2="40" stroke="url(#logoGold)" stroke-width="0.6" opacity="0.6"/>
+        <!-- small bindu -->
+        <circle cx="28" cy="9" r="1.5" fill="#f2d48a"/>
+      </svg>
+      <div>
+        <div class="nav__logo-word">Mohanji<em>.</em></div>
+        <span class="nav__logo-tag">Kailash Yatra 2026</span>
+      </div>
+    </a>
     <div class="nav__menu">
       <div class="nav__item"><a href="about.html">About</a></div>
       <div class="nav__item active"><a href="events.html">Journeys</a></div>
@@ -307,9 +380,7 @@
 
 <!-- ============= HERO ============= -->
 <section class="k-hero">
-  <div class="k-hero__media">
-    <div class="k-hero__photo"></div>
-  </div>
+  <div class="k-hero__media"><div class="k-hero__photo"></div></div>
   <div class="k-hero__scrim-1"></div>
   <div class="k-hero__scrim-2"></div>
   <div class="k-hero__halo"></div>
@@ -328,7 +399,7 @@
     <p class="k-hero__sub">The Journey Of A Lifetime — a pilgrimage not to a mountain, but to the stillness at the centre of your own being.</p>
     <div class="k-hero__dateblock">
       <span><strong>18 August</strong> — <strong>2 September 2026</strong></span>
-      <span style="color:rgba(201,161,78,0.4)">·</span>
+      <span style="color:rgba(201,161,78,0.45)">·</span>
       <span>Dev Kumbh · Manasarovar · Parikrama</span>
     </div>
     <div class="k-hero__ctas">
@@ -348,7 +419,7 @@
   <div class="k-hero__scroll">Scroll</div>
 </section>
 
-<!-- ============= GRACE — the opening invocation ============= -->
+<!-- ============= GRACE ============= -->
 <section class="grace">
   <div class="grace__om">ॐ</div>
   <h2>Only one thing really matters<br/>in this journey — <em>Grace.</em></h2>
@@ -358,7 +429,7 @@
   <div class="grace__attr">— The Invitation —</div>
 </section>
 
-<!-- ============= SIGNIFICANCE — Shiva Linga ============= -->
+<!-- ============= SIGNIFICANCE ============= -->
 <section class="sig">
   <div class="sig__grid">
     <div class="sig__art">
@@ -375,7 +446,7 @@
         <div class="sig__fact"><div class="sig__fact-n">6,638 m</div><div class="sig__fact-l">Summit · unclimbed</div></div>
         <div class="sig__fact"><div class="sig__fact-n">52 km</div><div class="sig__fact-l">Parikrama · 3 days</div></div>
         <div class="sig__fact"><div class="sig__fact-n">4 rivers</div><div class="sig__fact-l">Source of Asia</div></div>
-        <div class="sig__fact"><div class="sig__fact-n">5,645 m</div><div class="sig__fact-l">Drolma La · death & rebirth</div></div>
+        <div class="sig__fact"><div class="sig__fact-n">5,645 m</div><div class="sig__fact-l">Drolma La · rebirth</div></div>
       </div>
     </div>
   </div>
@@ -384,12 +455,12 @@
 <!-- ============= DEV KUMBH ============= -->
 <section class="kumbh">
   <div class="kumbh__inner">
-    <svg class="kumbh__mark" viewBox="0 0 72 72" fill="none" stroke="#c9a14e" stroke-width="1">
+    <svg class="kumbh__mark" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1">
       <circle cx="36" cy="36" r="30"/>
       <circle cx="36" cy="36" r="22"/>
       <circle cx="36" cy="36" r="14"/>
       <path d="M36 6 L36 14 M36 58 L36 66 M6 36 L14 36 M58 36 L66 36"/>
-      <circle cx="36" cy="36" r="4" fill="#c9a14e"/>
+      <circle cx="36" cy="36" r="4" fill="currentColor"/>
     </svg>
     <div class="kumbh__q">"Once in twelve years, the <em>gods themselves</em> are said to descend at Kailash to bathe in the unseen celestial waters. The 2026 yatra falls within that window — a <em>Dev Kumbh</em> yatra."</div>
     <p class="kumbh__body">Ordinary yatras open the heart. Dev Kumbh yatras open the cosmos. The alignment that arrives once in a generation is not a story — it is a force, and those who are present for it receive transmissions that would ordinarily take lifetimes to earn.</p>
@@ -408,7 +479,7 @@
   <div class="pillars__grid">
     <div class="pillar">
       <div class="pillar__roman">I.</div>
-      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 40 L16 20 L24 28 L32 14 L44 40 Z"/><circle cx="24" cy="8" r="3" fill="currentColor"/></svg>
+      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 40 L16 20 L24 28 L32 14 L44 40 Z"/><circle cx="24" cy="8" r="3" fill="currentColor"/></svg>
       <div class="pillar__sanskrit">Parikrama</div>
       <h3>The Outer <em>Kora</em></h3>
       <p>52 kilometres across three days. Darchen to Dirapuk beneath the north face, over the 5,645 m Drolma La, down to Zuthulpuk and back. A full circumambulation of the mountain is said to erase the karma of a single lifetime.</p>
@@ -416,7 +487,7 @@
     </div>
     <div class="pillar">
       <div class="pillar__roman">II.</div>
-      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 30 Q12 24 24 28 T44 30"/><path d="M4 36 Q12 30 24 34 T44 36"/><circle cx="24" cy="14" r="5"/><path d="M24 6 L24 9 M32 11 L30 13 M16 11 L18 13"/></svg>
+      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 30 Q12 24 24 28 T44 30"/><path d="M4 36 Q12 30 24 34 T44 36"/><circle cx="24" cy="14" r="5"/><path d="M24 6 L24 9 M32 11 L30 13 M16 11 L18 13"/></svg>
       <div class="pillar__sanskrit">Manas Sarovar</div>
       <h3>The Lake of <em>Consciousness</em></h3>
       <p>Born from the mind of Brahma. A pre-dawn bath at 4,590 m beside the highest freshwater lake on Earth. Fire ceremony at the southern shore. Mohanji's transmission at the water's edge. A day held entirely outside time.</p>
@@ -424,7 +495,7 @@
     </div>
     <div class="pillar">
       <div class="pillar__roman">III.</div>
-      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="12" y="22" width="24" height="18"/><path d="M8 22 L24 6 L40 22"/><path d="M20 40 L20 28 L28 28 L28 40"/><circle cx="24" cy="14" r="2" fill="currentColor"/></svg>
+      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1"><rect x="12" y="22" width="24" height="18"/><path d="M8 22 L24 6 L40 22"/><path d="M20 40 L20 28 L28 28 L28 40"/><circle cx="24" cy="14" r="2" fill="currentColor"/></svg>
       <div class="pillar__sanskrit">Ashtapad Darshan</div>
       <h3>The Southern <em>Face</em></h3>
       <p>The rarely visited face where Jain tradition places the moksha of Rishabhanatha. Private access arranged only for Mohanji's yatra. Silent darshan at sundown — the sheerest, most arresting view of Kailash most pilgrims never see.</p>
@@ -432,7 +503,7 @@
     </div>
     <div class="pillar">
       <div class="pillar__roman">IV.</div>
-      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="2" fill="currentColor"/><path d="M24 2 L24 8 M24 40 L24 46 M2 24 L8 24 M40 24 L46 24 M8 8 L12 12 M36 8 L32 12 M8 40 L12 36 M36 40 L32 36"/></svg>
+      <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="2" fill="currentColor"/><path d="M24 2 L24 8 M24 40 L24 46 M2 24 L8 24 M40 24 L46 24 M8 8 L12 12 M36 8 L32 12 M8 40 L12 36 M36 40 L32 36"/></svg>
       <div class="pillar__sanskrit">Antar Yātrā</div>
       <h3>The Inner <em>Kora</em></h3>
       <p>Morning meditation. Evening satsang. The daily presence of Mohanji walking at the pace of the slowest yatri. And a closing shaktipat transmission on the final night. The outer mountain is the method — this is the medicine.</p>
@@ -441,7 +512,7 @@
   </div>
 </section>
 
-<!-- ============= MOHANJI IN WORDS ============= -->
+<!-- ============= MOHANJI WORDS ============= -->
 <section class="words" id="words">
   <div class="words__inner">
     <div class="words__portrait">
@@ -481,10 +552,10 @@
     <div class="itin__d-body"><div class="itin__d-title">Kerung → <em>Saga</em></div><div class="itin__d-meta"><span>4,600 m</span><span>Plateau day</span></div><div class="itin__d-desc">The vast Tibetan plateau opens. Evening chanting circle under an ink-black sky.</div></div>
 
     <div class="itin__day"><div class="itin__d-num"><small>Day</small>06</div></div>
-    <div class="itin__d-body"><div class="itin__d-title">Saga → <em>Manasarovar</em></div><div class="itin__d-meta"><span>4,590 m</span><span>First darshan</span></div><div class="itin__d-desc">Around midday the mountain appears on the horizon. The vehicle stops. Nobody speaks. Evening arati at the lake.</div></div>
+    <div class="itin__d-body lake"><div class="itin__d-title">Saga → <em>Manasarovar</em></div><div class="itin__d-meta"><span>4,590 m</span><span>First darshan</span></div><div class="itin__d-desc">Around midday the mountain appears on the horizon. The vehicle stops. Nobody speaks. Evening arati at the lake.</div></div>
 
     <div class="itin__day"><div class="itin__d-num"><small>Day</small>07</div></div>
-    <div class="itin__d-body peak"><div class="itin__d-title">Manasarovar — <em>Holy Bath &amp; Homa</em></div><div class="itin__d-meta"><span>4,590 m</span><span>Dev Kumbh ceremony</span></div><div class="itin__d-desc">Pre-dawn bath in the mind of Brahma. Fire ceremony on the southern shore. Mohanji's transmission at the water's edge. A day without clocks.</div></div>
+    <div class="itin__d-body lake"><div class="itin__d-title">Manasarovar — <em>Holy Bath &amp; Homa</em></div><div class="itin__d-meta"><span>4,590 m</span><span>Dev Kumbh ceremony</span></div><div class="itin__d-desc">Pre-dawn bath in the mind of Brahma. Fire ceremony on the southern shore. Mohanji's transmission at the water's edge. A day without clocks.</div></div>
 
     <div class="itin__day"><div class="itin__d-num"><small>Day</small>08</div></div>
     <div class="itin__d-body"><div class="itin__d-title">Lake → <em>Darchen</em></div><div class="itin__d-meta"><span>4,670 m</span><span>Base of the mountain</span></div><div class="itin__d-desc">Short drive to the pilgrim village at the foot of Kailash. Final brief before Parikrama. Early night.</div></div>
@@ -519,25 +590,25 @@
     <svg class="elev__svg" viewBox="0 0 900 240" preserveAspectRatio="none">
       <defs>
         <linearGradient id="elevFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#c9a14e" stop-opacity="0.5"/>
-          <stop offset="100%" stop-color="#c9a14e" stop-opacity="0.02"/>
+          <stop offset="0%" stop-color="#c9a14e" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#c9a14e" stop-opacity="0.03"/>
         </linearGradient>
       </defs>
-      <line x1="0" y1="40" x2="900" y2="40" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
-      <line x1="0" y1="100" x2="900" y2="100" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
-      <line x1="0" y1="160" x2="900" y2="160" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
-      <text x="4" y="36" font-family="Manrope" font-size="10" fill="#e0bf7a">6000m</text>
-      <text x="4" y="96" font-family="Manrope" font-size="10" fill="#e0bf7a">4500m</text>
-      <text x="4" y="156" font-family="Manrope" font-size="10" fill="#e0bf7a">3000m</text>
+      <line x1="0" y1="40" x2="900" y2="40" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.35"/>
+      <line x1="0" y1="100" x2="900" y2="100" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.35"/>
+      <line x1="0" y1="160" x2="900" y2="160" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.35"/>
+      <text x="4" y="36" font-family="Manrope" font-size="10" fill="#8f6a2b">6000m</text>
+      <text x="4" y="96" font-family="Manrope" font-size="10" fill="#8f6a2b">4500m</text>
+      <text x="4" y="156" font-family="Manrope" font-size="10" fill="#8f6a2b">3000m</text>
       <path d="M 0,200 L 60,200 L 120,200 L 180,130 L 240,130 L 300,70 L 360,75 L 420,75 L 480,72 L 540,55 L 600,20 L 660,50 L 720,30 L 780,75 L 840,200 L 900,200 L 900,240 L 0,240 Z" fill="url(#elevFill)"/>
-      <polyline points="0,200 60,200 120,200 180,130 240,130 300,70 360,75 420,75 480,72 540,55 600,20 660,50 720,30 780,75 840,200 900,200" fill="none" stroke="#e0bf7a" stroke-width="2.5"/>
-      <g font-family="Manrope" font-size="9" fill="#fdfcf9">
-        <circle cx="600" cy="20" r="6" fill="#f2d48a"/>
-        <text x="600" y="10" text-anchor="middle" fill="#f2d48a" font-weight="600">DROLMA LA · 5,645m</text>
-        <circle cx="300" cy="70" r="4" fill="#c9a14e"/>
-        <text x="300" y="58" text-anchor="middle" fill="#e0bf7a">Manasarovar</text>
+      <polyline points="0,200 60,200 120,200 180,130 240,130 300,70 360,75 420,75 480,72 540,55 600,20 660,50 720,30 780,75 840,200 900,200" fill="none" stroke="#8f6a2b" stroke-width="2.5"/>
+      <g font-family="Manrope" font-size="9">
+        <circle cx="600" cy="20" r="6" fill="#d9743a"/>
+        <text x="600" y="10" text-anchor="middle" fill="#d9743a" font-weight="700">DROLMA LA · 5,645m</text>
+        <circle cx="300" cy="70" r="4" fill="#3a746b"/>
+        <text x="300" y="58" text-anchor="middle" fill="#20504a" font-weight="600">Manasarovar</text>
         <circle cx="720" cy="30" r="4" fill="#c9a14e"/>
-        <text x="720" y="20" text-anchor="middle" fill="#e0bf7a">Ashtapad</text>
+        <text x="720" y="20" text-anchor="middle" fill="#8f6a2b" font-weight="600">Ashtapad</text>
       </g>
     </svg>
   </div>
@@ -565,7 +636,7 @@
         <li><strong>Closing shaktipat ceremony</strong> at Ashtapad</li>
       </ul>
     </div>
-    <div class="inc__col">
+    <div class="inc__col inc__col--alt">
       <h3>Please <em>arrange yourself</em></h3>
       <ul>
         <li><strong>International flights</strong> to and from Kathmandu</li>
@@ -679,17 +750,11 @@
   </div>
   <div class="faq__list">
     <details class="faq__item"><summary class="faq__q">How fit do I need to be?</summary><div class="faq__a">You need to be comfortable walking 6–8 hours at altitude over rough terrain. We recommend at least three months of training — hill walking, stair work, cardio three times a week. A medical fitness certificate is mandatory. Ponies are available on parikrama days for those who need them.</div></details>
-
     <details class="faq__item"><summary class="faq__q">What about altitude sickness?</summary><div class="faq__a">Real, manageable, and planned for. We build in two full acclimatisation days, carry oxygen on every vehicle, travel with a doctor, and pace the itinerary gradually. Around 5% of yatris find they cannot cross the Drolma La and return early — we plan for this with dignity and care.</div></details>
-
     <details class="faq__item"><summary class="faq__q">Will Mohanji really be with us the whole time?</summary><div class="faq__a">Yes. From the opening satsang in Kathmandu on Day 1 to the closing circle on Day 14, Mohanji is with the group throughout. He walks the parikrama at the pace of the slowest yatri. He does not rush. He does not leave anyone behind.</div></details>
-
     <details class="faq__item"><summary class="faq__q">What makes 2026 a Dev Kumbh yatra?</summary><div class="faq__a">A specific planetary alignment that occurs once in roughly twelve years is said to bring a "gathering of the gods" to Kailash. The 2026 window carries this subtle-energy signature. Mohanji has chosen to hold the yatra inside this window precisely because the inner transmission is amplified during such alignments.</div></details>
-
     <details class="faq__item"><summary class="faq__q">Can I come alone?</summary><div class="faq__a">Over half of our yatris travel solo. You will arrive as a stranger and leave as something closer than family. We pair solo yatris thoughtfully for twin-share accommodation, or you can choose the Yogi tier for single occupancy.</div></details>
-
     <details class="faq__item"><summary class="faq__q">What's the group size?</summary><div class="faq__a">Capped at 48 yatris total. Pilgrim satsangs at 20. Yogi satsangs at 8. The caps protect the quality of the inner experience — not a marketing number.</div></details>
-
     <details class="faq__item"><summary class="faq__q">What happens if the route closes?</summary><div class="faq__a">The Tibetan Autonomous Region occasionally restricts access on short notice. If the yatra cannot run, registered yatris are offered a full refund or transfer to the 2027 group. We hold insurance against political closure at the operator level.</div></details>
   </div>
 </section>
@@ -714,39 +779,23 @@
 <footer>
   <div class="foot">
     <div>
-      <div class="foot__brand">Mohanji<em>.</em></div>
+      <div class="foot__brand">
+        <svg width="40" height="40" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+          <defs><linearGradient id="footGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f2d48a"/><stop offset="55%" stop-color="#c9a14e"/><stop offset="100%" stop-color="#8f6a2b"/></linearGradient></defs>
+          <circle cx="28" cy="28" r="26" fill="none" stroke="url(#footGold)" stroke-width="1.2"/>
+          <polygon points="28,13 14,40 42,40" fill="url(#footGold)" opacity="0.95"/>
+          <polyline points="28,13 24,22 27,26 22,34" fill="none" stroke="#fbf7ed" stroke-width="0.8" opacity="0.75"/>
+          <circle cx="28" cy="9" r="1.5" fill="#f2d48a"/>
+        </svg>
+        <div class="foot__brand-word">Mohanji<em>.</em></div>
+      </div>
       <p>A global family of seekers, volunteers, and pilgrims walking the path of unconditional love and silent service.</p>
     </div>
-    <div>
-      <h5>Explore</h5>
-      <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="events.html">Journeys</a></li>
-        <li><a href="spaces.html">Spaces</a></li>
-        <li><a href="awards.html">Awards</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Kailash 2026</h5>
-      <ul>
-        <li><a href="#itinerary">The 15-day yatra</a></li>
-        <li><a href="#register">Registration</a></li>
-        <li><a href="mailto:yatra@mohanji.org">Contact the team</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Connect</h5>
-      <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">YouTube</a></li>
-        <li><a href="#">Newsletter</a></li>
-      </ul>
-    </div>
+    <div><h5>Explore</h5><ul><li><a href="about.html">About</a></li><li><a href="events.html">Journeys</a></li><li><a href="spaces.html">Spaces</a></li><li><a href="awards.html">Awards</a></li></ul></div>
+    <div><h5>Kailash 2026</h5><ul><li><a href="#itinerary">The 15-day yatra</a></li><li><a href="#register">Registration</a></li><li><a href="mailto:yatra@mohanji.org">Contact the team</a></li></ul></div>
+    <div><h5>Connect</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="#">Newsletter</a></li></ul></div>
   </div>
-  <div class="foot__base">
-    <div>© 2026 Mohanji Foundation</div>
-    <div>ॐ नमः शिवाय</div>
-  </div>
+  <div class="foot__base"><div>© 2026 Mohanji Foundation</div><div>ॐ नमः शिवाय</div></div>
 </footer>
 
 <script>
