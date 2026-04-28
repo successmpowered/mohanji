@@ -1,0 +1,302 @@
+<!--
+  CARDS — five reusable card components on one page
+  --------------------------------------------------
+  Includes: pillar-card, event-card, testimonial-card, pricing-tier,
+            itinerary-row, crown-card, type-mockup-card.
+
+  Each component is independent — copy the .m-* block you need.
+-->
+<style>
+  body { font-family: 'Manrope', system-ui, sans-serif; background: #fdfcf9; color: #2a241b; padding: 40px; }
+  h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; margin: 60px 0 24px; }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; }
+
+  /* ============================================================
+     1. PILLAR CARD — used in 4-up grids on Kailash, events, index
+     ============================================================ */
+  .m-pillar {
+    position: relative;
+    padding: 48px 30px 44px;
+    background: #faf7f0;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    transition: all 0.4s;
+    overflow: hidden;
+  }
+  .m-pillar::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #d4ae6b, #b8924a, #8a6a2f);
+  }
+  .m-pillar:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(138, 106, 47, 0.15);
+    border-color: rgba(184, 146, 74, 0.55);
+  }
+  .m-pillar__num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px; letter-spacing: 0.3em;
+    color: #8a6a2f; margin-bottom: 20px; font-weight: 500;
+  }
+  .m-pillar__icon { width: 44px; height: 44px; margin-bottom: 26px; color: #b8924a; }
+  .m-pillar h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 30px; font-weight: 400; line-height: 1.15;
+    margin-bottom: 16px; letter-spacing: -0.01em;
+  }
+  .m-pillar h3 em { font-style: italic; color: #b8924a; }
+  .m-pillar p { font-size: 14px; line-height: 1.75; color: #5a5347; }
+
+  /* ============================================================
+     2. EVENT CARD
+     ============================================================ */
+  .m-event {
+    background: #fdfcf9;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    padding: 28px 28px 24px;
+    transition: all 0.3s;
+  }
+  .m-event:hover { border-color: rgba(184, 146, 74, 0.55); transform: translateY(-3px); }
+  .m-event--external { border-style: dashed; background: #faf7f0; }
+  .m-event__type {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8a6a2f; font-weight: 500; margin-bottom: 14px;
+  }
+  .m-event__type::before {
+    content: ""; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--type, #b8924a);
+  }
+  .m-event--external .m-event__type::before {
+    background: transparent;
+    border: 1px dashed currentColor;
+  }
+  .m-event h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px; font-weight: 400; line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .m-event__when { font-size: 13px; color: #8a8278; margin-bottom: 12px; }
+  .m-event__lede { font-size: 14px; color: #5a5347; line-height: 1.6; }
+
+  /* ============================================================
+     3. TESTIMONIAL CARD
+     ============================================================ */
+  .m-testi {
+    padding: 44px 36px;
+    background: #faf7f0;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    transition: all 0.4s;
+    position: relative;
+  }
+  .m-testi--dark {
+    background: rgba(253, 252, 249, 0.04);
+    border-color: rgba(212, 174, 107, 0.25);
+    color: #fdfcf9;
+    backdrop-filter: blur(8px);
+  }
+  .m-testi__mark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 72px; line-height: 0.6;
+    color: #b8924a; opacity: 0.4; margin-bottom: 8px;
+  }
+  .m-testi__quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px; font-style: italic; line-height: 1.55;
+    margin-bottom: 30px;
+  }
+  .m-testi__by {
+    display: flex; align-items: center; gap: 14px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(184, 146, 74, 0.2);
+  }
+  .m-testi__av {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4ae6b, #8a6a2f);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #fff; font-size: 18px;
+  }
+  .m-testi__name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .m-testi__loc { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #b8924a; font-weight: 500; }
+
+  /* ============================================================
+     4. PRICING TIER (use 3-up grid; one .m-tier--feature for emphasis)
+     ============================================================ */
+  .m-tier {
+    background: #fdfcf9;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    padding: 48px 38px;
+    position: relative; transition: all 0.4s;
+    display: flex; flex-direction: column;
+  }
+  .m-tier:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(138, 106, 47, 0.12); }
+  .m-tier--feature {
+    border: 2px solid #b8924a;
+    background: linear-gradient(180deg, #faf4e6 0%, #fdfcf9 30%);
+  }
+  .m-tier--feature::before {
+    content: "Most chosen";
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    padding: 5px 18px; background: #b8924a; color: #fff;
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500;
+  }
+  .m-tier__name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 28px; margin-bottom: 10px; font-weight: 400; }
+  .m-tier__name em { font-style: italic; color: #b8924a; }
+  .m-tier__tag { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #8a6a2f; font-weight: 500; margin-bottom: 26px; }
+  .m-tier__price { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 56px; line-height: 1; font-weight: 300; margin-bottom: 6px; }
+  .m-tier__price small { font-size: 16px; color: #8a8278; margin-left: 4px; }
+  .m-tier__per { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8278; margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid rgba(184, 146, 74, 0.3); }
+  .m-tier ul { list-style: none; margin-bottom: 32px; flex-grow: 1; padding: 0; }
+  .m-tier li { padding: 10px 0 10px 26px; position: relative; font-size: 14px; color: #5a5347; line-height: 1.55; }
+  .m-tier li::before { content: "◆"; position: absolute; left: 0; top: 10px; color: #b8924a; font-size: 10px; }
+  .m-tier__cta {
+    display: block; text-align: center;
+    padding: 16px;
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    border: 1px solid #b8924a; color: #8a6a2f; font-weight: 500;
+    transition: all 0.3s; text-decoration: none;
+  }
+  .m-tier__cta:hover { background: #b8924a; color: #fff; }
+  .m-tier--feature .m-tier__cta { background: #b8924a; color: #fff; }
+  .m-tier--feature .m-tier__cta:hover { background: #8a6a2f; }
+
+  /* ============================================================
+     5. ITINERARY ROW
+     ============================================================ */
+  .m-itin { display: grid; grid-template-columns: 130px 1fr; gap: 0; max-width: 900px; }
+  .m-itin__day { padding: 32px 0; border-bottom: 1px solid rgba(184, 146, 74, 0.3); }
+  .m-itin__num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 48px; line-height: 1; font-weight: 300;
+    color: #b8924a;
+  }
+  .m-itin__num small {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #8a6a2f; display: block; margin-bottom: 8px; font-weight: 500;
+  }
+  .m-itin__body {
+    padding: 32px 0 32px 46px;
+    border-bottom: 1px solid rgba(184, 146, 74, 0.3);
+    border-left: 1px solid rgba(184, 146, 74, 0.3);
+    position: relative;
+  }
+  .m-itin__body::before {
+    content: ""; position: absolute; left: -5px; top: 42px;
+    width: 9px; height: 9px;
+    background: #b8924a; border-radius: 50%;
+    box-shadow: 0 0 0 3px #fdfcf9;
+  }
+  .m-itin__body--peak::before {
+    background: #f2d48a; width: 13px; height: 13px; left: -7px;
+    box-shadow: 0 0 0 3px #fdfcf9, 0 0 20px rgba(240, 198, 110, 0.6);
+  }
+  .m-itin__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px; font-weight: 400;
+    margin-bottom: 10px; letter-spacing: -0.008em;
+  }
+  .m-itin__title em { font-style: italic; color: #b8924a; }
+  .m-itin__meta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8a6a2f; font-weight: 500; margin-bottom: 14px;
+  }
+  .m-itin__meta span { margin-right: 22px; }
+  .m-itin__meta span::before { content: ""; display: inline-block; width: 4px; height: 4px; background: #b8924a; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .m-itin__desc { font-size: 15px; color: #5a5347; line-height: 1.7; max-width: 640px; }
+</style>
+
+<h2>Pillar card</h2>
+<div class="demo-grid">
+  <div class="m-pillar">
+    <div class="m-pillar__num">I.</div>
+    <svg class="m-pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 40 L16 20 L24 28 L32 14 L44 40 Z"/><circle cx="32" cy="14" r="2.5" fill="currentColor"/></svg>
+    <h3>The <em>Parikrama</em></h3>
+    <p>Three days walking 52 km around the mountain. Each step a mantra. Each breath an offering.</p>
+  </div>
+</div>
+
+<h2>Event card</h2>
+<div class="demo-grid">
+  <div class="m-event" style="--type: #8a6a2f">
+    <div class="m-event__type">Satsang</div>
+    <h4>Weekly satsang with Mohanji</h4>
+    <div class="m-event__when">Tuesday · 19:00 BST · Online</div>
+    <p class="m-event__lede">An evening of presence, transmission, and silent meditation.</p>
+  </div>
+  <div class="m-event m-event--external" style="--type: #4a5a7a">
+    <div class="m-event__type">Invited appearance</div>
+    <h4>Parliament of the World's Religions</h4>
+    <div class="m-event__when">22 April 2026 · Chicago</div>
+    <p class="m-event__lede">Mohanji speaks on global consciousness at the Parliament's Chicago plenary.</p>
+  </div>
+</div>
+
+<h2>Testimonial card</h2>
+<div class="demo-grid">
+  <div class="m-testi">
+    <div class="m-testi__mark">"</div>
+    <div class="m-testi__quote">At Drolma La I fell to my knees — not from altitude, but from something leaving my body that I did not know I had been carrying since childhood.</div>
+    <div class="m-testi__by">
+      <div class="m-testi__av">A</div>
+      <div>
+        <div class="m-testi__name">Anushka R.</div>
+        <div class="m-testi__loc">Mumbai · Yatra 2022</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Pricing tier (with feature variant)</h2>
+<div class="demo-grid" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="m-tier">
+    <div class="m-tier__name">Seeker</div>
+    <div class="m-tier__tag">Standard</div>
+    <div class="m-tier__price">$4,200 <small>USD</small></div>
+    <div class="m-tier__per">Twin share</div>
+    <ul>
+      <li>15-day yatra programme</li>
+      <li>All permits, meals, transport</li>
+      <li>Group satsang access</li>
+    </ul>
+    <a href="#" class="m-tier__cta">Reserve →</a>
+  </div>
+  <div class="m-tier m-tier--feature">
+    <div class="m-tier__name">Pilgrim</div>
+    <div class="m-tier__tag">Deluxe · Small circle</div>
+    <div class="m-tier__price">$5,800 <small>USD</small></div>
+    <div class="m-tier__per">Twin share</div>
+    <ul>
+      <li>Everything in Seeker</li>
+      <li>Small-circle satsang (max 20)</li>
+      <li>Personal pony on parikrama</li>
+    </ul>
+    <a href="#" class="m-tier__cta">Reserve →</a>
+  </div>
+  <div class="m-tier">
+    <div class="m-tier__name">Yogi</div>
+    <div class="m-tier__tag">Private</div>
+    <div class="m-tier__price">$8,400 <small>USD</small></div>
+    <div class="m-tier__per">Single room</div>
+    <ul>
+      <li>Everything in Pilgrim</li>
+      <li>Inner-circle satsang (max 8)</li>
+      <li>Personal shaktipat</li>
+    </ul>
+    <a href="#" class="m-tier__cta">Reserve →</a>
+  </div>
+</div>
+
+<h2>Itinerary row</h2>
+<div class="m-itin">
+  <div class="m-itin__day"><div class="m-itin__num"><small>Day</small>09</div></div>
+  <div class="m-itin__body m-itin__body--peak">
+    <div class="m-itin__title">Parikrama I — <em>Darchen to Dirapuk</em></div>
+    <div class="m-itin__meta"><span>5,050 m</span><span>20 km · 7 hrs</span></div>
+    <div class="m-itin__desc">Beneath the sheer north face — the single most arresting view in the Himalayas. Ponies and porters walking with the group.</div>
+  </div>
+  <div class="m-itin__day"><div class="m-itin__num"><small>Day</small>10</div></div>
+  <div class="m-itin__body m-itin__body--peak">
+    <div class="m-itin__title">Parikrama II — <em>Drolma La</em></div>
+    <div class="m-itin__meta"><span>5,645 m</span><span>22 km · 10 hrs</span></div>
+    <div class="m-itin__desc">The high pass. The death-and-rebirth threshold.</div>
+  </div>
+</div>

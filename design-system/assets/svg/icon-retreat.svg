@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Retreat — leaf / forest. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1">
+  <path d="M24 8 C 12 12 8 24 8 36 C 20 36 32 32 36 20 C 38 12 32 8 24 8 Z"/>
+  <path d="M14 32 L24 16"/>
+</svg>

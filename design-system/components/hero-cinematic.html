@@ -1,0 +1,166 @@
+<!--
+  HERO · CINEMATIC (the "video effect" without a video)
+  ------------------------------------------------------
+  Used on: kailash. Photo with Ken-Burns animation, letterbox bars,
+  rotating ring, halo glow, optional snow particles.
+
+  Replace the photo URL. To use a real <video>, swap .m-cine__photo for
+  <video autoplay muted loop playsinline> with poster fallback.
+-->
+<style>
+  .m-cine {
+    position: relative; height: 100vh; min-height: 820px;
+    overflow: hidden;
+    background: #000;
+    color: #fdfcf9;
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+  /* Ken-Burns photo layer (= video effect) */
+  .m-cine__media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .m-cine__photo {
+    position: absolute; inset: -6%;
+    background-image: url("../assets/example-kailash.jpg");
+    background-size: cover;
+    background-position: center 35%;
+    animation: m-kenburns 28s ease-in-out infinite alternate;
+    filter: saturate(0.85) contrast(1.08) brightness(0.88);
+  }
+  @keyframes m-kenburns {
+    0%   { transform: scale(1.02) translate(0, 0); }
+    100% { transform: scale(1.12) translate(-1.5%, -2%); }
+  }
+
+  /* Two-pass scrim — hero readability + edge vignette */
+  .m-cine__scrim-1 {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0.75) 0%,
+      rgba(0,0,0,0.15) 38%,
+      rgba(0,0,0,0.25) 62%,
+      rgba(0,0,0,0.92) 100%);
+  }
+  .m-cine__scrim-2 {
+    position: absolute; inset: 0; z-index: 2;
+    background: radial-gradient(ellipse at 50% 55%,
+      rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 100%);
+  }
+
+  /* Gold halo behind subject */
+  .m-cine__halo {
+    position: absolute; top: 44%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(900px, 95vw); height: min(900px, 95vw);
+    z-index: 3; pointer-events: none;
+    background: radial-gradient(circle,
+      rgba(240, 198, 110, 0.22) 0%,
+      rgba(201, 161, 78, 0.08) 35%,
+      transparent 62%);
+    animation: m-halo 9s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+  }
+  @keyframes m-halo {
+    0%   { opacity: 0.55; transform: translate(-50%, -50%) scale(0.96); }
+    100% { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
+  }
+
+  /* Faint rotating ring */
+  .m-cine__ring {
+    position: absolute; top: 44%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(620px, 80vw); height: min(620px, 80vw);
+    z-index: 3; pointer-events: none; opacity: 0.15;
+    animation: m-spin 300s linear infinite;
+  }
+  @keyframes m-spin {
+    from { transform: translate(-50%, -50%) rotate(0); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Letterbox bars top + bottom */
+  .m-cine__bar {
+    position: absolute; left: 0; right: 0; height: 72px;
+    z-index: 4; pointer-events: none;
+  }
+  .m-cine__bar--top    { top: 0;    background: linear-gradient(180deg, rgba(0,0,0,0.85), transparent); }
+  .m-cine__bar--bottom { bottom: 0; background: linear-gradient(0deg,   rgba(0,0,0,0.95), transparent); }
+
+  /* Film flicker */
+  .m-cine__flicker {
+    position: absolute; inset: 0; z-index: 5; pointer-events: none;
+    background: radial-gradient(ellipse at 20% 20%,
+      rgba(255, 230, 180, 0.05) 0%, transparent 40%);
+    mix-blend-mode: screen;
+    animation: m-flicker 7s ease-in-out infinite alternate;
+  }
+  @keyframes m-flicker { 0% { opacity: 0.3; } 100% { opacity: 0.9; } }
+
+  /* Content */
+  .m-cine__inner {
+    position: relative; z-index: 10;
+    max-width: 1200px; margin: 0 auto;
+    padding: 210px 48px 140px;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; justify-content: center;
+  }
+  .m-cine__shloka {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 14px; letter-spacing: 0.38em;
+    color: #d4ae6b; margin-bottom: 40px;
+    text-transform: uppercase; font-weight: 400;
+  }
+  .m-cine__shloka::before, .m-cine__shloka::after {
+    content: ""; display: inline-block;
+    width: 42px; height: 1px;
+    background: #b8924a;
+    margin: 0 18px; vertical-align: middle;
+  }
+  .m-cine__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(54px, 8vw, 132px);
+    font-weight: 300; line-height: 0.92; letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    text-shadow: 0 10px 80px rgba(0, 0, 0, 0.7);
+  }
+  .m-cine__title em {
+    font-style: italic; color: #d4ae6b;
+    display: block; font-size: 0.78em; margin-top: 8px;
+  }
+  .m-cine__sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 24px);
+    color: rgba(253, 252, 249, 0.88);
+    line-height: 1.5; max-width: 640px;
+    margin: 0 auto 40px;
+  }
+</style>
+
+<section class="m-cine">
+  <div class="m-cine__media">
+    <div class="m-cine__photo"></div>
+    <!-- Real-video alternative:
+    <video class="m-cine__photo" autoplay muted loop playsinline poster="…fallback.jpg">
+      <source src="kailash-loop.mp4" type="video/mp4"/>
+    </video>
+    -->
+  </div>
+  <div class="m-cine__scrim-1"></div>
+  <div class="m-cine__scrim-2"></div>
+  <div class="m-cine__halo"></div>
+  <svg class="m-cine__ring" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="200" cy="200" r="180" fill="none" stroke="#e0bf7a" stroke-width="0.5" stroke-dasharray="1 4"/>
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#e0bf7a" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#e0bf7a" stroke-width="0.5" stroke-dasharray="2 6"/>
+  </svg>
+  <div class="m-cine__flicker"></div>
+  <div class="m-cine__bar m-cine__bar--top"></div>
+  <div class="m-cine__bar m-cine__bar--bottom"></div>
+
+  <div class="m-cine__inner">
+    <div class="m-cine__shloka">ॐ नमः शिवाय · Om Namah Shivaya</div>
+    <h1 class="m-cine__title">Kailash<em>With Mohanji</em></h1>
+    <p class="m-cine__sub">The journey of a lifetime — a pilgrimage not to a mountain, but to the stillness at the centre of your own being.</p>
+  </div>
+</section>

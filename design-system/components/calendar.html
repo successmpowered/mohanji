@@ -1,0 +1,273 @@
+<!--
+  CALENDAR — multi-day event grid (the trickiest component in the system)
+  --------------------------------------------------------------------------
+  Self-contained: drop into any HTML/Next.js/WordPress page. Imports
+  ../tokens.css for colours and typography.
+
+  Multi-day bar mechanics (the hard part):
+    Each event has a `start` and `end` ISO date. For every cell the event
+    overlaps, we render one .cal-event with a `role`:
+
+      role="single"     → start === end (single-day pill, full radius)
+      role="start"      → cell === start (left-rounded, right-flat)
+      role="mid"        → between start and end (flat both sides, title hidden)
+      role="end"        → cell === end (right-rounded, left-flat)
+      role="start-wrap" → Sunday cell of an ongoing event (re-renders title at week wrap)
+
+    Visual continuity is achieved with negative margin: -11px (matches the
+    grid cell padding+border) and selective border-radius removal.
+
+    External / "invited" events use a dashed border + white-soft background
+    + per-type colour for border + text.
+-->
+<style>
+  /* Scope to .mcal so it doesn't leak */
+  .mcal {
+    --satsang: #8a6a2f;
+    --retreat: #4a6b5a;
+    --pilgrimage: #9a4a3a;
+    --immersion: #4a5a7a;
+    --festival: #b8924a;
+
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: #fdfcf9;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .mcal__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(184, 146, 74, 0.3);
+  }
+  .mcal__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px; font-weight: 400; color: #2a241b;
+  }
+  .mcal__title em { font-style: italic; color: #b8924a; }
+  .mcal__nav { display: flex; gap: 8px; }
+  .mcal__nav button {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    background: transparent; color: #8a6a2f; cursor: pointer;
+    font-size: 16px; transition: all 0.3s;
+  }
+  .mcal__nav button:hover { background: #b8924a; color: #fff; }
+
+  .mcal__weekdays {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    background: #faf7f0;
+    border-bottom: 1px solid rgba(184, 146, 74, 0.3);
+  }
+  .mcal__wd {
+    padding: 10px 12px;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8a6a2f; font-weight: 500; text-align: left;
+  }
+
+  .mcal__grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+  }
+  .mcal__cell {
+    min-height: 110px;
+    border-right: 1px solid rgba(42, 36, 27, 0.06);
+    border-bottom: 1px solid rgba(42, 36, 27, 0.06);
+    padding: 8px 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mcal__cell:nth-child(7n) { border-right: none; }
+  .mcal__cell--out { background: #faf7f0; opacity: 0.5; }
+  .mcal__cell--today .mcal__day { color: #b8924a; font-weight: 500; }
+  .mcal__day {
+    font-size: 13px; color: #5a5347; margin-bottom: 6px;
+  }
+
+  /* THE MULTI-DAY BAR */
+  .cal-event {
+    display: block;
+    margin-bottom: 3px;
+    padding: 3px 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #fff;
+    border-radius: 999px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  /* Per-type fills */
+  .cal-event[data-type="satsang"]    { background: var(--satsang); }
+  .cal-event[data-type="retreat"]    { background: var(--retreat); }
+  .cal-event[data-type="pilgrimage"] { background: var(--pilgrimage); }
+  .cal-event[data-type="immersion"]  { background: var(--immersion); }
+  .cal-event[data-type="festival"]   { background: var(--festival); }
+
+  /* Multi-day continuity */
+  .cal-event.mid,
+  .cal-event.end {
+    margin-left: -11px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: none;
+  }
+  .cal-event.start,
+  .cal-event.mid {
+    margin-right: -11px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .cal-event.mid {
+    /* Hide title text in middle cells so the bar reads continuous */
+    color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* External / invited events */
+  .cal-event.external {
+    background: #faf7f0 !important;
+    border: 1px dashed;
+    box-shadow: none;
+    padding: 2px 7px;
+  }
+  .cal-event.external[data-type="satsang"]    { color: var(--satsang); border-color: var(--satsang); }
+  .cal-event.external[data-type="retreat"]    { color: var(--retreat); border-color: var(--retreat); }
+  .cal-event.external[data-type="pilgrimage"] { color: var(--pilgrimage); border-color: var(--pilgrimage); }
+  .cal-event.external[data-type="immersion"]  { color: var(--immersion); border-color: var(--immersion); }
+  .cal-event.external[data-type="festival"]   { color: var(--festival); border-color: var(--festival); }
+
+  /* Legend */
+  .mcal__legend {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    padding: 16px 28px;
+    border-top: 1px solid rgba(184, 146, 74, 0.3);
+    font-size: 12px; color: #5a5347;
+  }
+  .mcal__chip { display: inline-flex; align-items: center; gap: 8px; }
+  .mcal__chip::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--bg, #b8924a);
+  }
+  .mcal__chip--external::before {
+    background: transparent;
+    border: 1px dashed currentColor;
+  }
+</style>
+
+<div class="mcal" id="mcal">
+  <div class="mcal__head">
+    <div class="mcal__title">Journeys · <em><span data-month-label></span></em></div>
+    <div class="mcal__nav">
+      <button data-prev aria-label="Previous month">‹</button>
+      <button data-next aria-label="Next month">›</button>
+    </div>
+  </div>
+  <div class="mcal__weekdays">
+    <div class="mcal__wd">Sun</div>
+    <div class="mcal__wd">Mon</div>
+    <div class="mcal__wd">Tue</div>
+    <div class="mcal__wd">Wed</div>
+    <div class="mcal__wd">Thu</div>
+    <div class="mcal__wd">Fri</div>
+    <div class="mcal__wd">Sat</div>
+  </div>
+  <div class="mcal__grid" data-grid></div>
+  <div class="mcal__legend">
+    <span class="mcal__chip" style="--bg: #8a6a2f">Satsang</span>
+    <span class="mcal__chip" style="--bg: #4a6b5a">Retreat</span>
+    <span class="mcal__chip" style="--bg: #9a4a3a">Pilgrimage</span>
+    <span class="mcal__chip" style="--bg: #4a5a7a">Immersion</span>
+    <span class="mcal__chip" style="--bg: #b8924a">Festival</span>
+    <span class="mcal__chip mcal__chip--external">Invited appearance</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ----- DATA -----
+  // Replace with feed from CMS / Payload collection.
+  const EVENTS = [
+    { title: 'Weekly satsang',         type: 'satsang',    start: '2026-04-05', end: '2026-04-05' },
+    { title: 'Mauna retreat',          type: 'retreat',    start: '2026-04-10', end: '2026-04-14' },
+    { title: 'Muktinath yatra',        type: 'pilgrimage', start: '2026-04-18', end: '2026-04-25' },
+    { title: 'Parliament of Religions', type: 'satsang',   start: '2026-04-22', end: '2026-04-22', external: true },
+    { title: 'Mahashivratri',          type: 'festival',   start: '2026-04-28', end: '2026-04-28' }
+  ];
+
+  // ----- HELPERS -----
+  const root  = document.getElementById('mcal');
+  const grid  = root.querySelector('[data-grid]');
+  const label = root.querySelector('[data-month-label]');
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function parseIso(s) { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
+  function sameDay(a,b) { return a.getTime() === b.getTime(); }
+
+  function eventSegmentsForDate(year, month, day) {
+    const cell = new Date(year, month, day);
+    const cellDow = cell.getDay();
+    const out = [];
+    EVENTS.forEach(ev => {
+      const start = parseIso(ev.start);
+      const end   = parseIso(ev.end);
+      if (cell < start || cell > end) return;
+      const isSingle    = sameDay(start, end);
+      const isStart     = sameDay(cell, start);
+      const isEnd       = sameDay(cell, end);
+      const isWeekStart = cellDow === 0;
+      let role;
+      if (isSingle)         role = 'single';
+      else if (isStart)     role = 'start';
+      else if (isEnd)       role = 'end';
+      else if (isWeekStart) role = 'start-wrap';
+      else                  role = 'mid';
+      out.push({ ev, role });
+    });
+    return out;
+  }
+
+  let view = new Date(2026, 3, 1); // April 2026
+
+  function render() {
+    const y = view.getFullYear(), m = view.getMonth();
+    label.textContent = `${monthNames[m]} ${y}`;
+    grid.innerHTML = '';
+    const first = new Date(y, m, 1);
+    const startDow = first.getDay();
+    const daysInMonth = new Date(y, m+1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // leading blanks
+    for (let i = 0; i < startDow; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'mcal__cell mcal__cell--out';
+      grid.appendChild(cell);
+    }
+    // days
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'mcal__cell';
+      const cellDate = new Date(y, m, d);
+      if (sameDay(cellDate, today)) cell.classList.add('mcal__cell--today');
+      cell.innerHTML = `<div class="mcal__day">${d}</div>`;
+      eventSegmentsForDate(y, m, d).forEach(({ev, role}) => {
+        const pill = document.createElement('div');
+        pill.className = `cal-event ${role}` + (ev.external ? ' external' : '');
+        pill.dataset.type = ev.type;
+        pill.textContent = (role === 'mid') ? '' : ev.title;
+        pill.title = ev.title;
+        cell.appendChild(pill);
+      });
+      grid.appendChild(cell);
+    }
+  }
+
+  root.querySelector('[data-prev]').onclick = () => { view.setMonth(view.getMonth() - 1); render(); };
+  root.querySelector('[data-next]').onclick = () => { view.setMonth(view.getMonth() + 1); render(); };
+  render();
+})();
+</script>

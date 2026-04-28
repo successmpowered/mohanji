@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Satsang — gathering / lotus seat. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1">
+  <path d="M8 30 Q14 22 24 22 Q34 22 40 30"/>
+  <path d="M4 36 Q14 28 24 28 Q34 28 44 36"/>
+  <path d="M24 22 L24 14"/>
+  <circle cx="24" cy="11" r="3"/>
+  <line x1="6" y1="40" x2="42" y2="40" stroke-width="0.6" opacity="0.5"/>
+</svg>

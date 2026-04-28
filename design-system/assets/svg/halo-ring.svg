@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Halo / dotted concentric rings — used behind hero subjects. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <g fill="none" stroke="#e0bf7a">
+    <circle cx="200" cy="200" r="180" stroke-width="0.5" stroke-dasharray="1 4"/>
+    <circle cx="200" cy="200" r="140" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="100" stroke-width="0.5" stroke-dasharray="2 6"/>
+    <circle cx="200" cy="200" r="60" stroke-width="0.5"/>
+  </g>
+</svg>

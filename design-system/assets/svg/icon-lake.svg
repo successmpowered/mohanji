@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Manas Sarovar — sacred lake icon. Sun above, twin ripples below. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1">
+  <circle cx="24" cy="14" r="5"/>
+  <path d="M24 6 L24 9 M32 11 L30 13 M16 11 L18 13 M9 14 L12 14 M36 14 L39 14"/>
+  <path d="M4 30 Q12 24 24 28 T44 30"/>
+  <path d="M4 36 Q12 30 24 34 T44 36"/>
+</svg>

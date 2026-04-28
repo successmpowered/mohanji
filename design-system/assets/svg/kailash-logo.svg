@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Kailash With Mohanji — circular badge logo recreation.
+     Replace with the official asset when supplied by the brand team. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="kailashBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#54b5db"/>
+      <stop offset="100%" stop-color="#0e6b99"/>
+    </linearGradient>
+  </defs>
+  <!-- Disc -->
+  <circle cx="100" cy="100" r="96" fill="url(#kailashBlue)"/>
+  <!-- Sun behind mountain -->
+  <circle cx="68" cy="68" r="14" fill="#ffffff"/>
+  <!-- Sun rays -->
+  <g stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <line x1="52" y1="48" x2="46" y2="42"/>
+    <line x1="44" y1="68" x2="36" y2="68"/>
+    <line x1="52" y1="86" x2="46" y2="92"/>
+    <line x1="68" y1="46" x2="68" y2="38"/>
+    <line x1="84" y1="52" x2="90" y2="46"/>
+    <line x1="84" y1="84" x2="90" y2="90"/>
+    <line x1="92" y1="68" x2="100" y2="68"/>
+  </g>
+  <!-- Mountain (Kailash silhouette with cleft) -->
+  <path d="M 56 118 L 95 50 L 110 75 L 122 60 L 152 118 Z" fill="#ffffff"/>
+  <!-- Cleft + ridge details -->
+  <line x1="95" y1="50" x2="98" y2="118" stroke="#0e6b99" stroke-width="2.2" opacity="0.85"/>
+  <path d="M 95 50 L 86 80 M 95 50 L 104 72 M 110 75 L 104 100 M 122 60 L 130 95" stroke="#0e6b99" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Foreground ridge baseline -->
+  <path d="M 38 118 Q 60 112 90 118 Q 120 124 162 116" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.55"/>
+  <!-- Wordmark -->
+  <text x="100" y="148" text-anchor="middle" fill="#ffffff" font-family="Cormorant Garamond, Times New Roman, serif" font-size="22" font-weight="500" letter-spacing="1.5">KAILASH</text>
+  <text x="100" y="168" text-anchor="middle" fill="#ffffff" font-family="Cormorant Garamond, Times New Roman, serif" font-size="11" font-weight="400" letter-spacing="2.5">WITH MOHANJI</text>
+  <line x1="92" y1="178" x2="108" y2="178" stroke="#ffffff" stroke-width="1"/>
+</svg>

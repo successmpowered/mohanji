@@ -1,0 +1,80 @@
+<!--
+  COUNTDOWN — live D · H · M · S timer
+  --------------------------------------
+  Self-contained. Set data-target on the wrapper to an ISO-8601 datetime
+  (UTC). Updates every second; freezes at zero.
+
+  Usage:
+    <div class="m-count" data-target="2026-08-18T06:00:00Z">…</div>
+-->
+<style>
+  .m-count {
+    display: inline-flex; gap: 16px;
+    padding: 22px 36px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 161, 78, 0.25);
+    color: #fdfcf9;
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+  .m-count--light {
+    background: #faf7f0;
+    color: #2a241b;
+    border-color: rgba(184, 146, 74, 0.3);
+  }
+  .m-count__item { text-align: center; min-width: 62px; }
+  .m-count__n {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 40px; font-weight: 300;
+    line-height: 1; letter-spacing: -0.02em;
+    color: #d4ae6b;
+  }
+  .m-count--light .m-count__n { color: #b8924a; }
+  .m-count__l {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(253, 252, 249, 0.65);
+    margin-top: 8px; font-weight: 500;
+  }
+  .m-count--light .m-count__l { color: #8a8278; }
+  .m-count__sep {
+    color: rgba(201, 161, 78, 0.35);
+    font-size: 26px; align-self: center;
+  }
+</style>
+
+<div class="m-count" data-target="2026-08-18T06:00:00Z">
+  <div class="m-count__item"><div class="m-count__n" data-d>—</div><div class="m-count__l">Days</div></div>
+  <div class="m-count__sep">·</div>
+  <div class="m-count__item"><div class="m-count__n" data-h>—</div><div class="m-count__l">Hours</div></div>
+  <div class="m-count__sep">·</div>
+  <div class="m-count__item"><div class="m-count__n" data-m>—</div><div class="m-count__l">Minutes</div></div>
+  <div class="m-count__sep">·</div>
+  <div class="m-count__item"><div class="m-count__n" data-s>—</div><div class="m-count__l">Seconds</div></div>
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll('.m-count').forEach(node => {
+    const target = new Date(node.dataset.target).getTime();
+    const d = node.querySelector('[data-d]');
+    const h = node.querySelector('[data-h]');
+    const m = node.querySelector('[data-m]');
+    const s = node.querySelector('[data-s]');
+    const pad = n => String(n).padStart(2, '0');
+    function tick() {
+      let diff = Math.max(0, target - Date.now());
+      const days = Math.floor(diff / 86400000); diff -= days * 86400000;
+      const hrs  = Math.floor(diff / 3600000);  diff -= hrs * 3600000;
+      const mins = Math.floor(diff / 60000);    diff -= mins * 60000;
+      const secs = Math.floor(diff / 1000);
+      d.textContent = days;
+      h.textContent = pad(hrs);
+      m.textContent = pad(mins);
+      s.textContent = pad(secs);
+    }
+    tick();
+    setInterval(tick, 1000);
+  });
+})();
+</script>

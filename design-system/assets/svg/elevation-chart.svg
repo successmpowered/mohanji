@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Elevation profile — Kailash 15-day yatra (1,400m → 5,645m → 1,400m).
+     viewBox is 900x240. Scale to container width via preserveAspectRatio="none". -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" preserveAspectRatio="none" width="900" height="240">
+  <defs>
+    <linearGradient id="elevFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9a14e" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#c9a14e" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <!-- Gridlines -->
+  <line x1="0" y1="40"  x2="900" y2="40"  stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
+  <line x1="0" y1="100" x2="900" y2="100" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
+  <line x1="0" y1="160" x2="900" y2="160" stroke="#c9a14e" stroke-dasharray="2,4" opacity="0.25"/>
+  <text x="4" y="36"  font-family="Manrope" font-size="10" fill="#e0bf7a">6000m</text>
+  <text x="4" y="96"  font-family="Manrope" font-size="10" fill="#e0bf7a">4500m</text>
+  <text x="4" y="156" font-family="Manrope" font-size="10" fill="#e0bf7a">3000m</text>
+  <!-- Filled area -->
+  <path d="M 0,200 L 60,200 L 120,200 L 180,130 L 240,130 L 300,70 L 360,75 L 420,75 L 480,72 L 540,55 L 600,20 L 660,50 L 720,30 L 780,75 L 840,200 L 900,200 L 900,240 L 0,240 Z" fill="url(#elevFill)"/>
+  <!-- Profile line -->
+  <polyline points="0,200 60,200 120,200 180,130 240,130 300,70 360,75 420,75 480,72 540,55 600,20 660,50 720,30 780,75 840,200 900,200" fill="none" stroke="#e0bf7a" stroke-width="2.5"/>
+  <!-- Labelled markers -->
+  <g font-family="Manrope" font-size="9">
+    <circle cx="600" cy="20" r="6" fill="#f2d48a"/>
+    <text x="600" y="10" text-anchor="middle" fill="#f2d48a" font-weight="600">DROLMA LA · 5,645m</text>
+    <circle cx="300" cy="70" r="4" fill="#c9a14e"/>
+    <text x="300" y="58" text-anchor="middle" fill="#e0bf7a">Manasarovar</text>
+    <circle cx="720" cy="30" r="4" fill="#c9a14e"/>
+    <text x="720" y="20" text-anchor="middle" fill="#e0bf7a">Ashtapad</text>
+  </g>
+</svg>

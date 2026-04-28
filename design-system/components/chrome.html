@@ -1,0 +1,244 @@
+<!--
+  CHROME — global building blocks
+  --------------------------------
+  Self-contained reference for: announce-bar, sticky nav (light), floating
+  nav (dark/transparent), footer, FAQ accordion, paper-grain overlay,
+  section-head, kicker, button.
+-->
+<style>
+  body { margin: 0; font-family: 'Manrope', system-ui, sans-serif; background: #fdfcf9; color: #2a241b; }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* PAPER GRAIN OVERLAY — apply once, globally */
+  .m-grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 300;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ANNOUNCE BAR */
+  .m-announce {
+    background: #f5efe2; color: #2a241b;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-align: center; padding: 10px 20px;
+    border-bottom: 1px solid rgba(184, 146, 74, 0.3);
+  }
+  .m-announce a { color: #8a6a2f; margin-left: 10px; font-weight: 500; text-decoration: none; }
+  .m-announce__dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: #b8924a; border-radius: 50%;
+    margin-right: 10px; vertical-align: middle;
+    animation: m-pulse 2s ease-in-out infinite;
+  }
+  @keyframes m-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.5); opacity: 0.5; }
+  }
+
+  /* NAV — sticky-light variant (default) */
+  .m-nav-wrap {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(253, 252, 249, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(42, 36, 27, 0.08);
+  }
+  .m-nav {
+    max-width: 1400px; margin: 0 auto;
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .m-nav__logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 30px; color: #2a241b; letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .m-nav__logo em { font-style: italic; color: #b8924a; }
+  .m-nav__menu {
+    display: flex; gap: 38px;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 500;
+  }
+  .m-nav__item { padding: 10px 0; }
+  .m-nav__item a {
+    color: #2a241b; text-decoration: none;
+    transition: color 0.3s;
+  }
+  .m-nav__item:hover a, .m-nav__item.active a { color: #8a6a2f; }
+  .m-nav__cta {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 12px 24px;
+    background: #b8924a; color: #fdfcf9;
+    border: 1px solid #b8924a; font-weight: 500;
+    transition: all 0.35s; text-decoration: none;
+  }
+  .m-nav__cta:hover { background: #8a6a2f; }
+
+  /* NAV — floating-dark variant (overlaid on hero) */
+  .m-nav-wrap--dark {
+    position: absolute; top: 38px; left: 0; right: 0;
+    background: transparent; border-bottom: none; pointer-events: none;
+  }
+  .m-nav-wrap--dark .m-nav { pointer-events: auto; }
+  .m-nav-wrap--dark .m-nav__logo,
+  .m-nav-wrap--dark .m-nav__item a {
+    color: #fdfcf9;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+  }
+  .m-nav-wrap--dark .m-nav__item:hover a,
+  .m-nav-wrap--dark .m-nav__item.active a { color: #d4ae6b; }
+
+  /* SECTION HEAD + KICKER */
+  .m-section-head { text-align: center; max-width: 820px; margin: 0 auto 72px; }
+  .m-kicker {
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: #8a6a2f; font-weight: 500;
+    margin-bottom: 22px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .m-kicker::before, .m-kicker::after {
+    content: ""; width: 28px; height: 1px; background: #d4ae6b;
+  }
+  .m-section-head h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(44px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.04; letter-spacing: -0.015em;
+    color: #2a241b; margin: 0 0 22px;
+  }
+  .m-section-head h2 em { font-style: italic; color: #b8924a; }
+  .m-section-head p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px; font-style: italic;
+    color: #5a5347; line-height: 1.55; margin: 0;
+  }
+
+  /* FAQ */
+  .m-faq { max-width: 900px; margin: 0 auto; }
+  .m-faq__item {
+    border-bottom: 1px solid rgba(184, 146, 74, 0.3);
+    padding: 28px 0;
+  }
+  .m-faq__q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px; color: #2a241b; font-weight: 400;
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .m-faq__q::-webkit-details-marker { display: none; }
+  .m-faq__q::after {
+    content: "+"; font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px; color: #b8924a;
+    transition: transform 0.3s; font-weight: 300;
+  }
+  details[open] .m-faq__q::after { transform: rotate(45deg); }
+  .m-faq__a {
+    margin-top: 16px;
+    font-size: 15px; color: #5a5347; line-height: 1.75;
+    max-width: 760px;
+  }
+
+  /* FOOTER */
+  .m-footer {
+    background: #2a241b;
+    color: rgba(253, 252, 249, 0.6);
+    padding: 80px 48px 40px;
+    font-size: 13px;
+  }
+  .m-footer__grid {
+    max-width: 1400px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(212, 174, 107, 0.15);
+  }
+  .m-footer__brand {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 26px; color: #fdfcf9; letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .m-footer__brand em { font-style: italic; color: #d4ae6b; }
+  .m-footer p { line-height: 1.7; max-width: 320px; margin: 0; }
+  .m-footer h5 {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #d4ae6b; font-weight: 500;
+    margin: 0 0 18px;
+  }
+  .m-footer ul { list-style: none; padding: 0; margin: 0; }
+  .m-footer li { padding: 6px 0; }
+  .m-footer a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .m-footer a:hover { color: #d4ae6b; }
+  .m-footer__base {
+    max-width: 1400px; margin: 0 auto;
+    padding-top: 30px;
+    display: flex; justify-content: space-between;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(253, 252, 249, 0.4);
+  }
+</style>
+
+<div class="m-grain"></div>
+
+<div class="m-announce">
+  <span class="m-announce__dot"></span>
+  Kailash Yatra 2026 · Registration open
+  <a href="#">Reserve your place →</a>
+</div>
+
+<!-- Sticky-light nav -->
+<div class="m-nav-wrap">
+  <nav class="m-nav">
+    <a href="/" class="m-nav__logo">Mohanji<em>.</em></a>
+    <div class="m-nav__menu">
+      <div class="m-nav__item"><a href="#">About</a></div>
+      <div class="m-nav__item active"><a href="#">Journeys</a></div>
+      <div class="m-nav__item"><a href="#">Spaces</a></div>
+      <div class="m-nav__item"><a href="#">Awards</a></div>
+    </div>
+    <a href="#" class="m-nav__cta">Connect</a>
+  </nav>
+</div>
+
+<section style="padding: 120px 48px;">
+  <div class="m-section-head">
+    <div class="m-kicker">Section eyebrow</div>
+    <h2>The <em>section</em> headline</h2>
+    <p>An italic Cormorant lede sits beneath every section head — short, declarative, never more than two lines.</p>
+  </div>
+
+  <div class="m-faq">
+    <details class="m-faq__item">
+      <summary class="m-faq__q">How fit do I need to be?</summary>
+      <div class="m-faq__a">Comfortable walking 6–8 hours at altitude. Three months of training recommended. A medical fitness certificate is mandatory.</div>
+    </details>
+    <details class="m-faq__item">
+      <summary class="m-faq__q">What about altitude sickness?</summary>
+      <div class="m-faq__a">Real, manageable, and planned for. Two acclimatisation days, oxygen on every vehicle, doctor on the team.</div>
+    </details>
+  </div>
+</section>
+
+<footer class="m-footer">
+  <div class="m-footer__grid">
+    <div>
+      <div class="m-footer__brand">Mohanji<em>.</em></div>
+      <p>A global family of seekers, volunteers, and pilgrims walking the path of unconditional love and silent service.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul><li><a href="#">About</a></li><li><a href="#">Journeys</a></li><li><a href="#">Spaces</a></li><li><a href="#">Awards</a></li></ul>
+    </div>
+    <div>
+      <h5>Connect</h5>
+      <ul><li><a href="#">Newsletter</a></li><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li></ul>
+    </div>
+    <div>
+      <h5>Donate</h5>
+      <ul><li><a href="#">Mohanji Foundation</a></li><li><a href="#">ACT Worldwide</a></li></ul>
+    </div>
+  </div>
+  <div class="m-footer__base">
+    <div>© 2026 Mohanji Foundation</div>
+    <div>ॐ नमः शिवाय</div>
+  </div>
+</footer>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ashtapad — temple / pilgrimage shrine icon. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1">
+  <rect x="12" y="22" width="24" height="18"/>
+  <path d="M8 22 L24 6 L40 22"/>
+  <path d="M20 40 L20 28 L28 28 L28 40"/>
+  <circle cx="24" cy="14" r="2" fill="currentColor"/>
+  <line x1="4" y1="40" x2="44" y2="40" stroke-width="0.6" opacity="0.5"/>
+</svg>
