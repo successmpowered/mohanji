@@ -10,10 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Pilgrimage palette — snow, sky, Mansarovar, stone, saffron, gold */
-    --snow:#fbf7ed;           /* warm mountain ivory */
-    --snow-soft:#f5efe0;      /* aged paper */
-    --snow-warm:#efe6d0;      /* sandstone monastery wall */
+    /* Kailash With Mohanji brand palette — sky blue primary, gold secondary */
+    --brand:#1c94cc;          /* logo sky blue */
+    --brand-light:#54b5db;    /* logo top highlight */
+    --brand-deep:#0e6b99;     /* logo bottom depth */
+    --brand-ink:#0a4c72;      /* deepest brand shadow */
+    --brand-pale:#e8f3fa;     /* washed brand tint */
+    --snow:#fbfaf5;           /* warm mountain ivory */
+    --snow-soft:#f4f0e4;      /* aged paper */
+    --snow-warm:#ece4d0;      /* sandstone monastery wall */
     --ice:#e4ecf1;            /* glacial ice */
     --ice-deep:#c7d5de;       /* shadowed snow */
     --sky:#7fa0b8;            /* Himalayan sky */
@@ -62,11 +67,12 @@
   /* ========== NAV ========== */
   .nav-wrap{position:absolute;top:42px;left:0;right:0;z-index:50;pointer-events:none}
   .nav{max-width:1400px;margin:0 auto;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;pointer-events:auto}
-  .nav__logo{display:flex;align-items:center;gap:14px;color:var(--white)}
-  .nav__logo-mark{width:46px;height:46px;flex-shrink:0;filter:drop-shadow(0 2px 14px rgba(0,0,0,0.6))}
-  .nav__logo-word{font-family:var(--serif);font-size:30px;color:var(--white);letter-spacing:0.04em;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,0.75)}
+  .nav__logo{display:flex;align-items:center;gap:18px;color:var(--white)}
+  .nav__logo-mark{width:72px;height:72px;flex-shrink:0;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.7))}
+  .nav__logo-divider{width:1px;height:46px;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.35),transparent)}
+  .nav__logo-word{font-family:var(--serif);font-size:28px;color:var(--white);letter-spacing:0.04em;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,0.75)}
   .nav__logo-word em{font-style:italic;color:var(--gold-light)}
-  .nav__logo-tag{display:block;font-family:var(--sans);font-size:9px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-light);margin-top:4px;font-weight:500;opacity:0.85}
+  .nav__logo-tag{display:block;font-family:var(--sans);font-size:9px;letter-spacing:0.36em;text-transform:uppercase;color:var(--brand-light);margin-top:5px;font-weight:500;opacity:0.95}
   .nav__menu{display:flex;gap:36px;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500}
   .nav__item>a{color:rgba(255,255,255,0.88);transition:color 0.3s;text-shadow:0 2px 16px rgba(0,0,0,0.8)}
   .nav__item:hover>a,.nav__item.active>a{color:var(--gold-light)}
@@ -370,6 +376,7 @@
     </a>
     <div class="nav__menu">
       <div class="nav__item"><a href="about.html">About</a></div>
+      <div class="nav__item"><a href="sadhana.html">Spiritual Practices</a></div>
       <div class="nav__item active"><a href="events.html">Journeys</a></div>
       <div class="nav__item"><a href="spaces.html">Spaces</a></div>
       <div class="nav__item"><a href="awards.html">Awards</a></div>
