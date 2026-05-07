@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#fdfcf9" />
+<title>Mohanji — Be You</title>
+<meta name="description" content="A global family walking the timeless path of Be You." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#fdfcf9; --soft:#faf7f0; --warm:#f5efe2;
+    --ink:#2a241b; --ink-soft:#5a5347; --ink-mute:#8a8278;
+    --gold:#b8924a; --gold-light:#d4ae6b; --gold-deep:#8a6a2f;
+    --gold-trace:#faf4e6;
+    --line:rgba(42,36,27,.10); --line-gold:rgba(184,146,74,.3);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Manrope',system-ui,sans-serif;
+    --safe-bot:env(safe-area-inset-bottom);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(78px + var(--safe-bot))}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
+  img{display:block;max-width:100%}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .announce{background:var(--warm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:9px 16px;border-bottom:1px solid var(--line-gold);line-height:1.4}
+  .announce__dot{display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin-right:7px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
+  .announce a{color:var(--gold-deep);font-weight:500;margin-left:6px;display:inline-block}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgba(253,252,249,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:14px 18px;min-height:60px}
+  .nav__logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em;color:var(--ink)}
+  .nav__logo em{font-style:italic;color:var(--gold)}
+  .nav__burger{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--line)}
+  .nav__burger:active{background:var(--soft)}
+  .nav__burger span{display:block;width:18px;height:1.5px;background:var(--ink);position:relative;transition:transform .35s,opacity .2s}
+  .nav__burger span::before,.nav__burger span::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--ink);transition:transform .35s}
+  .nav__burger span::before{top:-6px}
+  .nav__burger span::after{top:6px}
+  .nav__burger.is-open span{background:transparent}
+  .nav__burger.is-open span::before{transform:translateY(6px) rotate(45deg)}
+  .nav__burger.is-open span::after{transform:translateY(-6px) rotate(-45deg)}
+
+  .drawer{position:fixed;inset:0;background:var(--white);z-index:49;transform:translateX(100%);transition:transform .4s cubic-bezier(.5,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px 22px calc(40px + var(--safe-bot))}
+  .drawer.is-open{transform:translateX(0)}
+  .drawer__group{border-top:1px solid var(--line);padding:18px 0}
+  .drawer__group:last-of-type{border-bottom:1px solid var(--line)}
+  .drawer__head{display:flex;justify-content:space-between;align-items:center;width:100%;font-family:var(--serif);font-size:26px;font-weight:300;color:var(--ink);padding:6px 0;letter-spacing:-.005em;text-align:left}
+  .drawer__head em{font-style:italic;color:var(--gold)}
+  .drawer__head::after{content:"+";font-family:var(--serif);font-size:28px;color:var(--gold);font-weight:300;transition:transform .3s}
+  .drawer__group.is-open .drawer__head::after{transform:rotate(45deg)}
+  .drawer__panel{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .drawer__group.is-open .drawer__panel{max-height:600px}
+  .drawer__panel a{display:block;padding:14px 0 14px 4px;font-size:15px;color:var(--ink-soft);border-top:1px solid var(--line);font-weight:400}
+  .drawer__panel a:first-child{border-top:none;margin-top:6px}
+  .drawer__cta{display:block;text-align:center;background:var(--gold);color:var(--white);padding:18px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-top:32px}
+
+  .hero{position:relative;min-height:78vh;padding:60px 22px 80px;display:flex;align-items:center;text-align:center;overflow:hidden;background:linear-gradient(180deg,#1a1510 0%,#2a241b 100%);color:var(--white)}
+  .hero__halo{position:absolute;top:36%;left:50%;transform:translate(-50%,-50%);width:480px;height:480px;background:radial-gradient(circle,rgba(212,174,107,.28) 0%,transparent 60%);pointer-events:none;animation:breathe 8s ease-in-out infinite alternate}
+  @keyframes breathe{from{opacity:.6;transform:translate(-50%,-50%) scale(.95)}to{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+  .hero__inner{position:relative;width:100%;max-width:540px;margin:0 auto}
+  .hero__kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:24px;display:inline-flex;align-items:center;gap:10px}
+  .hero__kicker::before,.hero__kicker::after{content:"";width:22px;height:1px;background:var(--gold-light)}
+  .hero__title{font-family:var(--serif);font-size:clamp(40px,11vw,68px);font-weight:300;line-height:1;letter-spacing:-.022em;margin-bottom:22px}
+  .hero__title em{font-style:italic;color:var(--gold-light);display:block;margin-top:4px}
+  .hero__lede{font-family:var(--serif);font-style:italic;font-size:18px;color:rgba(253,252,249,.85);line-height:1.5;margin-bottom:28px}
+  .hero__cta{display:inline-block;background:var(--gold);color:var(--white);padding:17px 36px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;border:1px solid var(--gold);min-height:48px}
+  .hero__cta:active{background:var(--gold-deep)}
+
+  section{padding:64px 22px}
+  .section--soft{background:var(--soft)}
+  .section--ink{background:var(--ink);color:var(--white)}
+  .section--ink .section__lede{color:rgba(253,252,249,.7)}
+  .section__kicker{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .section__kicker::before{content:"";width:24px;height:1px;background:var(--gold-light)}
+  .section--ink .section__kicker{color:var(--gold-light)}
+  .section__title{font-family:var(--serif);font-size:clamp(32px,8vw,46px);font-weight:300;line-height:1.05;letter-spacing:-.015em;margin-bottom:16px}
+  .section__title em{font-style:italic;color:var(--gold)}
+  .section--ink .section__title em{color:var(--gold-light)}
+  .section__lede{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-soft);line-height:1.5;margin-bottom:36px}
+
+  .pillars{display:grid;gap:14px}
+  .pillar{background:var(--white);border:1px solid var(--line);padding:28px 22px;display:flex;gap:18px;align-items:flex-start}
+  .pillar__num{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--gold);letter-spacing:.16em;flex-shrink:0;padding-top:4px;min-width:30px}
+  .pillar h3{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.15;margin-bottom:8px}
+  .pillar h3 em{font-style:italic;color:var(--gold)}
+  .pillar p{font-size:14.5px;color:var(--ink-soft);line-height:1.65}
+
+  .scroller{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -22px;padding:4px 22px 24px;scrollbar-width:none}
+  .scroller::-webkit-scrollbar{display:none}
+  .scard{flex:0 0 78%;max-width:300px;scroll-snap-align:start;background:var(--white);border:1px solid var(--line);padding:24px 22px;display:flex;flex-direction:column;min-height:220px}
+  .scard__tag{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:12px}
+  .scard h3{font-family:var(--serif);font-size:22px;font-weight:400;line-height:1.2;margin-bottom:8px}
+  .scard h3 em{font-style:italic;color:var(--gold)}
+  .scard p{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:auto}
+  .scard__meta{padding-top:16px;margin-top:18px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+  .scroller__hint{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);text-align:center;margin-top:-8px}
+
+  details{border-top:1px solid var(--line);padding:18px 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{font-family:var(--serif);font-size:20px;font-weight:400;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;cursor:pointer;padding:6px 0}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--serif);font-size:24px;color:var(--gold);transition:transform .3s;flex-shrink:0}
+  details[open] summary::after{transform:rotate(45deg)}
+  details > div{padding:14px 0 4px;font-size:15px;color:var(--ink-soft);line-height:1.7}
+
+  .botbar{position:fixed;bottom:0;left:0;right:0;z-index:48;background:rgba(253,252,249,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:12px 16px calc(12px + var(--safe-bot));display:flex;gap:10px}
+  .botbar__primary{flex:1;background:var(--gold);color:var(--white);padding:16px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center}
+  .botbar__primary:active{background:var(--gold-deep)}
+  .botbar__secondary{flex:0 0 48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:18px;color:var(--ink-soft)}
+
+  footer{background:#1a1510;color:rgba(253,252,249,.55);padding:56px 22px 32px;font-size:13px;text-align:center}
+  footer .brand{font-family:var(--serif);font-size:24px;color:var(--white);margin-bottom:12px}
+  footer .brand em{font-style:italic;color:var(--gold-light)}
+  footer p{line-height:1.65;max-width:340px;margin:0 auto 28px}
+  footer a{color:var(--gold-light)}
+  footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-bottom:24px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
+  @media (min-width:640px){
+    .pillars{grid-template-columns:1fr 1fr}
+    .scard{flex-basis:340px}
+    section{padding:80px 32px}
+    .hero{padding:80px 32px 100px}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <span class="announce__dot"></span>
+  Live this Sunday · Weekly Satsang
+  <a href="events.html">Reserve →</a>
+</div>
+
+<nav class="nav">
+  <a href="index.html" class="nav__logo">Mohanji<em>.</em></a>
+  <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</nav>
+
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__group">
+    <button class="drawer__head" type="button">About</button>
+    <div class="drawer__panel">
+      <a href="about.html">Who is Mohanji</a>
+      <a href="about.html#journey">Life journey</a>
+      <a href="about.html#teachings">The teaching</a>
+      <a href="about.html#orgs">Foundations</a>
+    </div>
+  </div>
+  <div class="drawer__group">
+    <button class="drawer__head" type="button">Spiritual <em>Practices</em></button>
+    <div class="drawer__panel">
+      <a href="sadhana.html#meditation">Meditation</a>
+      <a href="sadhana.html#pranayama">Pranayama</a>
+      <a href="sadhana.html#chanting">Chanting</a>
+      <a href="sadhana.html#processes">Inner Transformation</a>
+      <a href="sadhana.html#homa">Homa</a>
+      <a href="sadhana.html#daily">Daily Sadhana →</a>
+    </div>
+  </div>
+  <div class="drawer__group">
+    <button class="drawer__head" type="button">Events</button>
+    <div class="drawer__panel">
+      <a href="events.html">All events</a>
+      <a href="events.html#satsang">Weekly Satsang</a>
+      <a href="kailash.html">Kailash Pilgrimage</a>
+    </div>
+  </div>
+  <div class="drawer__group">
+    <button class="drawer__head" type="button">Centres</button>
+    <div class="drawer__panel">
+      <a href="spaces.html">All Mohanji Spaces</a>
+      <a href="spaces.html#india">India</a>
+      <a href="spaces.html#europe">Europe</a>
+      <a href="spaces.html#americas">Americas</a>
+    </div>
+  </div>
+  <div class="drawer__group">
+    <button class="drawer__head" type="button">Awards & Family</button>
+    <div class="drawer__panel">
+      <a href="awards.html">Recognitions</a>
+      <a href="#">Volunteer</a>
+      <a href="#">Donate</a>
+    </div>
+  </div>
+  <a href="#join" class="drawer__cta">Join the Family</a>
+</aside>
+
+<section class="hero">
+  <div class="hero__halo"></div>
+  <div class="hero__inner">
+    <div class="hero__kicker">A life in service</div>
+    <h1 class="hero__title">In stillness,<em>everything answers.</em></h1>
+    <p class="hero__lede">A spiritual master, humanitarian, and silent presence — walking with seekers across ninety countries.</p>
+    <a href="sadhana.html" class="hero__cta">Begin practice →</a>
+  </div>
+</section>
+
+<section class="section--soft" id="path">
+  <div class="section__kicker">The path</div>
+  <h2 class="section__title">Five <em>pillars</em>, one path.</h2>
+  <p class="section__lede">Mohanji's teaching rests on five threads — practised together, woven daily.</p>
+  <div class="pillars">
+    <div class="pillar"><div class="pillar__num">— I —</div><div><h3>Daily <em>Sadhana</em></h3><p>The unbroken thread of practice — the spine of every seeker's day.</p></div></div>
+    <div class="pillar"><div class="pillar__num">— II —</div><div><h3><em>Forgiveness</em></h3><p>The single act that releases the most stored weight.</p></div></div>
+    <div class="pillar"><div class="pillar__num">— III —</div><div><h3>Silent <em>Service</em></h3><p>Seva — feeding, teaching, healing — as the practice itself.</p></div></div>
+    <div class="pillar"><div class="pillar__num">— IV —</div><div><h3><em>Satsang</em></h3><p>The company of truth. A weekly return to the Master's voice.</p></div></div>
+    <div class="pillar"><div class="pillar__num">— V —</div><div><h3>The <em>Pilgrimage</em></h3><p>Once a year — Kailash, Puri, the inner mountain.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section__kicker">Where to begin</div>
+  <h2 class="section__title">Today's <em>practices.</em></h2>
+  <p class="section__lede">Swipe through the most-loved meditations and processes.</p>
+  <div class="scroller">
+    <div class="scard"><span class="scard__tag">Meditation</span><h3>Power of <em>Purity</em></h3><p>The signature meditation — purification of the seven chakras.</p><div class="scard__meta">30 min · Audio · All levels</div></div>
+    <div class="scard"><span class="scard__tag">Process</span><h3>Forgiveness <em>Process</em></h3><p>The process Mohanji calls indispensable.</p><div class="scard__meta">90 min · Workshop</div></div>
+    <div class="scard"><span class="scard__tag">Breath</span><h3>Conscious Gapless <em>Breathing</em></h3><p>A continuous circular breath dissolving the boundary of self.</p><div class="scard__meta">90 min · In-person</div></div>
+    <div class="scard"><span class="scard__tag">Chant</span><h3>Mohanji <em>Aarati</em></h3><p>The evening offering of light — how the global family gathers.</p><div class="scard__meta">10 min · Audio</div></div>
+    <div class="scard"><span class="scard__tag">Fire</span><h3>Agnihotra</h3><p>Two minutes at sunrise, two at sunset. The personal homa.</p><div class="scard__meta">5 min × 2 · Self-led</div></div>
+  </div>
+  <p class="scroller__hint">← swipe →</p>
+</section>
+
+<section class="section--ink">
+  <div class="section__kicker">The presence</div>
+  <h2 class="section__title">A teacher who <em>walks with you.</em></h2>
+  <p class="section__lede">Mohanji has guided seekers in over ninety countries — but the work is always personal, and always begins where you stand.</p>
+  <a href="about.html" class="hero__cta">Read his story →</a>
+</section>
+
+<section class="section--soft">
+  <div class="section__kicker">Questions seekers ask</div>
+  <h2 class="section__title">Begin <em>here.</em></h2>
+  <p class="section__lede">A few of the most-asked questions before starting on the path.</p>
+  <details><summary>Do I need to be religious?</summary><div>No. Mohanji's teaching is universal — it asks only that you be honest with yourself.</div></details>
+  <details><summary>How much time does it take?</summary><div>The Daily Sadhana audio is 28 minutes. That is enough. Begin there.</div></details>
+  <details><summary>Where do I start?</summary><div>The Spiritual Practices page lists everything — open it, choose one, begin tomorrow.</div></details>
+  <details><summary>Is anything paid?</summary><div>The core meditations and chants are free forever. Some advanced workshops carry a fee.</div></details>
+</section>
+
+<footer>
+  <div class="brand">Mohanji<em>.</em></div>
+  <p>A global family of seekers, volunteers, and pilgrims walking the path of unconditional love.</p>
+  <div class="links">
+    <a href="about.html">About</a>
+    <a href="sadhana.html">Practices</a>
+    <a href="events.html">Events</a>
+    <a href="spaces.html">Centres</a>
+    <a href="awards.html">Awards</a>
+  </div>
+  <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.5;margin-top:20px">© 2026 Mohanji Foundation</div>
+</footer>
+
+<div class="botbar">
+  <a href="sadhana.html" class="botbar__primary">Begin Practice</a>
+  <a href="events.html" class="botbar__secondary" aria-label="Events">◷</a>
+</div>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('is-open');
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.drawer__group').forEach(g => {
+    g.querySelector('.drawer__head').addEventListener('click', () => g.classList.toggle('is-open'));
+  });
+</script>
+</body>
+</html>

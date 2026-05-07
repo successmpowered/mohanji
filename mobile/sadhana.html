@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#fdfcf9" />
+<title>Spiritual Practices — Mohanji</title>
+<meta name="description" content="The daily turning toward the Self. A complete library of meditations, breathwork, chants, processes, and homas." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#fdfcf9; --soft:#faf7f0; --warm:#f5efe2;
+    --ink:#2a241b; --ink-soft:#5a5347; --ink-mute:#8a8278;
+    --gold:#b8924a; --gold-light:#d4ae6b; --gold-deep:#8a6a2f;
+    --gold-whisper:#f0e6ce; --gold-trace:#faf4e6;
+    --line:rgba(42,36,27,.10); --line-gold:rgba(184,146,74,.3);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Manrope',system-ui,sans-serif;
+    --safe-bot:env(safe-area-inset-bottom);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(78px + var(--safe-bot))}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* announce + nav (shared with index) */
+  .announce{background:var(--warm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:9px 16px;border-bottom:1px solid var(--line-gold);line-height:1.4}
+  .announce__dot{display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin-right:7px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
+  .announce a{color:var(--gold-deep);font-weight:500;margin-left:6px}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgba(253,252,249,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:14px 18px;min-height:60px}
+  .nav__logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em;color:var(--ink)}
+  .nav__logo em{font-style:italic;color:var(--gold)}
+  .nav__burger{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--line)}
+  .nav__burger span{display:block;width:18px;height:1.5px;background:var(--ink);position:relative;transition:transform .35s,opacity .2s}
+  .nav__burger span::before,.nav__burger span::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--ink);transition:transform .35s}
+  .nav__burger span::before{top:-6px}
+  .nav__burger span::after{top:6px}
+  .nav__burger.is-open span{background:transparent}
+  .nav__burger.is-open span::before{transform:translateY(6px) rotate(45deg)}
+  .nav__burger.is-open span::after{transform:translateY(-6px) rotate(-45deg)}
+
+  .drawer{position:fixed;inset:0;background:var(--white);z-index:49;transform:translateX(100%);transition:transform .4s cubic-bezier(.5,0,.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px 22px calc(40px + var(--safe-bot))}
+  .drawer.is-open{transform:translateX(0)}
+  .drawer__group{border-top:1px solid var(--line);padding:18px 0}
+  .drawer__group:last-of-type{border-bottom:1px solid var(--line)}
+  .drawer__head{display:flex;justify-content:space-between;align-items:center;width:100%;font-family:var(--serif);font-size:26px;font-weight:300;color:var(--ink);padding:6px 0;text-align:left}
+  .drawer__head em{font-style:italic;color:var(--gold)}
+  .drawer__head::after{content:"+";font-family:var(--serif);font-size:28px;color:var(--gold);transition:transform .3s}
+  .drawer__group.is-open .drawer__head::after{transform:rotate(45deg)}
+  .drawer__panel{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .drawer__group.is-open .drawer__panel{max-height:600px}
+  .drawer__panel a{display:block;padding:14px 0 14px 4px;font-size:15px;color:var(--ink-soft);border-top:1px solid var(--line)}
+  .drawer__panel a:first-child{border-top:none;margin-top:6px}
+  .drawer__cta{display:block;text-align:center;background:var(--gold);color:var(--white);padding:18px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-top:32px}
+
+  /* HERO */
+  .hero{position:relative;padding:64px 22px 60px;text-align:center;overflow:hidden;background:linear-gradient(180deg,var(--soft) 0%,var(--white) 80%)}
+  .hero__halo{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;background:radial-gradient(circle,rgba(212,174,107,.22) 0%,transparent 60%);pointer-events:none;animation:breathe 7s ease-in-out infinite alternate}
+  @keyframes breathe{from{opacity:.55;transform:translate(-50%,-50%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
+  .hero__inner{position:relative}
+  .hero__kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:22px;display:inline-flex;align-items:center;gap:10px}
+  .hero__kicker::before,.hero__kicker::after{content:"";width:22px;height:1px;background:var(--gold-light)}
+  .hero__title{font-family:var(--serif);font-size:clamp(38px,10vw,60px);font-weight:300;line-height:1;letter-spacing:-.02em;margin-bottom:20px}
+  .hero__title em{font-style:italic;color:var(--gold)}
+  .hero__lede{font-family:var(--serif);font-size:17px;color:var(--ink-soft);line-height:1.55;margin-bottom:18px}
+  .hero__lede strong{font-weight:500;color:var(--gold-deep);font-style:normal}
+  .hero__lede em{font-style:italic}
+  .hero__sanskrit{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gold-deep);letter-spacing:.16em;opacity:.85;margin-top:12px}
+
+  /* TODAY CARD */
+  .today{padding:0 22px;margin-top:-30px;position:relative;z-index:5}
+  .today__card{background:var(--white);border:1px solid var(--line-gold);box-shadow:0 20px 50px rgba(42,36,27,.08);padding:28px 22px}
+  .today__visual{aspect-ratio:1;max-width:160px;margin:0 auto 22px;background:radial-gradient(circle at 50% 50%,var(--gold-whisper) 0%,var(--gold-trace) 60%,var(--soft) 100%);position:relative;display:flex;align-items:center;justify-content:center}
+  .today__visual::before{content:"";position:absolute;inset:14%;border:1px solid var(--gold-light);border-radius:50%;opacity:.6}
+  .today__visual::after{content:"";position:absolute;inset:24%;border:1px solid var(--gold);border-radius:50%;opacity:.45;animation:rotate 280s linear infinite}
+  @keyframes rotate{to{transform:rotate(360deg)}}
+  .today__symbol{font-family:var(--serif);font-style:italic;font-size:54px;color:var(--gold-deep);position:relative;z-index:2}
+  .today__label{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:14px;text-align:center}
+  .today__title{font-family:var(--serif);font-size:32px;font-weight:300;line-height:1.05;margin-bottom:14px;text-align:center}
+  .today__title em{font-style:italic;color:var(--gold)}
+  .today__essence{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-soft);line-height:1.5;margin-bottom:20px;text-align:center}
+  .today__meta{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:22px}
+  .today__meta span{display:inline-flex;align-items:center;gap:6px}
+  .today__meta span::before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%}
+  .today__cta{display:block;text-align:center;background:var(--gold);color:var(--white);padding:18px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;min-height:48px}
+  .today__cta:active{background:var(--gold-deep)}
+
+  /* PATHS */
+  .paths{padding:64px 22px 32px}
+  .paths__head{text-align:center;margin-bottom:32px}
+  .paths__kicker{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin-bottom:14px}
+  .paths__head h2{font-family:var(--serif);font-size:32px;font-weight:300;line-height:1.1;margin-bottom:12px}
+  .paths__head h2 em{font-style:italic;color:var(--gold)}
+  .paths__head p{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-soft)}
+  .paths__grid{display:grid;gap:14px}
+  .pathc{background:var(--white);border:1px solid var(--line);padding:30px 22px;text-align:center}
+  .pathc__num{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gold);letter-spacing:.18em;margin-bottom:12px}
+  .pathc h3{font-family:var(--serif);font-size:28px;font-weight:300;margin-bottom:10px}
+  .pathc h3 em{font-style:italic;color:var(--gold)}
+  .pathc p{font-size:14px;color:var(--ink-soft);line-height:1.65;margin-bottom:18px}
+  .pathc__detail{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
+
+  /* STICKY CHIPS */
+  .chips{position:sticky;top:60px;z-index:40;background:rgba(253,252,249,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0}
+  .chips__inner{display:flex;gap:8px;overflow-x:auto;padding:0 18px 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+  .chips__inner::-webkit-scrollbar{display:none}
+  .chip{flex-shrink:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:9px 16px;border:1px solid var(--line);color:var(--ink-soft);min-height:38px;display:inline-flex;align-items:center;scroll-snap-align:start;white-space:nowrap}
+  .chip.is-active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+  /* CATEGORY */
+  .cat{padding:56px 22px;border-top:1px solid var(--line);scroll-margin-top:120px}
+  .cat:nth-of-type(even){background:var(--soft)}
+  .cat__head{margin-bottom:28px}
+  .cat__num{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--gold);letter-spacing:.18em;margin-bottom:10px}
+  .cat__head h2{font-family:var(--serif);font-size:32px;font-weight:300;line-height:1.05;letter-spacing:-.012em;margin-bottom:14px}
+  .cat__head h2 em{font-style:italic;color:var(--gold)}
+  .cat__head p{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-soft);line-height:1.55;padding-bottom:14px;border-bottom:1px solid var(--line-gold)}
+
+  /* PRACTICE — accordion-card hybrid for mobile */
+  .practice{background:var(--white);border:1px solid var(--line);margin-bottom:10px}
+  .cat:nth-of-type(even) .practice{background:var(--white)}
+  .practice__btn{width:100%;padding:20px 22px;display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer}
+  .practice__btn::after{content:"+";font-family:var(--serif);font-size:24px;color:var(--gold);margin-left:auto;transition:transform .3s;flex-shrink:0}
+  .practice.is-open .practice__btn::after{transform:rotate(45deg)}
+  .practice__head{flex:1;min-width:0}
+  .practice__tag{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;display:block;margin-bottom:5px}
+  .practice__name{font-family:var(--serif);font-size:21px;font-weight:400;line-height:1.2}
+  .practice__name em{font-style:italic;color:var(--gold)}
+  .practice__body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .practice.is-open .practice__body{max-height:400px}
+  .practice__inner{padding:0 22px 22px}
+  .practice__essence{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink-soft);line-height:1.55;margin-bottom:14px}
+  .practice__meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;padding-top:12px;border-top:1px solid var(--line)}
+  .practice__meta span::before{content:"·";color:var(--gold);margin-right:6px}
+  .practice__meta span:first-child::before{display:none}
+  .practice--featured{background:linear-gradient(180deg,var(--gold-trace),var(--soft))!important;border-color:var(--gold-light)}
+  .practice--restricted .practice__name::after{content:"By approval";display:inline-block;font-family:var(--sans);font-style:normal;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-whisper);padding:3px 7px;margin-left:8px;vertical-align:middle;font-weight:500}
+
+  .subgroup{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:500;margin:24px 0 12px}
+
+  /* CLOSING */
+  .closing{background:var(--ink);color:var(--white);padding:80px 22px 70px;text-align:center;position:relative;overflow:hidden}
+  .closing__halo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;background:radial-gradient(circle,rgba(212,174,107,.18) 0%,transparent 60%);pointer-events:none}
+  .closing__inner{position:relative}
+  .closing__kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-bottom:20px}
+  .closing h2{font-family:var(--serif);font-size:36px;font-weight:300;line-height:1.05;margin-bottom:16px}
+  .closing h2 em{font-style:italic;color:var(--gold-light)}
+  .closing p{font-family:var(--serif);font-style:italic;font-size:18px;color:rgba(253,252,249,.78);line-height:1.55;margin-bottom:30px}
+  .closing__cta{display:inline-block;background:var(--gold);color:var(--white);padding:18px 36px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;min-height:48px}
+
+  footer{background:#1a1510;color:rgba(253,252,249,.55);padding:48px 22px 28px;font-size:13px;text-align:center}
+  footer a{color:var(--gold-light)}
+
+  .botbar{position:fixed;bottom:0;left:0;right:0;z-index:48;background:rgba(253,252,249,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:12px 16px calc(12px + var(--safe-bot));display:flex;gap:10px}
+  .botbar__primary{flex:1;background:var(--gold);color:var(--white);padding:16px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center}
+  .botbar__secondary{flex:0 0 48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:18px;color:var(--ink-soft)}
+
+  @media (min-width:640px){
+    .paths__grid{grid-template-columns:repeat(3,1fr)}
+    .cat{padding:80px 32px}
+    .hero{padding:80px 32px}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <span class="announce__dot"></span>
+  Live this Sunday · Weekly Satsang
+  <a href="events.html">Reserve →</a>
+</div>
+
+<nav class="nav">
+  <a href="index.html" class="nav__logo">Mohanji<em>.</em></a>
+  <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</nav>
+
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__group"><button class="drawer__head" type="button">About</button><div class="drawer__panel"><a href="about.html">Who is Mohanji</a><a href="about.html#journey">Life journey</a></div></div>
+  <div class="drawer__group is-open"><button class="drawer__head" type="button">Spiritual <em>Practices</em></button><div class="drawer__panel"><a href="#meditation">Meditation</a><a href="#pranayama">Pranayama</a><a href="#chanting">Chanting</a><a href="#processes">Inner Transformation</a><a href="#homa">Homa</a><a href="#daily">Daily Sadhana →</a></div></div>
+  <div class="drawer__group"><button class="drawer__head" type="button">Events</button><div class="drawer__panel"><a href="events.html">All events</a><a href="kailash.html">Kailash Pilgrimage</a></div></div>
+  <div class="drawer__group"><button class="drawer__head" type="button">Centres</button><div class="drawer__panel"><a href="spaces.html">All spaces</a></div></div>
+  <div class="drawer__group"><button class="drawer__head" type="button">Awards</button><div class="drawer__panel"><a href="awards.html">Recognitions</a></div></div>
+  <a href="#today" class="drawer__cta">Begin Practice</a>
+</aside>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__halo"></div>
+  <div class="hero__inner">
+    <div class="hero__kicker">The daily turning</div>
+    <h1 class="hero__title">Spiritual <em>Practices</em></h1>
+    <p class="hero__lede">In Sanskrit, this is called <strong>Sadhana</strong> — <em>sādhanā</em>, the means by which the goal is reached. A relationship — between you, your breath, your silence, and the One who has always been waiting inside.</p>
+    <div class="hero__sanskrit">साधना · the daily path</div>
+  </div>
+</section>
+
+<!-- TODAY -->
+<section class="today" id="today">
+  <div class="today__card">
+    <div class="today__visual"><div class="today__symbol">ॐ</div></div>
+    <div class="today__label">Today's Sadhana · Day 1</div>
+    <h2 class="today__title">The <em>Daily Sadhana</em></h2>
+    <p class="today__essence">One unbroken thread of practice — the foundation of every seeker's day.</p>
+    <div class="today__meta"><span>28 min</span><span>Audio</span><span>All levels</span></div>
+    <a href="#daily" class="today__cta">Begin now →</a>
+  </div>
+</section>
+
+<!-- PATHS -->
+<section class="paths">
+  <div class="paths__head">
+    <div class="paths__kicker">Where to enter</div>
+    <h2>Three doorways into <em>practice.</em></h2>
+    <p>Wherever you are — there is a place to begin.</p>
+  </div>
+  <div class="paths__grid">
+    <div class="pathc"><div class="pathc__num">— I —</div><h3><em>Begin</em></h3><p>For the seeker who has never sat in silence. Ten-minute meditations, one breath practice.</p><div class="pathc__detail">7-day starter →</div></div>
+    <div class="pathc"><div class="pathc__num">— II —</div><h3><em>Deepen</em></h3><p>For those with an established sit. Add the Forgiveness Process, learn the chants.</p><div class="pathc__detail">3-month arc →</div></div>
+    <div class="pathc"><div class="pathc__num">— III —</div><h3><em>Master</em></h3><p>Conscious Gapless Breathing, Avadhuta Homa, Mohanji Energy Transfer — by approval.</p><div class="pathc__detail">Apprenticeship →</div></div>
+  </div>
+</section>
+
+<!-- CHIPS -->
+<div class="chips">
+  <div class="chips__inner">
+    <a href="#meditation" class="chip">Meditation</a>
+    <a href="#pranayama" class="chip">Pranayama</a>
+    <a href="#chanting" class="chip">Chanting</a>
+    <a href="#processes" class="chip">Inner Transformation</a>
+    <a href="#homa" class="chip">Homa</a>
+    <a href="#daily" class="chip">Daily</a>
+  </div>
+</div>
+
+<!-- 1. MEDITATION -->
+<section class="cat" id="meditation">
+  <div class="cat__head">
+    <div class="cat__num">— Category 01 —</div>
+    <h2>Guided <em>Meditations</em></h2>
+    <p>A library of guided sits — each carrying a specific frequency. Begin with whichever calls to you.</p>
+  </div>
+  <div class="practice practice--featured"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Most beloved</span><div class="practice__name">Power of <em>Purity</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Mohanji's signature meditation. A purification of the seven chakras through light and sound.</p><div class="practice__meta"><span>30 min</span><span>Audio</span><span>All levels</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Awareness</span><div class="practice__name">360 Degrees</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A meditation of total awareness — looking inward and outward simultaneously.</p><div class="practice__meta"><span>25 min</span><span>Audio</span><span>Beginner</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Stillness</span><div class="practice__name">Bliss of <em>Silence</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A descent into the silence beneath all sound.</p><div class="practice__meta"><span>40 min</span><span>Audio</span><span>Intermediate</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Liberation</span><div class="practice__name">Freedom <em>Meditation</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Release the patterns that bind. For those ready to let go.</p><div class="practice__meta"><span>35 min</span><span>Audio</span><span>All levels</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Ascension</span><div class="practice__name">Doorway to Heaven</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A guided journey through the inner gates.</p><div class="practice__meta"><span>45 min</span><span>Audio</span><span>Intermediate</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Heart</span><div class="practice__name">Blossoms of <em>Love</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The opening of the heart-centre.</p><div class="practice__meta"><span>30 min</span><span>Audio</span><span>All levels</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Healing</span><div class="practice__name">Self-Healing</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Returning the body to its own intelligence.</p><div class="practice__meta"><span>25 min</span><span>Audio</span><span>All levels</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Devotion</span><div class="practice__name">Shirdi Sai Baba</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A devotional meditation in the lineage of Sai Baba of Shirdi.</p><div class="practice__meta"><span>30 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Devotion</span><div class="practice__name">Shree Jagannatha</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A meditation on the Lord of the Universe — born from Mohanji's Puri pilgrimages.</p><div class="practice__meta"><span>30 min</span><span>Audio</span></div></div></div></div>
+</section>
+
+<!-- 2. PRANAYAMA -->
+<section class="cat" id="pranayama">
+  <div class="cat__head">
+    <div class="cat__num">— Category 02 —</div>
+    <h2>Pranayama & <em>Breathing</em></h2>
+    <p>The bridge between body and consciousness. One ancient, one given to Mohanji directly.</p>
+  </div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Foundation</span><div class="practice__name">Pranayama</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The classical breath disciplines — Anuloma Viloma, Bhastrika, Kapalabhati, Bhramari.</p><div class="practice__meta"><span>20 min</span><span>Video</span><span>All levels</span></div></div></div></div>
+  <div class="practice practice--restricted"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Mohanji direct</span><div class="practice__name">Conscious Gapless <em>Breathing</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A continuous, circular breath that dissolves the boundary between inhale and exhale — and between self and Self.</p><div class="practice__meta"><span>90 min</span><span>In-person</span><span>Advanced</span></div></div></div></div>
+</section>
+
+<!-- 3. CHANTING -->
+<section class="cat" id="chanting">
+  <div class="cat__head">
+    <div class="cat__num">— Category 03 —</div>
+    <h2>Chanting & <em>Mantra</em></h2>
+    <p>Sound as offering, sound as protection, sound as connection.</p>
+  </div>
+  <div class="subgroup">Essential daily chants</div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Daily</span><div class="practice__name">Gayatri</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The mother of all mantras. Chant 108 times at sunrise.</p><div class="practice__meta"><span>15 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Daily</span><div class="practice__name">Hanuman <em>Chalisa</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Forty verses of unbreakable strength and devotion.</p><div class="practice__meta"><span>12 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Daily</span><div class="practice__name">Sahasranaam</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The thousand names — Vishnu, Lalita, or Shiva.</p><div class="practice__meta"><span>45 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Daily</span><div class="practice__name">Ashtotari</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">One hundred and eight names — a focused devotional sit.</p><div class="practice__meta"><span>20 min</span><span>Audio</span></div></div></div></div>
+  <div class="subgroup">Connection chants — Mohanji lineage</div>
+  <div class="practice practice--featured"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Lineage</span><div class="practice__name">Mohanji <em>Aarati</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The evening offering of light — how the global family gathers.</p><div class="practice__meta"><span>10 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice practice--featured"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Lineage</span><div class="practice__name">Mohanji <em>Gayatri</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The mantra of direct connection to the source-presence of Mohanji.</p><div class="practice__meta"><span>15 min</span><span>Audio</span></div></div></div></div>
+  <div class="subgroup">Protection chants</div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Refuge</span><div class="practice__name">Grace of <em>Protection</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A daily armour — for travel, for crisis, for the vulnerable hours.</p><div class="practice__meta"><span>10 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Refuge</span><div class="practice__name">Devi & Anjaneya <em>Kavacham</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The sealing armours of the Mother and of Hanuman.</p><div class="practice__meta"><span>20 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Refuge</span><div class="practice__name">Mahasudarshana</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The discus of Vishnu — invoked to dissolve obstacles.</p><div class="practice__meta"><span>15 min</span><span>Audio</span></div></div></div></div>
+  <div class="practice practice--restricted"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Refuge</span><div class="practice__name">Shiva <em>Kavacham</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The Lord's own armour. Powerful, particular — given only after preparation.</p><div class="practice__meta"><span>25 min</span><span>In-person</span></div></div></div></div>
+</section>
+
+<!-- 4. INNER TRANSFORMATION -->
+<section class="cat" id="processes">
+  <div class="cat__head">
+    <div class="cat__num">— Category 04 —</div>
+    <h2>Inner <em>Transformation</em></h2>
+    <p>Structured practices that work on what meditation alone cannot reach — patterns, memories, blocks, ancestral threads.</p>
+  </div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Material</span><div class="practice__name">Abundance <em>Process</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Re-aligning with prosperity as a natural state — not as accumulation, but as flow.</p><div class="practice__meta"><span>60 min</span><span>Workshop</span></div></div></div></div>
+  <div class="practice practice--featured"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Most transformative</span><div class="practice__name">Forgiveness <em>Process</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The process Mohanji calls indispensable. Releases the hidden grip of unforgiveness.</p><div class="practice__meta"><span>90 min</span><span>Workshop</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Power</span><div class="practice__name">Shakti <em>Process</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Awakening the dormant feminine energy — for stability, courage, creative force.</p><div class="practice__meta"><span>2 hours</span><span>Workshop</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Self-knowledge</span><div class="practice__name">Connect to <em>Yourself</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A guided enquiry — meeting the parts of yourself you have not yet met.</p><div class="practice__meta"><span>75 min</span><span>Workshop</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Reflection</span><div class="practice__name">Soul <em>Mirror</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">A practice of seeing yourself as the soul sees you.</p><div class="practice__meta"><span>60 min</span><span>Workshop</span></div></div></div></div>
+  <div class="practice practice--restricted"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Direct</span><div class="practice__name">Mohanji Energy <em>Transfer</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Direct transmission. Held only on specific occasions, with preparation.</p><div class="practice__meta"><span>By session</span><span>In-person</span></div></div></div></div>
+</section>
+
+<!-- 5. HOMA -->
+<section class="cat" id="homa">
+  <div class="cat__head">
+    <div class="cat__num">— Category 05 —</div>
+    <h2>Sacred <em>Fire</em></h2>
+    <p>The most ancient sadhana — offering into living flame.</p>
+  </div>
+  <div class="practice practice--featured"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Daily fire</span><div class="practice__name">Agnihotra</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The personal homa — a small copper vessel, a fistful of rice, two minutes at sunrise and sunset.</p><div class="practice__meta"><span>5 min × 2</span><span>Self-led</span></div></div></div></div>
+  <div class="practice"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Foundation</span><div class="practice__name">Homa <em>Level 0 & 1</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Formal training in the structure, mantras, and intention of fire-offering.</p><div class="practice__meta"><span>2-day course</span><span>In-person</span></div></div></div></div>
+  <div class="practice practice--restricted"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">Advanced</span><div class="practice__name">Avadhuta <em>Homa</em></div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">The fire of the renunciate — taught only to those whose practice has matured.</p><div class="practice__meta"><span>5-day retreat</span><span>In-person</span></div></div></div></div>
+</section>
+
+<!-- 6. DAILY -->
+<section class="cat" id="daily">
+  <div class="cat__head">
+    <div class="cat__num">— Category 06 —</div>
+    <h2>The Essential <em>Daily Sadhana</em></h2>
+    <p>If you do nothing else, do this. The single practice Mohanji recommends as the spine of every seeker's day.</p>
+  </div>
+  <div class="practice practice--featured is-open"><button class="practice__btn" type="button"><div class="practice__head"><span class="practice__tag">The foundation</span><div class="practice__name">Daily <em>Sadhana</em> · 28-minute audio</div></div></button><div class="practice__body"><div class="practice__inner"><p class="practice__essence">Three protection chants · one purification breath · one twelve-minute meditation · one minute of gratitude. Done before sunrise, before phones, before anything else.</p><div class="practice__meta"><span>28 min</span><span>Audio</span><span>Free forever</span></div></div></div></div>
+</section>
+
+<section class="closing">
+  <div class="closing__halo"></div>
+  <div class="closing__inner">
+    <div class="closing__kicker">One thread, every day</div>
+    <h2>The practice that <em>practises you.</em></h2>
+    <p>Begin with one. Begin tomorrow.</p>
+    <a href="#today" class="closing__cta">Begin the Daily Sadhana →</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Mohanji Foundation · <a href="index.html">Home</a> · <a href="about.html">About</a>
+</footer>
+
+<div class="botbar">
+  <a href="#today" class="botbar__primary">Begin Practice</a>
+  <a href="events.html" class="botbar__secondary" aria-label="Events">◷</a>
+</div>
+
+<script>
+  // Drawer
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('is-open');
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.drawer__group').forEach(g => g.querySelector('.drawer__head').addEventListener('click', () => g.classList.toggle('is-open')));
+
+  // Practice accordions
+  document.querySelectorAll('.practice__btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('is-open')));
+
+  // Scroll-spy chips
+  const chips = document.querySelectorAll('.chip');
+  const sections = [...document.querySelectorAll('.cat')];
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => obs.observe(s));
+
+  // Smooth-scroll chips with offset
+  chips.forEach(c => c.addEventListener('click', ev => {
+    ev.preventDefault();
+    const id = c.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.offsetTop - 110, behavior: 'smooth' });
+  }));
+</script>
+</body>
+</html>
