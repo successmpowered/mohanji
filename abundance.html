@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rewire Yourself — Abundance with Mohanji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1714;
+    --ink-soft:#4a443d;
+    --bg:#f6f1e8;
+    --bg-deep:#efe7d8;
+    --paper:#fdfaf4;
+    --gold:#b08628;
+    --gold-deep:#8a6618;
+    --line:rgba(26,23,20,.14);
+    --shadow:0 24px 60px -28px rgba(26,23,20,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-.01em}
+
+  /* grain + atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(246,241,232,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1120px;margin:0 auto}
+  .brand{font-family:'Fraunces',serif;font-size:1.15rem;letter-spacing:.02em}
+  .brand span{color:var(--gold-deep)}
+  .nav-cta{font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;color:var(--ink);border:1px solid var(--ink);padding:10px 20px;border-radius:40px;transition:.25s}
+  .nav-cta:hover{background:var(--ink);color:var(--bg)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:96px 0 80px;z-index:2}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--gold-deep);margin-bottom:28px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+  .hero h1{font-size:clamp(2.7rem,7vw,5.4rem);line-height:.98;margin-bottom:26px;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--gold-deep)}
+  .lede{font-size:clamp(1.08rem,1.6vw,1.32rem);color:var(--ink-soft);max-width:46ch;margin-bottom:40px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  .btn{display:inline-block;font-weight:600;text-decoration:none;border-radius:48px;transition:.28s;cursor:pointer;border:none;font-family:inherit}
+  .btn-primary{background:var(--ink);color:var(--paper);padding:18px 38px;font-size:1rem;box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--gold-deep)}
+  .btn-ghost{font-size:.92rem;color:var(--ink);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px;text-decoration-color:var(--gold)}
+  .hero-meta{margin-top:22px;font-size:.86rem;color:var(--ink-soft);letter-spacing:.01em}
+
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+  .video-card{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--ink);aspect-ratio:4/5;display:flex;align-items:flex-end}
+  .video-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,23,20,.1) 0%,rgba(26,23,20,.72) 100%)}
+  .video-card .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(253,250,244,.35);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:20px}
+  .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:rgba(253,250,244,.92);display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.3s}
+  .play:hover{transform:translate(-50%,-50%) scale(1.08)}
+  .play::before{content:"";border-left:20px solid var(--ink);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:5px}
+  .video-cap{position:relative;z-index:3;color:var(--paper);padding:26px}
+  .video-cap b{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;display:block;letter-spacing:.01em}
+  .video-cap span{font-size:.82rem;opacity:.8}
+
+  /* ---------- MARQUEE STRIP ---------- */
+  .strip{background:var(--ink);color:var(--bg);padding:18px 0;overflow:hidden;position:relative;z-index:2}
+  .strip-track{display:flex;gap:48px;white-space:nowrap;animation:slide 28s linear infinite;font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem}
+  .strip-track span{opacity:.9}
+  .strip-track .dot{color:var(--gold)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative;z-index:2}
+  .sec{padding:96px 0}
+  .sec-tag{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--gold-deep);margin-bottom:18px}
+  .sec h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.04;margin-bottom:24px;max-width:18ch}
+  .sec h2 em{font-style:italic;color:var(--gold-deep)}
+  .sec p.big{font-size:1.18rem;color:var(--ink-soft);max-width:54ch}
+
+  /* ---------- PROBLEM ---------- */
+  .problem{background:var(--bg-deep)}
+  .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .prob-list{list-style:none;margin-top:8px}
+  .prob-list li{padding:20px 0;border-bottom:1px solid var(--line);font-size:1.06rem;display:flex;gap:16px;align-items:baseline}
+  .prob-list li::before{content:"—";color:var(--gold-deep);font-weight:700}
+
+  /* ---------- QUOTE ---------- */
+  .quote{padding:110px 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--paper) 100%)}
+  .quote blockquote{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.4vw,3rem);line-height:1.18;max-width:20ch;margin:0 auto;font-weight:300}
+  .quote .seq{display:block;color:var(--gold-deep);font-style:italic}
+  .quote cite{display:block;margin-top:34px;font-family:'Manrope';font-style:normal;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* ---------- SHIFT (what changes) ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:34px 28px;transition:.3s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .card .num{font-family:'Fraunces',serif;font-style:italic;font-size:1.4rem;color:var(--gold-deep);margin-bottom:14px}
+  .card h3{font-size:1.22rem;margin-bottom:10px}
+  .card p{font-size:.98rem;color:var(--ink-soft)}
+
+  /* ---------- ABOUT MOHANJI (the reveal) ---------- */
+  .reveal{background:var(--ink);color:var(--bg);overflow:hidden}
+  .reveal .wrap{position:relative}
+  .reveal-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+  .portrait{border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#2a2520;display:flex;align-items:center;justify-content:center;color:rgba(246,241,232,.3);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:24px;box-shadow:var(--shadow)}
+  .reveal .sec-tag{color:var(--gold)}
+  .reveal h2{color:var(--bg)}
+  .reveal h2 em{color:var(--gold)}
+  .reveal p{color:rgba(246,241,232,.78);font-size:1.08rem;margin-bottom:18px;max-width:52ch}
+
+  /* ---------- PROGRAM / OFFER ---------- */
+  .offer{background:var(--paper)}
+  .offer-head{text-align:center;margin-bottom:56px}
+  .offer-head h2{margin:0 auto 18px}
+  .offer-head p{color:var(--ink-soft);max-width:50ch;margin:0 auto}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .tier{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:38px 30px;display:flex;flex-direction:column;position:relative}
+  .tier.feature{border-color:var(--gold);box-shadow:var(--shadow);transform:scale(1.03)}
+  .tier .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold-deep);color:var(--paper);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 16px;border-radius:30px;white-space:nowrap}
+  .tier .opt{position:absolute;top:-13px;right:18px;background:var(--ink);color:var(--paper);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:30px}
+  .tier h3{font-size:1.3rem;margin-bottom:6px}
+  .tier .price{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--ink);margin:10px 0 4px}
+  .tier .price small{font-size:1rem;color:var(--ink-soft)}
+  .tier .sub{font-size:.84rem;color:var(--ink-soft);margin-bottom:22px;min-height:34px}
+  .tier ul{list-style:none;margin-bottom:28px;flex:1}
+  .tier li{font-size:.94rem;padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+  .tier li::before{content:"✓";color:var(--gold-deep);font-weight:700}
+  .tier .btn{text-align:center;background:var(--ink);color:var(--paper);padding:15px}
+  .tier.feature .btn{background:var(--gold-deep)}
+  .tier .btn:hover{transform:translateY(-2px)}
+  .offer-note{text-align:center;margin-top:34px;font-size:.88rem;color:var(--ink-soft)}
+
+  /* ---------- OPT-IN (the free door) ---------- */
+  .optin{background:linear-gradient(160deg,var(--gold-deep),var(--gold));color:#fff;position:relative;overflow:hidden}
+  .optin::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E")}
+  .optin .wrap{position:relative;text-align:center}
+  .optin .sec-tag{color:rgba(255,255,255,.85)}
+  .optin h2{color:#fff;margin:0 auto 18px}
+  .optin p{color:rgba(255,255,255,.9);max-width:48ch;margin:0 auto 38px;font-size:1.1rem}
+  .form{display:flex;gap:12px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .form input{flex:1;min-width:240px;padding:18px 22px;border:none;border-radius:48px;font-family:inherit;font-size:1rem;color:var(--ink)}
+  .form .btn{background:var(--ink);color:#fff;padding:18px 34px}
+  .form .btn:hover{transform:translateY(-2px);background:#000}
+  .optin .fine{margin-top:18px;font-size:.78rem;color:rgba(255,255,255,.7)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(246,241,232,.6);padding:48px 0;text-align:center;font-size:.84rem;position:relative;z-index:2}
+  footer .brand{color:var(--bg);font-size:1.3rem;margin-bottom:10px}
+
+  /* reveal-on-scroll */
+  .ro{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .ro.in{opacity:1;transform:none}
+
+  @media(max-width:860px){
+    .hero-grid,.prob-grid,.reveal-grid{grid-template-columns:1fr;gap:40px}
+    .cards,.tiers{grid-template-columns:1fr}
+    .tier.feature{transform:none}
+    .video-card{aspect-ratio:16/11}
+    .hero{padding:64px 0 56px}
+    .sec{padding:72px 0}
+    .nav-cta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand">Abundance <span>· with Mohanji</span></div>
+    <a href="#watch" class="nav-cta">Watch Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow ro">No theories · Only what works</span>
+        <h1 class="ro">Rewire yourself for <em>abundance.</em></h1>
+        <p class="lede ro">You weren't born to struggle. You were born abundant — and somewhere along the way, your own mind learned to block it. This is the work of unlearning that. Watch the full Abundance process with Mohanji, free.</p>
+        <div class="hero-actions ro">
+          <a href="#watch" class="btn btn-primary">Watch the free session</a>
+          <a href="#program" class="btn btn-ghost">See the July program</a>
+        </div>
+        <p class="hero-meta ro">Free instant access · No cost · Watch in your own time</p>
+      </div>
+      <div class="ro">
+        <div class="video-card">
+          <div class="ph">[ PLACEHOLDER: thumbnail / still frame from the previous Abundance process video ]</div>
+          <a href="#watch" class="play" aria-label="Watch"></a>
+          <div class="video-cap">
+            <b>The Abundance Process</b>
+            <span>Full recorded session with Mohanji · [PLACEHOLDER: runtime, e.g. 90 min]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="strip">
+  <div class="strip-track">
+    <span>Why not me?</span><span class="dot">✦</span>
+    <span>Change your language</span><span class="dot">✦</span>
+    <span>Change your attitude</span><span class="dot">✦</span>
+    <span>Change your fortunes</span><span class="dot">✦</span>
+    <span>Why not me?</span><span class="dot">✦</span>
+    <span>Change your language</span><span class="dot">✦</span>
+    <span>Change your attitude</span><span class="dot">✦</span>
+    <span>Change your fortunes</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec problem">
+  <div class="wrap">
+    <div class="prob-grid">
+      <div>
+        <div class="sec-tag ro">The real reason you're stuck</div>
+        <h2 class="ro">It was never your <em>destiny.</em> It was your conditioning.</h2>
+        <p class="big ro">Most people chase abundance their whole lives without ever asking why it keeps slipping away. The honest answer is uncomfortable: the barrier is internal. And what's internal can be changed.</p>
+      </div>
+      <ul class="prob-list ro">
+        <li>You work hard, yet success never seems to last</li>
+        <li>You finally get there — then quietly sabotage it</li>
+        <li>You see obstacles everywhere others see openings</li>
+        <li>A voice insists "not for someone like me"</li>
+        <li>You're exhausted from forcing what should flow</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap">
+    <blockquote>
+      "Why not me?"
+      <span class="seq">Change your language. Change your attitude. Change your fortunes.</span>
+    </blockquote>
+    <cite>— Mohanji</cite>
+  </div>
+</section>
+
+<!-- SHIFT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-tag ro">What actually changes</div>
+    <h2 class="ro">Abundance is not something you chase. It's something you <em>allow.</em></h2>
+    <p class="big ro">This isn't positive thinking or affirmations on a sticky note. It's a direct, practical reset of the patterns running underneath your results.</p>
+    <div class="cards">
+      <div class="card ro">
+        <div class="num">01</div>
+        <h3>Diagnose the block</h3>
+        <p>Uncover the specific inner patterns and limiting beliefs quietly capping your life — the ones you've stopped noticing.</p>
+      </div>
+      <div class="card ro">
+        <div class="num">02</div>
+        <h3>Release what's stuck</h3>
+        <p>Let go of the conditioning, fear, and self-sabotage running on autopilot. Awareness is the key that opens the door.</p>
+      </div>
+      <div class="card ro">
+        <div class="num">03</div>
+        <h3>Rewire for flow</h3>
+        <p>Install the mindset of a person to whom abundance comes naturally — in finances, relationships, health, and peace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVEAL: who is Mohanji -->
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="reveal-grid">
+      <div class="ro">
+        <div class="portrait">[ PLACEHOLDER: portrait of Mohanji ]</div>
+      </div>
+      <div>
+        <div class="sec-tag ro">The one guiding this</div>
+        <h2 class="ro">This isn't motivation. It's <em>transmission.</em></h2>
+        <p class="ro">Mohanji is a living spiritual teacher whose work reaches communities across more than 90 countries. People don't come to him for theories — they come because something shifts in his presence that words alone can't explain.</p>
+        <p class="ro">What makes this process different is not the exercises, though they work. It's the consciousness behind them. You'll feel the difference in the first ten minutes of the recording — which is exactly why we're giving it to you free. We'd rather you experience it than take our word for it.</p>
+        <p class="ro" style="opacity:.6;font-size:.92rem">[ PLACEHOLDER: 1–2 lines of specific credibility — e.g. Mohanji Foundation's reach, humanitarian work, or a notable endorsement, in your own verified words ]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPT-IN: the free door -->
+<section class="sec optin" id="watch">
+  <div class="wrap">
+    <div class="sec-tag ro">Free · Instant access</div>
+    <h2 class="ro">Watch the full Abundance process — on us.</h2>
+    <p class="ro">Enter your email and we'll send you instant access to the complete recorded session with Mohanji. Experience the work for yourself before you decide anything.</p>
+    <form class="form ro" onsubmit="return false;">
+      <input type="email" placeholder="Your best email" required aria-label="Email">
+      <button class="btn" type="submit">Send me the video</button>
+    </form>
+    <p class="fine ro">[ CONNECT THIS FORM TO YOUR KAJABI OPT-IN — on submit, deliver the video + tag the contact into the July-program nurture sequence ]</p>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="sec offer" id="program">
+  <div class="wrap">
+    <div class="offer-head">
+      <div class="sec-tag ro">Live · 4–5 July 2026 · Denmark & Online</div>
+      <h2 class="ro">Ready to go deeper? Do the work <em>live</em> with Mohanji.</h2>
+      <p class="ro">The recording opens the door. The live program walks you through it — three guided 2-hour sessions, live Q&A with Mohanji, and a 21-day daily practice to make the change stick.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier ro">
+        <h3>Core</h3>
+        <div class="price">€108</div>
+        <div class="sub">The complete live experience.</div>
+        <ul>
+          <li>Three live 2-hour sessions (4–5 July)</li>
+          <li>Guided processes, tools & exercises</li>
+          <li>Live Q&A with Mohanji</li>
+          <li>21-day daily personal practice</li>
+        </ul>
+        <a href="#" class="btn">Reserve my place</a>
+      </div>
+      <div class="tier feature ro">
+        <span class="flag">Most chosen</span>
+        <h3>Core + Support</h3>
+        <div class="price">€162</div>
+        <div class="sub">Everything in Core, reinforced.</div>
+        <ul>
+          <li>Everything in Core</li>
+          <li>Follow-up session with Mohanji (12 July)</li>
+          <li>21-day practice with group energy</li>
+          <li>Guidance from Mohanji Acharyas</li>
+        </ul>
+        <a href="#" class="btn">Reserve my place</a>
+      </div>
+      <div class="tier ro">
+        <span class="opt">Optional — confirm</span>
+        <h3>Inner Circle</h3>
+        <div class="price">€333</div>
+        <div class="sub">[ PROPOSAL — delete if not offered ]</div>
+        <ul>
+          <li>Everything in Core + Support</li>
+          <li>[ Small-group circle / extended Q&A ]</li>
+          <li>[ Priority access / closer guidance ]</li>
+          <li>[ Define the premium benefit ]</li>
+        </ul>
+        <a href="#" class="btn">Join the circle</a>
+      </div>
+    </div>
+    <p class="offer-note ro">Attend in Mohanji's physical presence in Denmark, or join live online from anywhere. <br>In-person attendees also require a Happiness Festival day pass for both days.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="brand">Abundance with Mohanji</div>
+    <p>Mohanji Peace Centre, Denmark · Online worldwide · 4–5 July 2026</p>
+    <p style="margin-top:14px;opacity:.5">© 2026 Mohanji Foundation. [ PLACEHOLDER: privacy & terms links ]</p>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.ro').forEach((el,i)=>{
+    el.style.transitionDelay=(i%4*70)+'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
